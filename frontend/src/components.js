@@ -474,45 +474,59 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         ))}
       </div>
 
-      {/* MATRIX-STYLE ADAPTIVE STATUS DASHBOARD - DISAPPEARS OVER CONTENT */}
+      {/* MATRIX-STYLE ADAPTIVE STATUS - MOBILE OPTIMIZED */}
       <motion.div 
-        className="fixed top-1/2 left-6 transform -translate-y-1/2 z-20"
+        className="fixed z-20 transition-all duration-500"
+        style={{
+          top: typeof window !== 'undefined' && window.innerWidth < 768 ? '20px' : '50%',
+          left: typeof window !== 'undefined' && window.innerWidth < 768 ? '8px' : '24px',
+          transform: typeof window !== 'undefined' && window.innerWidth < 768 ? 'none' : 'translateY(-50%)',
+        }}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
-        whileHover={{ scale: 1.05, x: -10 }}
-        style={{
-          background: 'rgba(0, 0, 0, 0.1)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)'
+        whileHover={{ 
+          scale: typeof window !== 'undefined' && window.innerWidth < 768 ? 1.02 : 1.05, 
+          x: typeof window !== 'undefined' && window.innerWidth < 768 ? -5 : -10 
         }}
       >
         <motion.div 
-          className="bg-black/60 backdrop-blur-2xl border border-emerald-400/60 rounded-2xl p-4 shadow-2xl transition-all duration-300"
+          className="bg-black/70 backdrop-blur-xl border border-emerald-400/60 rounded-xl shadow-2xl transition-all duration-300"
+          style={{
+            padding: typeof window !== 'undefined' && window.innerWidth < 768 ? '8px' : '16px',
+            fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '10px' : '12px'
+          }}
           animate={{
             borderColor: ['rgba(34, 197, 94, 0.6)', 'rgba(34, 197, 94, 0.8)', 'rgba(34, 197, 94, 0.6)'],
             boxShadow: [
-              '0 0 20px rgba(34, 197, 94, 0.3)',
-              '0 0 30px rgba(34, 197, 94, 0.5)',
-              '0 0 20px rgba(34, 197, 94, 0.3)'
+              '0 0 15px rgba(34, 197, 94, 0.3)',
+              '0 0 25px rgba(34, 197, 94, 0.5)',
+              '0 0 15px rgba(34, 197, 94, 0.3)'
             ]
           }}
           transition={{ duration: 3, repeat: Infinity }}
         >
-          <div className="bg-gradient-to-r from-emerald-400/30 to-blue-400/30 rounded-xl p-3 mb-3">
-            <div className="text-emerald-400 font-bold text-sm mb-2 flex items-center font-mono">
+          <div className="bg-gradient-to-r from-emerald-400/30 to-blue-400/30 rounded-lg p-2 mb-2">
+            <div className="text-emerald-400 font-bold flex items-center font-mono" style={{fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '9px' : '12px'}}>
               <motion.div 
-                className="w-2 h-2 bg-emerald-400 rounded-full mr-2"
+                className="bg-emerald-400 rounded-full mr-1"
+                style={{
+                  width: typeof window !== 'undefined' && window.innerWidth < 768 ? '6px' : '8px',
+                  height: typeof window !== 'undefined' && window.innerWidth < 768 ? '6px' : '8px'
+                }}
                 animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
-              MATRIX STATUS
+              {typeof window !== 'undefined' && window.innerWidth < 768 ? 'STATUS' : 'MATRIX STATUS'}
             </div>
-            <div className="space-y-2 text-xs font-mono">
+            <div className="space-y-1 font-mono" style={{fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '8px' : '10px'}}>
               <div className="flex justify-between items-center">
-                <span className="text-gray-300">HEROES_NET:</span>
+                <span className="text-gray-300">{typeof window !== 'undefined' && window.innerWidth < 768 ? 'HEROES:' : 'HEROES_NET:'}</span>
                 <div className="flex items-center">
-                  <div className="w-12 h-1 bg-emerald-400/30 rounded-full mr-2 overflow-hidden">
+                  <div className="bg-emerald-400/30 rounded-full mr-1 overflow-hidden" style={{
+                    width: typeof window !== 'undefined' && window.innerWidth < 768 ? '24px' : '48px',
+                    height: '4px'
+                  }}>
                     <motion.div 
                       className="h-full bg-emerald-400 rounded-full"
                       initial={{ width: 0 }}
@@ -524,9 +538,12 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
                 </div>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-300">MATRIX_INTEG:</span>
+                <span className="text-gray-300">{typeof window !== 'undefined' && window.innerWidth < 768 ? 'MATRIX:' : 'MATRIX_INTEG:'}</span>
                 <div className="flex items-center">
-                  <div className="w-12 h-1 bg-red-400/30 rounded-full mr-2 overflow-hidden">
+                  <div className="bg-red-400/30 rounded-full mr-1 overflow-hidden" style={{
+                    width: typeof window !== 'undefined' && window.innerWidth < 768 ? '24px' : '48px',
+                    height: '4px'
+                  }}>
                     <motion.div 
                       className="h-full bg-red-400 rounded-full"
                       initial={{ width: 0 }}
@@ -538,9 +555,12 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
                 </div>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-300">LIBERATION:</span>
+                <span className="text-gray-300">{typeof window !== 'undefined' && window.innerWidth < 768 ? 'LIBRT:' : 'LIBERATION:'}</span>
                 <div className="flex items-center">
-                  <div className="w-12 h-1 bg-blue-400/30 rounded-full mr-2 overflow-hidden">
+                  <div className="bg-blue-400/30 rounded-full mr-1 overflow-hidden" style={{
+                    width: typeof window !== 'undefined' && window.innerWidth < 768 ? '24px' : '48px',
+                    height: '4px'
+                  }}>
                     <motion.div 
                       className="h-full bg-blue-400 rounded-full"
                       initial={{ width: 0 }}
@@ -553,44 +573,53 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
               </div>
             </div>
           </div>
-          <div className="text-xs text-gray-400 text-center font-mono">
+          <div className="text-gray-400 text-center font-mono" style={{fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '7px' : '10px'}}>
             <motion.span 
               className="text-emerald-400"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               ●
-            </motion.span> ENTERPRISE.MATRIX
+            </motion.span> {typeof window !== 'undefined' && window.innerWidth < 768 ? 'MATRIX' : 'ENTERPRISE.MATRIX'}
           </div>
         </motion.div>
       </motion.div>
 
-      {/* MATRIX-STYLE ADAPTIVE RADAR - DISAPPEARS OVER CONTENT */}
+      {/* MATRIX-STYLE ADAPTIVE RADAR - MOBILE OPTIMIZED */}
       <motion.div 
-        className="fixed top-1/2 right-6 transform -translate-y-1/2 z-20"
+        className="fixed z-20 transition-all duration-500"
+        style={{
+          top: typeof window !== 'undefined' && window.innerWidth < 768 ? '20px' : '50%',
+          right: typeof window !== 'undefined' && window.innerWidth < 768 ? '8px' : '24px',
+          transform: typeof window !== 'undefined' && window.innerWidth < 768 ? 'none' : 'translateY(-50%)',
+        }}
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.7 }}
-        whileHover={{ scale: 1.05, x: 10 }}
-        style={{
-          background: 'rgba(0, 0, 0, 0.1)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)'
+        whileHover={{ 
+          scale: typeof window !== 'undefined' && window.innerWidth < 768 ? 1.02 : 1.05, 
+          x: typeof window !== 'undefined' && window.innerWidth < 768 ? 5 : 10 
         }}
       >
         <motion.div 
-          className="bg-black/60 backdrop-blur-2xl border border-blue-400/60 rounded-2xl p-4 shadow-2xl"
+          className="bg-black/70 backdrop-blur-xl border border-blue-400/60 rounded-xl shadow-2xl"
+          style={{
+            padding: typeof window !== 'undefined' && window.innerWidth < 768 ? '8px' : '16px'
+          }}
           animate={{
             borderColor: ['rgba(59, 130, 246, 0.6)', 'rgba(59, 130, 246, 0.8)', 'rgba(59, 130, 246, 0.6)'],
             boxShadow: [
-              '0 0 20px rgba(59, 130, 246, 0.3)',
-              '0 0 30px rgba(59, 130, 246, 0.5)',
-              '0 0 20px rgba(59, 130, 246, 0.3)'
+              '0 0 15px rgba(59, 130, 246, 0.3)',
+              '0 0 25px rgba(59, 130, 246, 0.5)',
+              '0 0 15px rgba(59, 130, 246, 0.3)'
             ]
           }}
           transition={{ duration: 3, repeat: Infinity, delay: 1 }}
         >
-          <div className="relative w-24 h-24 mx-auto mb-3">
+          <div className="relative mx-auto mb-2" style={{
+            width: typeof window !== 'undefined' && window.innerWidth < 768 ? '48px' : '96px',
+            height: typeof window !== 'undefined' && window.innerWidth < 768 ? '48px' : '96px'
+          }}>
             <motion.div 
               className="absolute inset-0 rounded-full border-2 border-blue-400/60"
               animate={{
@@ -601,58 +630,81 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
               }}
               transition={{ duration: 4, repeat: Infinity }}
             />
-            <div className="absolute inset-2 rounded-full border border-blue-400/40"></div>
-            <div className="absolute inset-4 rounded-full border border-blue-400/20"></div>
+            <div className="absolute inset-1 rounded-full border border-blue-400/40"></div>
+            <div className="absolute inset-2 rounded-full border border-blue-400/20"></div>
             <motion.div 
-              className="absolute inset-6 rounded-full bg-blue-400/30"
+              className="absolute rounded-full bg-blue-400/30"
+              style={{
+                inset: typeof window !== 'undefined' && window.innerWidth < 768 ? '12px' : '24px'
+              }}
               animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
             <motion.div 
-              className="absolute top-1/2 left-1/2 w-10 h-0.5 origin-left"
+              className="absolute top-1/2 left-1/2 origin-left"
               style={{
+                width: typeof window !== 'undefined' && window.innerWidth < 768 ? '20px' : '40px',
+                height: '2px',
                 background: 'linear-gradient(90deg, rgba(59, 130, 246, 1) 0%, rgba(59, 130, 246, 0.5) 50%, transparent 100%)'
               }}
               animate={{ rotate: 360 }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             />
-            {/* Matrix-Style Radar Blips */}
+            {/* Mobile-Optimized Radar Blips */}
             <motion.div 
-              className="absolute top-2 right-3 w-1 h-1 bg-emerald-400 rounded-full"
+              className="absolute bg-emerald-400 rounded-full"
+              style={{
+                top: typeof window !== 'undefined' && window.innerWidth < 768 ? '4px' : '8px',
+                right: typeof window !== 'undefined' && window.innerWidth < 768 ? '6px' : '12px',
+                width: typeof window !== 'undefined' && window.innerWidth < 768 ? '3px' : '4px',
+                height: typeof window !== 'undefined' && window.innerWidth < 768 ? '3px' : '4px'
+              }}
               animate={{ 
                 scale: [1, 2, 1], 
                 opacity: [1, 0, 1],
-                boxShadow: ['0 0 5px rgba(34, 197, 94, 0.5)', '0 0 15px rgba(34, 197, 94, 1)', '0 0 5px rgba(34, 197, 94, 0.5)']
+                boxShadow: ['0 0 3px rgba(34, 197, 94, 0.5)', '0 0 8px rgba(34, 197, 94, 1)', '0 0 3px rgba(34, 197, 94, 0.5)']
               }}
               transition={{ duration: 2, repeat: Infinity }}
             />
             <motion.div 
-              className="absolute bottom-4 left-4 w-1 h-1 bg-yellow-400 rounded-full"
+              className="absolute bg-yellow-400 rounded-full"
+              style={{
+                bottom: typeof window !== 'undefined' && window.innerWidth < 768 ? '8px' : '16px',
+                left: typeof window !== 'undefined' && window.innerWidth < 768 ? '8px' : '16px',
+                width: typeof window !== 'undefined' && window.innerWidth < 768 ? '3px' : '4px',
+                height: typeof window !== 'undefined' && window.innerWidth < 768 ? '3px' : '4px'
+              }}
               animate={{ 
                 scale: [1, 2, 1], 
                 opacity: [1, 0, 1],
-                boxShadow: ['0 0 5px rgba(245, 158, 11, 0.5)', '0 0 15px rgba(245, 158, 11, 1)', '0 0 5px rgba(245, 158, 11, 0.5)']
+                boxShadow: ['0 0 3px rgba(245, 158, 11, 0.5)', '0 0 8px rgba(245, 158, 11, 1)', '0 0 3px rgba(245, 158, 11, 0.5)']
               }}
               transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
             />
             <motion.div 
-              className="absolute top-6 left-2 w-1 h-1 bg-red-400 rounded-full"
+              className="absolute bg-red-400 rounded-full"
+              style={{
+                top: typeof window !== 'undefined' && window.innerWidth < 768 ? '12px' : '24px',
+                left: typeof window !== 'undefined' && window.innerWidth < 768 ? '4px' : '8px',
+                width: typeof window !== 'undefined' && window.innerWidth < 768 ? '3px' : '4px',
+                height: typeof window !== 'undefined' && window.innerWidth < 768 ? '3px' : '4px'
+              }}
               animate={{ 
                 scale: [1, 2, 1], 
                 opacity: [1, 0, 1],
-                boxShadow: ['0 0 5px rgba(239, 68, 68, 0.5)', '0 0 15px rgba(239, 68, 68, 1)', '0 0 5px rgba(239, 68, 68, 0.5)']
+                boxShadow: ['0 0 3px rgba(239, 68, 68, 0.5)', '0 0 8px rgba(239, 68, 68, 1)', '0 0 3px rgba(239, 68, 68, 0.5)']
               }}
               transition={{ duration: 2, repeat: Infinity, delay: 1.4 }}
             />
           </div>
-          <div className="text-xs text-center font-mono">
-            <div className="text-blue-400 font-bold mb-1">MATRIX.RADAR</div>
+          <div className="text-center font-mono" style={{fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '8px' : '10px'}}>
+            <div className="text-blue-400 font-bold mb-1">{typeof window !== 'undefined' && window.innerWidth < 768 ? 'RADAR' : 'MATRIX.RADAR'}</div>
             <motion.div 
               className="text-gray-400"
               animate={{ opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              12.8K NODES_TRACKED
+              {typeof window !== 'undefined' && window.innerWidth < 768 ? '12.8K' : '12.8K NODES_TRACKED'}
             </motion.div>
           </div>
         </motion.div>
