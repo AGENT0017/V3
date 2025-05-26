@@ -657,53 +657,131 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-          {/* MILITARY COMMAND LOGO WITH HUD EFFECTS */}
+          {/* BILLION-DOLLAR PREMIUM LOGO WITH ENTERPRISE EFFECTS */}
           <motion.div
             className="mb-8 relative"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
-            {/* TARGETING RETICLE AROUND LOGO */}
-            <div className="absolute -top-8 -left-8 -right-8 -bottom-8 border border-green-400/30 rounded-lg">
-              <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-green-400"></div>
-              <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-green-400"></div>
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-green-400"></div>
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-green-400"></div>
+            {/* PREMIUM HOLOGRAPHIC FRAME */}
+            <div className="absolute -top-12 -left-12 -right-12 -bottom-12 border-2 border-gradient-to-r from-emerald-400/30 via-blue-400/30 to-purple-400/30 rounded-xl backdrop-blur-sm">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-blue-500/5 to-purple-500/5 rounded-xl"></div>
+              <div className="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-emerald-400 rounded-tl-lg"></div>
+              <div className="absolute top-0 right-0 w-8 h-8 border-r-4 border-t-4 border-blue-400 rounded-tr-lg"></div>
+              <div className="absolute bottom-0 left-0 w-8 h-8 border-l-4 border-b-4 border-purple-400 rounded-bl-lg"></div>
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-amber-400 rounded-br-lg"></div>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black mb-4 leading-none font-anton relative">
-              <span className="text-white drop-shadow-lg">
+              {/* PREMIUM THRIVE with Enterprise Glow */}
+              <motion.span 
+                className="text-white relative inline-block"
+                animate={{
+                  textShadow: [
+                    '0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(34, 197, 94, 0.3), 0 0 60px rgba(34, 197, 94, 0.2)',
+                    '0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(34, 197, 94, 0.5), 0 0 90px rgba(34, 197, 94, 0.3)',
+                    '0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(34, 197, 94, 0.3), 0 0 60px rgba(34, 197, 94, 0.2)'
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
                 #THRIVE
-              </span>
-              <span className="text-red-500 relative ml-2 drop-shadow-lg">
+                {/* Premium Particle Effects */}
+                <div className="absolute -top-2 -left-2 w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
+                <div className="absolute -top-1 -right-1 w-1 h-1 bg-blue-400 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+              </motion.span>
+              
+              {/* PREMIUM CHAOS with Dynamic Effects */}
+              <motion.span 
+                className="text-red-500 relative ml-2 inline-block"
+                animate={{
+                  textShadow: [
+                    '0 0 20px rgba(239, 68, 68, 0.5), 0 0 40px rgba(239, 68, 68, 0.3), 0 0 60px rgba(239, 68, 68, 0.2)',
+                    '0 0 30px rgba(239, 68, 68, 0.8), 0 0 60px rgba(239, 68, 68, 0.5), 0 0 90px rgba(239, 68, 68, 0.3)',
+                    '0 0 20px rgba(239, 68, 68, 0.5), 0 0 40px rgba(239, 68, 68, 0.3), 0 0 60px rgba(239, 68, 68, 0.2)'
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              >
                 CHAOS
                 {glitchActive && (
-                  <span className="absolute inset-0 text-yellow-400 animate-ping">CHAOS</span>
+                  <motion.span 
+                    className="absolute inset-0 text-yellow-400"
+                    animate={{
+                      opacity: [1, 0, 1],
+                      x: [0, 2, -2, 0],
+                      textShadow: '0 0 20px rgba(245, 158, 11, 1), 0 0 40px rgba(245, 158, 11, 0.8)'
+                    }}
+                    transition={{ duration: 0.3, repeat: 3 }}
+                  >
+                    CHAOS
+                  </motion.span>
                 )}
-              </span>
+                {/* Premium Chaos Particles */}
+                <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-red-400 rounded-full animate-ping"></div>
+                <div className="absolute -top-1 left-1/2 w-1 h-1 bg-yellow-400 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+              </motion.span>
               
-              {/* HOLOGRAPHIC SCAN LINES */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse"></div>
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
-              </div>
+              {/* ENTERPRISE HOLOGRAPHIC SCAN LINES */}
+              <motion.div 
+                className="absolute inset-0 pointer-events-none"
+                animate={{ opacity: [0.3, 0.7, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent"></div>
+              </motion.div>
             </h1>
             
-            <div className="text-xl md:text-2xl font-mono text-yellow-400 mb-6 font-bold relative">
+            {/* PREMIUM MISSION STATEMENT */}
+            <motion.div 
+              className="text-xl md:text-2xl font-mono mb-6 font-bold relative"
+              animate={{
+                backgroundImage: [
+                  'linear-gradient(45deg, #fbbf24, #34d399, #60a5fa)',
+                  'linear-gradient(45deg, #34d399, #60a5fa, #a78bfa)',
+                  'linear-gradient(45deg, #60a5fa, #a78bfa, #fbbf24)',
+                  'linear-gradient(45deg, #a78bfa, #fbbf24, #34d399)'
+                ]
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+              style={{
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                color: 'transparent'
+              }}
+            >
               BREAK THE MATRIX • BUILD HEROES • RESIST THE SYSTEM
               
-              {/* DATA STREAM EFFECT */}
-              <div className="absolute -left-4 top-1/2 w-2 h-2 bg-green-400 animate-ping"></div>
-              <div className="absolute -right-4 top-1/2 w-2 h-2 bg-red-400 animate-ping" style={{animationDelay: '0.5s'}}></div>
-            </div>
+              {/* PREMIUM DATA INDICATORS */}
+              <div className="absolute -left-6 top-1/2 w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg shadow-emerald-400/50"></div>
+              <div className="absolute -right-6 top-1/2 w-3 h-3 bg-red-400 rounded-full animate-pulse shadow-lg shadow-red-400/50" style={{animationDelay: '0.5s'}}></div>
+            </motion.div>
             
-            <div className="text-lg md:text-xl font-mono text-green-400 mb-8 relative">
-              &gt; TACTICAL COMMAND FOR HUMAN LIBERATION &lt;
+            {/* ENTERPRISE COMMAND LINE */}
+            <motion.div 
+              className="text-lg md:text-xl font-mono text-emerald-400 mb-8 relative bg-black/20 backdrop-blur-sm border border-emerald-400/30 rounded-lg px-4 py-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5 }}
+            >
+              <span className="text-emerald-400/60">&gt;</span> TACTICAL COMMAND FOR HUMAN LIBERATION 
+              <motion.span 
+                className="text-white animate-pulse ml-1"
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                |
+              </motion.span>
               
-              {/* TYPING CURSOR EFFECT */}
-              <span className="animate-pulse text-white">|</span>
-            </div>
+              {/* Enterprise Status Indicators */}
+              <div className="absolute -top-2 -right-2 flex space-x-1">
+                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
+                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* STRATEGIC MILITARY HERO COMMAND CENTER */}
