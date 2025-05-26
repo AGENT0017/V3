@@ -22,175 +22,200 @@ import {
   ChevronRight,
   ChevronLeft,
   X,
-  Check
+  Check,
+  Shield,
+  Zap,
+  Users,
+  Radio,
+  MapPin,
+  Flame,
+  Skull,
+  Compass,
+  Wrench,
+  Brain,
+  Eye,
+  MessageSquare,
+  AlertTriangle,
+  Headphones,
+  Video,
+  Mic,
+  Globe
 } from 'lucide-react';
 
-// Mock TMDB API data
-const mockMovies = [
-  {
-    id: 1,
-    title: "Quantum Nexus",
-    overview: "A mind-bending sci-fi thriller about parallel universes colliding.",
-    backdrop_path: "https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=1200",
-    poster_path: "https://images.unsplash.com/photo-1606512741416-fb5bbceaa4e2?w=300",
-    vote_average: 8.5,
-    release_date: "2024-03-15",
-    genre_ids: [878, 53],
-    cost: 75,
-    type: "movie",
-    youtube_id: "dQw4w9WgXcQ"
-  },
-  {
-    id: 2,
-    title: "Shadow Protocol",
-    overview: "Elite agents navigate a world of espionage and betrayal.",
-    backdrop_path: "https://images.unsplash.com/photo-1642810814997-31c017df06a8?w=1200",
-    poster_path: "https://images.pexels.com/photos/7533332/pexels-photo-7533332.jpeg?w=300",
-    vote_average: 7.8,
-    release_date: "2024-01-20",
-    genre_ids: [28, 53],
-    cost: 60,
-    type: "movie",
-    youtube_id: "dQw4w9WgXcQ"
-  },
-  {
-    id: 3,
-    title: "Digital Dreams",
-    overview: "A cyberpunk adventure in a virtual reality world.",
-    backdrop_path: "https://images.unsplash.com/photo-1717548379141-3060abccd58d?w=1200",
-    poster_path: "https://images.unsplash.com/photo-1717548381519-10ee59c67150?w=300",
-    vote_average: 9.1,
-    release_date: "2024-04-10",
-    genre_ids: [878, 28],
-    cost: 90,
-    type: "movie",
-    youtube_id: "dQw4w9WgXcQ"
-  }
-];
+// Enhanced Mock Data for Apocalypse Survival
+const apocalypseContent = {
+  survival: [
+    {
+      id: 1001,
+      title: "Urban Survival: When Cities Fall",
+      description: "Essential skills for surviving when infrastructure collapses.",
+      poster: "https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=300",
+      cost: 0, // Free during crisis
+      type: "survival",
+      urgency: "critical",
+      youtube_id: "dQw4w9WgXcQ",
+      skills: ["Water purification", "Food scavenging", "Shelter building"]
+    },
+    {
+      id: 1002,
+      title: "Off-Grid Power Systems",
+      description: "Generate electricity when the grid goes down.",
+      poster: "https://images.unsplash.com/photo-1606512741416-fb5bbceaa4e2?w=300",
+      cost: 25,
+      type: "survival",
+      urgency: "high",
+      youtube_id: "dQw4w9WgXcQ",
+      skills: ["Solar power", "Wind generation", "Battery storage"]
+    },
+    {
+      id: 1003,
+      title: "Medical Skills for Chaos",
+      description: "Life-saving medical knowledge when hospitals aren't available.",
+      poster: "https://images.unsplash.com/photo-1642810814997-31c017df06a8?w=300",
+      cost: 40,
+      type: "survival",
+      urgency: "critical",
+      youtube_id: "dQw4w9WgXcQ",
+      skills: ["First aid", "Herbal medicine", "Field surgery"]
+    }
+  ],
+  resistance: [
+    {
+      id: 2001,
+      title: "Digital Anonymity Masterclass",
+      description: "Stay invisible in a surveillance state.",
+      poster: "https://images.pexels.com/photos/7533332/pexels-photo-7533332.jpeg?w=300",
+      cost: 50,
+      type: "resistance",
+      urgency: "high",
+      youtube_id: "dQw4w9WgXcQ",
+      skills: ["VPN setup", "Encrypted messaging", "Anonymous browsing"]
+    },
+    {
+      id: 2002,
+      title: "Alternative Economy Basics",
+      description: "Trade and survive without traditional currency.",
+      poster: "https://images.unsplash.com/photo-1717548381519-10ee59c67150?w=300",
+      cost: 30,
+      type: "resistance",
+      urgency: "medium",
+      youtube_id: "dQw4w9WgXcQ",
+      skills: ["Bartering", "Cryptocurrency", "Resource sharing"]
+    }
+  ],
+  entertainment: [
+    {
+      id: 3001,
+      title: "Chaos Cinema: Mad Max Fury Road",
+      description: "Classic apocalypse entertainment for morale.",
+      poster: "https://images.unsplash.com/photo-1717548379141-3060abccd58d?w=300",
+      cost: 20,
+      type: "movie",
+      genre: "apocalypse",
+      youtube_id: "dQw4w9WgXcQ",
+      mood: "adrenaline"
+    },
+    {
+      id: 3002,
+      title: "Underground Comedy Hour",
+      description: "Keep your sanity with rebel humor.",
+      poster: "https://images.unsplash.com/photo-1717548384641-2bc48d1ad0e5?w=300",
+      cost: 15,
+      type: "comedy",
+      genre: "streaming",
+      isLive: true,
+      mood: "hope"
+    }
+  ],
+  community: [
+    {
+      id: 4001,
+      title: "Regional Survival Networks",
+      description: "Connect with local preppers and rebels.",
+      poster: "https://images.pexels.com/photos/3820514/pexels-photo-3820514.jpeg?w=300",
+      cost: 0,
+      type: "community",
+      members: 1247,
+      location: "Global"
+    }
+  ]
+};
 
-const mockTVShows = [
+const apocalypseTasks = [
   {
     id: 101,
-    title: "Chaos Theory",
-    overview: "Scientists discover reality is more fragile than they imagined.",
-    backdrop_path: "https://images.unsplash.com/photo-1717548384641-2bc48d1ad0e5?w=1200",
-    poster_path: "https://images.pexels.com/photos/3820514/pexels-photo-3820514.jpeg?w=300",
-    vote_average: 8.9,
-    first_air_date: "2024-02-14",
-    genre_ids: [18, 878],
-    cost: 45,
-    type: "tv",
-    episodes: 12,
-    youtube_id: "dQw4w9WgXcQ"
-  }
-];
-
-const mockPodcasts = [
-  {
-    id: 201,
-    title: "The Thrive Mindset",
-    description: "Weekly discussions on personal growth and success strategies.",
-    cover: "https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=300",
-    episodes: 45,
-    cost: 20,
-    type: "podcast",
-    duration: "45 min avg"
-  },
-  {
-    id: 202,
-    title: "Chaos Chronicles",
-    description: "True stories of overcoming impossible odds.",
-    cover: "https://images.unsplash.com/photo-1606512741416-fb5bbceaa4e2?w=300",
-    episodes: 23,
-    cost: 25,
-    type: "podcast",
-    duration: "60 min avg"
-  }
-];
-
-const mockInteractiveContent = [
-  {
-    id: 301,
-    title: "The Heist",
-    description: "Make choices that determine the outcome of this interactive thriller.",
-    poster: "https://images.unsplash.com/photo-1642810814997-31c017df06a8?w=300",
-    cost: 120,
-    type: "interactive",
-    duration: "2-4 hours",
-    choices: 47
-  }
-];
-
-const mockTextContent = [
-  {
-    id: 401,
-    title: "Building Digital Empires",
-    excerpt: "The ultimate guide to creating successful online businesses.",
-    cover: "https://images.pexels.com/photos/7533332/pexels-photo-7533332.jpeg?w=300",
-    cost: 15,
-    type: "text",
-    readTime: "12 min read",
-    author: "Alex Chen"
-  }
-];
-
-const mockTasks = [
-  {
-    id: 1,
-    title: "Share on Social Media",
-    description: "Share any content from #THRIVECHAOS on your social media",
-    reward: 50,
+    title: "Share Survival Knowledge",
+    description: "Upload or share a survival tip with the community",
+    reward: 100,
     icon: Share2,
     completed: false,
-    type: "social"
+    type: "community",
+    urgency: "high"
   },
   {
-    id: 2,
-    title: "Daily Check-in",
-    description: "Visit #THRIVECHAOS platform daily",
-    reward: 10,
-    icon: Calendar,
-    completed: true,
-    type: "daily"
-  },
-  {
-    id: 3,
-    title: "Rate Content",
-    description: "Rate 5 pieces of content to help others discover great material",
-    reward: 25,
-    icon: Star,
+    id: 102,
+    title: "Master a Crisis Skill",
+    description: "Complete any survival course and practice the skill",
+    reward: 150,
+    icon: Wrench,
     completed: false,
-    type: "engagement",
-    progress: 2,
-    target: 5
+    type: "survival",
+    urgency: "critical"
   },
   {
-    id: 4,
-    title: "Invite a Friend",
-    description: "Invite a friend to join #THRIVECHAOS",
+    id: 103,
+    title: "Build Local Network",
+    description: "Connect with 3 rebels in your geographic area",
     reward: 200,
-    icon: Gift,
+    icon: Users,
     completed: false,
-    type: "referral"
+    type: "networking",
+    urgency: "high"
   },
   {
-    id: 5,
-    title: "Create Playlist",
-    description: "Create your first personalized content playlist",
-    reward: 30,
+    id: 104,
+    title: "Stream Chaos Content",
+    description: "Host a live stream about survival, resistance, or chaos",
+    reward: 250,
+    icon: Video,
+    completed: false,
+    type: "streaming",
+    urgency: "medium"
+  },
+  {
+    id: 105,
+    title: "Emergency Drill Complete",
+    description: "Practice a real emergency scenario (bug-out bag, communication)",
+    reward: 300,
+    icon: AlertTriangle,
+    completed: false,
+    type: "preparedness",
+    urgency: "critical"
+  },
+  {
+    id: 106,
+    title: "Support a Rebel",
+    description: "Help another community member with resources or knowledge",
+    reward: 175,
     icon: Heart,
     completed: false,
-    type: "engagement"
+    type: "mutual-aid",
+    urgency: "high"
   }
 ];
 
-// Header Component
-export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks }) => {
+// Enhanced Header with Apocalypse Features
+export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks, crisisMode }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showEmergencyMenu, setShowEmergencyMenu] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full bg-black bg-opacity-95 backdrop-blur-md z-50 border-b border-gray-800">
+    <header className={`fixed top-0 w-full backdrop-blur-md z-50 border-b ${
+      crisisMode 
+        ? 'bg-red-900 bg-opacity-90 border-red-700' 
+        : 'bg-black bg-opacity-95 border-gray-800'
+    }`}>
       <div className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center space-x-8">
           <motion.div 
@@ -198,41 +223,90 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
             onClick={() => setCurrentView('home')}
             whileHover={{ scale: 1.05 }}
           >
+            <Skull className="w-8 h-8 text-white" />
             <div className="text-2xl font-bold text-white">#THRIVECHAOS</div>
+            {crisisMode && (
+              <motion.div 
+                className="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold"
+                animate={{ opacity: [1, 0.5, 1] }}
+                transition={{ repeat: Infinity, duration: 1 }}
+              >
+                CRISIS MODE
+              </motion.div>
+            )}
           </motion.div>
           
           <nav className="hidden md:flex space-x-6">
-            {['Home', 'Movies', 'TV Shows', 'Podcasts', 'Interactive', 'Text'].map((item) => (
-              <motion.button
-                key={item}
-                className="text-white hover:text-gray-300 transition-colors"
-                onClick={() => setCurrentView(item.toLowerCase().replace(' ', ''))}
-                whileHover={{ scale: 1.05 }}
-              >
-                {item}
-              </motion.button>
-            ))}
+            {[
+              { name: 'Home', view: 'home', icon: Flame },
+              { name: 'Survival', view: 'survival', icon: Shield },
+              { name: 'Resistance', view: 'resistance', icon: Zap },
+              { name: 'Stream', view: 'streaming', icon: Radio },
+              { name: 'Community', view: 'community', icon: Users },
+              { name: 'Intel', view: 'intel', icon: Eye }
+            ].map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <motion.button
+                  key={item.name}
+                  className="flex items-center space-x-1 text-white hover:text-gray-300 transition-colors"
+                  onClick={() => setCurrentView(item.view)}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  <span>{item.name}</span>
+                </motion.button>
+              );
+            })}
           </nav>
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* Points Display */}
+          {/* Crisis Points Display */}
           <motion.div 
-            className="flex items-center space-x-2 bg-gray-900 px-4 py-2 rounded-full cursor-pointer"
+            className={`flex items-center space-x-2 px-4 py-2 rounded-full cursor-pointer ${
+              crisisMode 
+                ? 'bg-red-800 border border-red-600' 
+                : 'bg-gray-900'
+            }`}
             onClick={() => setShowTasks(true)}
             whileHover={{ scale: 1.05 }}
           >
             <Coins className="w-5 h-5 text-yellow-400" />
             <span className="text-white font-semibold">{userPoints}</span>
+            <span className="text-gray-300 text-sm">CHAOS</span>
           </motion.div>
 
-          {/* Earn Points Button */}
+          {/* Emergency Menu */}
+          <motion.button
+            className={`p-2 rounded-full transition-colors ${
+              crisisMode 
+                ? 'bg-red-600 hover:bg-red-700' 
+                : 'bg-red-700 hover:bg-red-600'
+            }`}
+            onClick={() => setShowEmergencyMenu(!showEmergencyMenu)}
+            whileHover={{ scale: 1.1 }}
+          >
+            <AlertTriangle className="w-6 h-6 text-white" />
+          </motion.button>
+
+          {/* Live Stream Indicator */}
+          <motion.div 
+            className="flex items-center space-x-2 bg-green-700 px-3 py-2 rounded-full"
+            animate={{ opacity: [1, 0.7, 1] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
+            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+            <span className="text-white text-sm font-semibold">LIVE</span>
+          </motion.div>
+
+          {/* Earn Chaos Points */}
           <motion.button
             className="bg-white text-black px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition-colors"
             onClick={() => setShowTasks(true)}
             whileHover={{ scale: 1.05 }}
           >
-            Earn Points
+            Earn Chaos
           </motion.button>
 
           {/* Search */}
@@ -242,14 +316,6 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
             whileHover={{ scale: 1.1 }}
           >
             <Search className="w-6 h-6" />
-          </motion.button>
-
-          {/* Notifications */}
-          <motion.button
-            className="text-white hover:text-gray-300"
-            whileHover={{ scale: 1.1 }}
-          >
-            <Bell className="w-6 h-6" />
           </motion.button>
 
           {/* Profile */}
@@ -262,7 +328,35 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
         </div>
       </div>
 
-      {/* Search Bar */}
+      {/* Emergency Menu Dropdown */}
+      <AnimatePresence>
+        {showEmergencyMenu && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute right-6 top-16 bg-red-900 border border-red-700 rounded-lg p-4 min-w-64"
+          >
+            <h3 className="text-white font-bold mb-3">🚨 EMERGENCY TOOLS</h3>
+            <div className="space-y-2">
+              <button className="w-full text-left text-white hover:bg-red-800 p-2 rounded">
+                📡 Emergency Communications
+              </button>
+              <button className="w-full text-left text-white hover:bg-red-800 p-2 rounded">
+                🗺️ Safe Zone Locator
+              </button>
+              <button className="w-full text-left text-white hover:bg-red-800 p-2 rounded">
+                🎒 Bug-Out Checklist
+              </button>
+              <button className="w-full text-left text-white hover:bg-red-800 p-2 rounded">
+                👥 Find Local Network
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Enhanced Search */}
       <AnimatePresence>
         {showSearch && (
           <motion.div
@@ -273,10 +367,10 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
           >
             <input
               type="text"
-              placeholder="Search movies, shows, podcasts, articles..."
+              placeholder="Search survival skills, streams, resistance tactics..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-gray-900 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
+              className="w-full bg-gray-900 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               autoFocus
             />
           </motion.div>
@@ -286,101 +380,144 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
   );
 };
 
-// Hero Section Component
-export const HeroSection = ({ userPoints }) => {
-  const [currentHero, setCurrentHero] = useState(0);
-  const heroContent = [...mockMovies, ...mockTVShows];
+// Enhanced Hero Section for Apocalypse
+export const ApocalypseHero = ({ userPoints, crisisMode }) => {
+  const [currentAlert, setCurrentAlert] = useState(0);
+  const alerts = [
+    "⚡ INFRASTRUCTURE FAILING - Learn essential survival skills NOW",
+    "🔥 LIVE: Community leaders sharing real-time crisis updates", 
+    "🛡️ NEW: Anonymous resistance tactics just uploaded",
+    "📡 EMERGENCY: Secure communication networks established"
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentHero((prev) => (prev + 1) % heroContent.length);
-    }, 6000);
+      setCurrentAlert((prev) => (prev + 1) % alerts.length);
+    }, 4000);
     return () => clearInterval(interval);
-  }, [heroContent.length]);
-
-  const current = heroContent[currentHero];
-  const canWatch = userPoints >= current.cost;
+  }, [alerts.length]);
 
   return (
     <div className="relative h-screen overflow-hidden">
       <motion.div
-        key={currentHero}
+        className="absolute inset-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0"
       >
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${current.backdrop_path})` }}
+          style={{ 
+            backgroundImage: `url(https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=1200)`,
+            filter: crisisMode ? 'hue-rotate(0deg) saturate(1.2)' : 'hue-rotate(20deg)'
+          }}
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
+        <div className={`absolute inset-0 ${
+          crisisMode 
+            ? 'bg-red-900 bg-opacity-60' 
+            : 'bg-black bg-opacity-50'
+        }`} />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
       </motion.div>
 
+      {/* Crisis Alert Banner */}
+      <div className={`absolute top-24 left-0 right-0 z-20 ${
+        crisisMode ? 'bg-red-600' : 'bg-orange-600'
+      } text-white py-2 px-6`}>
+        <motion.div
+          key={currentAlert}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          className="text-center font-semibold"
+        >
+          {alerts[currentAlert]}
+        </motion.div>
+      </div>
+
       <div className="relative z-10 flex items-center h-full px-6 md:px-12">
-        <div className="max-w-2xl">
-          <motion.h1
-            key={`title-${currentHero}`}
+        <div className="max-w-4xl">
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-4"
+            className="mb-6"
           >
-            {current.title}
-          </motion.h1>
+            <div className="flex items-center space-x-4 mb-4">
+              <Skull className="w-12 h-12 text-red-500" />
+              <div className="text-red-400 font-bold text-xl">APOCALYPSE MODE</div>
+            </div>
+          </motion.div>
 
-          <motion.p
-            key={`overview-${currentHero}`}
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-lg md:text-xl text-gray-200 mb-6 max-w-xl"
+            className="text-5xl md:text-7xl font-bold text-white mb-6"
           >
-            {current.overview}
+            THRIVE IN THE
+            <br />
+            <span className="text-red-400">CHAOS</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl"
+          >
+            When systems collapse, rebels rise. Learn survival skills, connect with your tribe, 
+            and keep your sanity with apocalypse-ready entertainment.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="flex items-center space-x-4"
+            transition={{ delay: 0.9 }}
+            className="flex flex-wrap items-center gap-4"
           >
             <motion.button
-              className={`flex items-center space-x-2 px-8 py-3 rounded-lg font-semibold text-lg transition-all ${
-                canWatch
-                  ? 'bg-white text-black hover:bg-gray-200'
-                  : 'bg-gray-600 text-gray-300 cursor-not-allowed'
-              }`}
-              whileHover={canWatch ? { scale: 1.05 } : {}}
-              disabled={!canWatch}
+              className="flex items-center space-x-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold text-lg transition-all"
+              whileHover={{ scale: 1.05 }}
             >
-              {canWatch ? <Play className="w-6 h-6" /> : <Lock className="w-6 h-6" />}
-              <span>{canWatch ? 'Play' : `${current.cost} points needed`}</span>
+              <Shield className="w-6 h-6" />
+              <span>Start Surviving</span>
             </motion.button>
 
             <motion.button
-              className="flex items-center space-x-2 px-8 py-3 bg-gray-700 bg-opacity-80 text-white rounded-lg font-semibold hover:bg-opacity-100 transition-all"
+              className="flex items-center space-x-2 px-8 py-4 bg-gray-700 bg-opacity-80 text-white rounded-lg font-semibold hover:bg-opacity-100 transition-all"
               whileHover={{ scale: 1.05 }}
             >
-              <Info className="w-6 h-6" />
-              <span>More Info</span>
+              <Radio className="w-6 h-6" />
+              <span>Join Live Stream</span>
+            </motion.button>
+
+            <motion.button
+              className="flex items-center space-x-2 px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-black transition-all"
+              whileHover={{ scale: 1.05 }}
+            >
+              <Users className="w-6 h-6" />
+              <span>Find Your Tribe</span>
             </motion.button>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
-            className="flex items-center space-x-4 mt-6"
+            transition={{ delay: 1.1 }}
+            className="flex items-center space-x-6 mt-8"
           >
-            <div className="flex items-center space-x-1">
-              <Star className="w-5 h-5 text-yellow-400 fill-current" />
-              <span className="text-white font-semibold">{current.vote_average}</span>
+            <div className="flex items-center space-x-2">
+              <Users className="w-5 h-5 text-green-400" />
+              <span className="text-white">12,847 Rebels Online</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Coins className="w-5 h-5 text-yellow-400" />
-              <span className="text-white">{current.cost} points</span>
+              <Radio className="w-5 h-5 text-red-400" />
+              <span className="text-white">23 Live Streams</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <AlertTriangle className="w-5 h-5 text-yellow-400" />
+              <span className="text-white">Crisis Level: MODERATE</span>
             </div>
           </motion.div>
         </div>
@@ -389,50 +526,82 @@ export const HeroSection = ({ userPoints }) => {
   );
 };
 
-// Content Card Component
-export const ContentCard = ({ item, userPoints, onPlay }) => {
+// Enhanced Content Card for Apocalypse
+export const ApocalypseContentCard = ({ item, userPoints, onPlay, featured = false }) => {
   const [isHovered, setIsHovered] = useState(false);
   const canAccess = userPoints >= item.cost;
 
+  const getUrgencyColor = (urgency) => {
+    switch (urgency) {
+      case 'critical': return 'text-red-400 border-red-400';
+      case 'high': return 'text-orange-400 border-orange-400';
+      case 'medium': return 'text-yellow-400 border-yellow-400';
+      default: return 'text-green-400 border-green-400';
+    }
+  };
+
   const getTypeIcon = () => {
     switch (item.type) {
+      case 'survival': return <Shield className="w-4 h-4" />;
+      case 'resistance': return <Zap className="w-4 h-4" />;
+      case 'streaming': return <Radio className="w-4 h-4" />;
+      case 'community': return <Users className="w-4 h-4" />;
       case 'movie': return <Play className="w-4 h-4" />;
-      case 'tv': return <Play className="w-4 h-4" />;
-      case 'podcast': return <Volume2 className="w-4 h-4" />;
-      case 'interactive': return <Gamepad2 className="w-4 h-4" />;
-      case 'text': return <BookOpen className="w-4 h-4" />;
-      default: return <Play className="w-4 h-4" />;
+      default: return <Flame className="w-4 h-4" />;
     }
   };
 
   return (
     <motion.div
-      className="relative group cursor-pointer"
+      className={`relative group cursor-pointer ${featured ? 'scale-110' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: featured ? 1.15 : 1.05, zIndex: 10 }}
       transition={{ duration: 0.2 }}
     >
       <div className="relative overflow-hidden rounded-lg">
         <img
-          src={item.poster_path || item.cover || item.poster}
+          src={item.poster || item.cover}
           alt={item.title}
           className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
         />
         
-        {!canAccess && (
+        {/* Urgency Badge */}
+        {item.urgency && (
+          <div className={`absolute top-2 left-2 px-2 py-1 rounded-full text-xs font-bold border ${getUrgencyColor(item.urgency)}`}>
+            {item.urgency.toUpperCase()}
+          </div>
+        )}
+
+        {/* Live Indicator */}
+        {item.isLive && (
+          <div className="absolute top-2 right-2 flex items-center space-x-1 bg-red-600 px-2 py-1 rounded-full">
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+            <span className="text-white text-xs font-bold">LIVE</span>
+          </div>
+        )}
+
+        {/* Cost/Lock Overlay */}
+        {!canAccess && item.cost > 0 && (
           <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
             <div className="text-center">
               <Lock className="w-8 h-8 text-white mx-auto mb-2" />
-              <div className="text-white font-semibold">{item.cost} points</div>
+              <div className="text-white font-semibold">{item.cost} CHAOS</div>
             </div>
           </div>
         )}
 
-        <div className="absolute top-2 right-2 bg-black bg-opacity-80 px-2 py-1 rounded-full flex items-center space-x-1">
+        {/* Free Content Badge */}
+        {item.cost === 0 && (
+          <div className="absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-bold">
+            FREE
+          </div>
+        )}
+
+        <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 px-2 py-1 rounded-full flex items-center space-x-1">
           {getTypeIcon()}
           <Coins className="w-4 h-4 text-yellow-400" />
-          <span className="text-white text-sm">{item.cost}</span>
+          <span className="text-white text-sm">{item.cost || 'FREE'}</span>
         </div>
       </div>
 
@@ -442,33 +611,53 @@ export const ContentCard = ({ item, userPoints, onPlay }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="absolute bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 p-4 rounded-b-lg"
+            className="absolute bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 p-4 rounded-b-lg border-t border-red-600"
           >
             <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
             <p className="text-gray-300 text-sm mb-3 line-clamp-2">
-              {item.overview || item.description || item.excerpt}
+              {item.description || item.overview}
             </p>
+            
+            {/* Skills Display */}
+            {item.skills && (
+              <div className="flex flex-wrap gap-1 mb-3">
+                {item.skills.slice(0, 3).map((skill, index) => (
+                  <span key={index} className="bg-red-600 text-white text-xs px-2 py-1 rounded">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Community Info */}
+            {item.members && (
+              <div className="flex items-center space-x-2 mb-3">
+                <Users className="w-4 h-4 text-green-400" />
+                <span className="text-green-400 text-sm">{item.members} members</span>
+              </div>
+            )}
             
             <div className="flex items-center justify-between">
               <button
                 onClick={() => canAccess && onPlay(item)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-semibold transition-all ${
                   canAccess
-                    ? 'bg-white text-black hover:bg-gray-200'
+                    ? 'bg-red-600 hover:bg-red-700 text-white'
                     : 'bg-gray-600 text-gray-300 cursor-not-allowed'
                 }`}
                 disabled={!canAccess}
               >
                 {canAccess ? getTypeIcon() : <Lock className="w-4 h-4" />}
-                <span>{canAccess ? 'Play' : 'Locked'}</span>
+                <span>{canAccess ? (item.isLive ? 'Join Live' : 'Access') : 'Locked'}</span>
               </button>
 
               <div className="flex items-center space-x-2">
-                {item.vote_average && (
-                  <div className="flex items-center space-x-1">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-white text-sm">{item.vote_average}</span>
-                  </div>
+                {item.urgency && (
+                  <div className={`w-3 h-3 rounded-full ${
+                    item.urgency === 'critical' ? 'bg-red-500' :
+                    item.urgency === 'high' ? 'bg-orange-500' :
+                    item.urgency === 'medium' ? 'bg-yellow-500' : 'bg-green-500'
+                  }`} />
                 )}
               </div>
             </div>
@@ -479,8 +668,155 @@ export const ContentCard = ({ item, userPoints, onPlay }) => {
   );
 };
 
-// Content Row Component
-export const ContentRow = ({ title, content, userPoints, onPlay }) => {
+// Enhanced Tasks Modal for Apocalypse
+export const ApocalypseTasksModal = ({ isOpen, onClose, userPoints, setUserPoints }) => {
+  const [tasks, setTasks] = useState(apocalypseTasks);
+
+  const completeTask = (taskId) => {
+    setTasks(prev => prev.map(task => {
+      if (task.id === taskId && !task.completed) {
+        setUserPoints(prev => prev + task.reward);
+        return { ...task, completed: true };
+      }
+      return task;
+    }));
+  };
+
+  const getUrgencyColor = (urgency) => {
+    switch (urgency) {
+      case 'critical': return 'border-red-500 bg-red-500 bg-opacity-10';
+      case 'high': return 'border-orange-500 bg-orange-500 bg-opacity-10';
+      case 'medium': return 'border-yellow-500 bg-yellow-500 bg-opacity-10';
+      default: return 'border-green-500 bg-green-500 bg-opacity-10';
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-gray-900 border border-red-600 rounded-xl p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h2 className="text-4xl font-bold text-white flex items-center space-x-3">
+              <Skull className="w-10 h-10 text-red-500" />
+              <span>CHAOS MISSIONS</span>
+            </h2>
+            <p className="text-gray-400 mt-2">Complete missions to earn CHAOS points and help the resistance</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-white transition-colors"
+          >
+            <X className="w-8 h-8" />
+          </button>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {tasks.map((task) => {
+            const IconComponent = task.icon;
+            return (
+              <motion.div
+                key={task.id}
+                className={`p-6 rounded-xl border-2 transition-all ${
+                  task.completed
+                    ? 'border-green-500 bg-green-500 bg-opacity-10'
+                    : getUrgencyColor(task.urgency)
+                }`}
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className={`p-3 rounded-full ${
+                      task.completed ? 'bg-green-500' : 
+                      task.urgency === 'critical' ? 'bg-red-600' :
+                      task.urgency === 'high' ? 'bg-orange-600' :
+                      'bg-gray-700'
+                    }`}>
+                      {task.completed ? (
+                        <Check className="w-6 h-6 text-white" />
+                      ) : (
+                        <IconComponent className="w-6 h-6 text-white" />
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-lg">{task.title}</h3>
+                      <p className="text-gray-400">{task.description}</p>
+                      <div className={`inline-block mt-2 px-2 py-1 rounded text-xs font-bold ${
+                        task.urgency === 'critical' ? 'bg-red-600 text-white' :
+                        task.urgency === 'high' ? 'bg-orange-600 text-white' :
+                        'bg-yellow-600 text-black'
+                      }`}>
+                        {task.urgency?.toUpperCase()} PRIORITY
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-1">
+                    <Coins className="w-5 h-5 text-yellow-400" />
+                    <span className="text-white font-bold">+{task.reward}</span>
+                  </div>
+                </div>
+
+                {!task.completed && (
+                  <button
+                    onClick={() => completeTask(task.id)}
+                    className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors"
+                  >
+                    Complete Mission
+                  </button>
+                )}
+
+                {task.completed && (
+                  <div className="text-center text-green-400 font-semibold">
+                    ✓ Mission Accomplished
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Crisis Status */}
+        <div className="mt-8 p-6 bg-red-900 bg-opacity-30 border border-red-600 rounded-lg">
+          <h3 className="text-white font-bold text-xl mb-4 flex items-center space-x-2">
+            <AlertTriangle className="w-6 h-6 text-red-400" />
+            <span>CURRENT CRISIS LEVEL</span>
+          </h3>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-orange-400">MODERATE</div>
+              <div className="text-gray-400">System Instability</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-green-400">12,847</div>
+              <div className="text-gray-400">Active Rebels</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-blue-400">23</div>
+              <div className="text-gray-400">Live Streams</div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// Enhanced Content Row for Apocalypse
+export const ApocalypseContentRow = ({ title, content, userPoints, onPlay, urgent = false }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const maxScroll = Math.max(0, content.length * 300 - window.innerWidth + 100);
 
@@ -495,7 +831,17 @@ export const ContentRow = ({ title, content, userPoints, onPlay }) => {
   return (
     <div className="mb-12">
       <div className="flex items-center justify-between mb-6 px-6">
-        <h2 className="text-2xl font-bold text-white">{title}</h2>
+        <h2 className={`text-3xl font-bold flex items-center space-x-3 ${
+          urgent ? 'text-red-400' : 'text-white'
+        }`}>
+          {urgent && <AlertTriangle className="w-8 h-8 text-red-400" />}
+          <span>{title}</span>
+          {urgent && (
+            <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+              URGENT
+            </span>
+          )}
+        </h2>
         <div className="flex space-x-2">
           <button
             onClick={() => scroll('left')}
@@ -520,9 +866,14 @@ export const ContentRow = ({ title, content, userPoints, onPlay }) => {
           animate={{ x: -scrollPosition }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          {content.map((item) => (
+          {content.map((item, index) => (
             <div key={item.id} className="flex-shrink-0 w-72">
-              <ContentCard item={item} userPoints={userPoints} onPlay={onPlay} />
+              <ApocalypseContentCard 
+                item={item} 
+                userPoints={userPoints} 
+                onPlay={onPlay}
+                featured={index === 0 && urgent}
+              />
             </div>
           ))}
         </motion.div>
@@ -531,199 +882,53 @@ export const ContentRow = ({ title, content, userPoints, onPlay }) => {
   );
 };
 
-// Tasks Modal Component
-export const TasksModal = ({ isOpen, onClose, userPoints, setUserPoints }) => {
-  const [tasks, setTasks] = useState(mockTasks);
-
-  const completeTask = (taskId) => {
-    setTasks(prev => prev.map(task => {
-      if (task.id === taskId && !task.completed) {
-        setUserPoints(prev => prev + task.reward);
-        return { ...task, completed: true };
-      }
-      return task;
-    }));
-  };
-
-  if (!isOpen) return null;
-
+// Live Stream Component
+export const LiveStreamGrid = ({ streams, userPoints, onJoinStream }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-gray-900 rounded-xl p-8 max-w-4xl w-full max-h-[80vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-3xl font-bold text-white">Earn Points</h2>
-            <p className="text-gray-400 mt-2">Complete tasks to unlock premium content</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors"
-          >
-            <X className="w-8 h-8" />
-          </button>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {tasks.map((task) => {
-            const IconComponent = task.icon;
-            return (
-              <motion.div
-                key={task.id}
-                className={`p-6 rounded-xl border-2 transition-all ${
-                  task.completed
-                    ? 'border-green-500 bg-green-500 bg-opacity-10'
-                    : 'border-gray-700 bg-gray-800 hover:border-gray-600'
-                }`}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className={`p-3 rounded-full ${
-                      task.completed ? 'bg-green-500' : 'bg-gray-700'
-                    }`}>
-                      {task.completed ? (
-                        <Check className="w-6 h-6 text-white" />
-                      ) : (
-                        <IconComponent className="w-6 h-6 text-white" />
-                      )}
-                    </div>
-                    <div>
-                      <h3 className="text-white font-bold text-lg">{task.title}</h3>
-                      <p className="text-gray-400">{task.description}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-1">
-                    <Coins className="w-5 h-5 text-yellow-400" />
-                    <span className="text-white font-bold">+{task.reward}</span>
-                  </div>
-                </div>
-
-                {task.progress && (
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm text-gray-400 mb-2">
-                      <span>Progress</span>
-                      <span>{task.progress}/{task.target}</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div
-                        className="bg-blue-500 h-2 rounded-full transition-all"
-                        style={{ width: `${(task.progress / task.target) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {!task.completed && (
-                  <button
-                    onClick={() => completeTask(task.id)}
-                    className="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
-                  >
-                    Complete Task
-                  </button>
-                )}
-
-                {task.completed && (
-                  <div className="text-center text-green-400 font-semibold">
-                    ✓ Completed
-                  </div>
-                )}
-              </motion.div>
-            );
-          })}
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-// Video Player Component
-export const VideoPlayer = ({ content, isOpen, onClose }) => {
-  if (!isOpen || !content) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black z-50 flex items-center justify-center"
-    >
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
-      >
-        <X className="w-8 h-8" />
-      </button>
-
-      <div className="w-full h-full flex items-center justify-center">
-        {content.type === 'podcast' ? (
-          <div className="text-center p-8">
-            <img
-              src={content.cover}
-              alt={content.title}
-              className="w-64 h-64 mx-auto rounded-lg mb-6"
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {streams.map((stream) => (
+        <motion.div
+          key={stream.id}
+          className="bg-gray-900 border border-red-600 rounded-lg overflow-hidden"
+          whileHover={{ scale: 1.03 }}
+        >
+          <div className="relative">
+            <img 
+              src={stream.thumbnail} 
+              alt={stream.title}
+              className="w-full h-48 object-cover"
             />
-            <h2 className="text-3xl font-bold text-white mb-4">{content.title}</h2>
-            <p className="text-gray-400 mb-6">{content.description}</p>
-            <div className="bg-gray-800 p-6 rounded-lg">
-              <div className="text-white mb-4">🎵 Audio Player Simulation</div>
-              <div className="text-gray-400">Playing: Episode 1 - Introduction</div>
+            <div className="absolute top-2 left-2 flex items-center space-x-1 bg-red-600 px-2 py-1 rounded-full">
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              <span className="text-white text-xs font-bold">LIVE</span>
+            </div>
+            <div className="absolute top-2 right-2 bg-black bg-opacity-80 text-white px-2 py-1 rounded">
+              {stream.viewers} watching
             </div>
           </div>
-        ) : content.type === 'text' ? (
-          <div className="max-w-4xl mx-auto p-8 text-white">
-            <h1 className="text-4xl font-bold mb-6">{content.title}</h1>
-            <div className="text-gray-400 mb-8">By {content.author} • {content.readTime}</div>
-            <div className="prose prose-invert max-w-none">
-              <p>This is a sample article content. In a real implementation, this would contain the full article text with proper formatting, images, and interactive elements.</p>
-              <p>The #THRIVECHAOS platform provides premium text content that helps users grow and develop new skills through comprehensive guides and articles.</p>
-            </div>
-          </div>
-        ) : content.type === 'interactive' ? (
-          <div className="text-center p-8">
-            <h2 className="text-3xl font-bold text-white mb-6">{content.title}</h2>
-            <p className="text-gray-400 mb-8">{content.description}</p>
-            <div className="bg-gray-800 p-8 rounded-lg">
-              <div className="text-white mb-6">🎮 Interactive Experience</div>
-              <div className="text-gray-400 mb-4">You wake up in a mysterious room...</div>
-              <div className="space-y-4">
-                <button className="block w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition-colors">
-                  → Look around the room
-                </button>
-                <button className="block w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg transition-colors">
-                  → Check your pockets
-                </button>
-                <button className="block w-full bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-lg transition-colors">
-                  → Try the door
-                </button>
+          
+          <div className="p-4">
+            <h3 className="text-white font-bold text-lg mb-2">{stream.title}</h3>
+            <p className="text-gray-400 text-sm mb-3">{stream.description}</p>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-gray-300 text-sm">{stream.streamer}</span>
               </div>
+              
+              <button
+                onClick={() => onJoinStream(stream)}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+              >
+                Join Stream
+              </button>
             </div>
           </div>
-        ) : (
-          <iframe
-            width="80%"
-            height="80%"
-            src={`https://www.youtube.com/embed/${content.youtube_id}?autoplay=1`}
-            title={content.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="rounded-lg"
-          />
-        )}
-      </div>
-    </motion.div>
+        </motion.div>
+      ))}
+    </div>
   );
 };
