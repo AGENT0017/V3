@@ -214,50 +214,34 @@ const Home = () => {
         <>
           <HeroSection userPoints={userPoints} />
           <div className="pt-12 space-y-12">
-            {content.trending && (
+            {content.survival && (
               <ContentRow 
-                title="Trending Now" 
-                content={content.trending} 
+                title="Critical Survival Skills" 
+                content={content.survival} 
                 userPoints={userPoints}
                 onPlay={handlePlay}
               />
             )}
-            {content.movies && (
+            {content.resistance && (
               <ContentRow 
-                title="Popular Movies" 
-                content={content.movies} 
+                title="Resistance Training" 
+                content={content.resistance} 
                 userPoints={userPoints}
                 onPlay={handlePlay}
               />
             )}
-            {content.shows && (
+            {content.entertainment && (
               <ContentRow 
-                title="TV Series" 
-                content={content.shows} 
+                title="Entertainment & Morale" 
+                content={content.entertainment} 
                 userPoints={userPoints}
                 onPlay={handlePlay}
               />
             )}
-            {content.podcasts && (
+            {content.streams && (
               <ContentRow 
-                title="Featured Podcasts" 
-                content={content.podcasts} 
-                userPoints={userPoints}
-                onPlay={handlePlay}
-              />
-            )}
-            {content.interactive && (
-              <ContentRow 
-                title="Interactive Experiences" 
-                content={content.interactive} 
-                userPoints={userPoints}
-                onPlay={handlePlay}
-              />
-            )}
-            {content.articles && (
-              <ContentRow 
-                title="Premium Articles" 
-                content={content.articles} 
+                title="Live Streams" 
+                content={content.streams} 
                 userPoints={userPoints}
                 onPlay={handlePlay}
               />
