@@ -36,7 +36,15 @@ import {
   Wrench,
   Flame,
   Coins,
-  Crown
+  Crown,
+  CreditCard,
+  MessageSquare,
+  Gamepad2,
+  Dumbbell,
+  Book,
+  Compass,
+  Smartphone,
+  Map
 } from 'lucide-react';
 
 // Enhanced User Classification System
