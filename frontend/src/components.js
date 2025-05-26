@@ -732,7 +732,7 @@ export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }
                     key={item.name}
                     className="w-full flex items-center space-x-3 text-white hover:text-gray-300 transition-colors py-3 px-4 hover:bg-gray-800 rounded-lg"
                     onClick={() => {
-                      setCurrentView(item.view);
+                      onNavigate(item.view);
                       setShowMobileMenu(false);
                     }}
                     whileHover={{ scale: 1.02 }}
