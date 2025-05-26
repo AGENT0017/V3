@@ -379,24 +379,8 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
-      {/* Animated Background Effects */}
-      <div className="fixed inset-0 opacity-10 bg-gradient-to-b from-yellow-600 via-red-900 to-black pointer-events-none animate-pulse"></div>
-      
-      {/* Floating Golden Particles */}
-      <div className="fixed inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-yellow-400 rounded-full animate-ping"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
-        ))}
-      </div>
+      {/* Simple Background Effect */}
+      <div className="fixed inset-0 opacity-10 bg-gradient-to-b from-red-900 to-black pointer-events-none"></div>
 
       {/* Dopamine Reward Animation */}
       <AnimatePresence>
