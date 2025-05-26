@@ -144,6 +144,107 @@ const businessFeatures = {
     }
   }
 };
+const businessFeatures = {
+  // Community Creation Tools
+  communityTemplates: [
+    {
+      id: "survival_academy",
+      name: "Survival Academy",
+      description: "Teach essential survival skills to rebels",
+      category: "Education",
+      price: 0, // Free template
+      features: ["Live streaming", "Course modules", "Certification system"],
+      theme: "survival",
+      color: "green"
+    },
+    {
+      id: "crypto_rebels",
+      name: "Crypto Rebels Hub",
+      description: "Build a community around cryptocurrency and financial freedom",
+      category: "Finance",
+      price: 50,
+      features: ["Trading signals", "Portfolio tracking", "Private channels"],
+      theme: "tech",
+      color: "blue"
+    },
+    {
+      id: "wellness_warriors",
+      name: "Wellness Warriors",
+      description: "Health and wellness coaching community",
+      category: "Health",
+      price: 30,
+      features: ["Fitness tracking", "Nutrition plans", "Group challenges"],
+      theme: "health",
+      color: "purple"
+    }
+  ],
+
+  // Subscription Plans
+  subscriptionTiers: [
+    {
+      id: "basic",
+      name: "Rebel Starter",
+      price: 29,
+      interval: "monthly",
+      features: [
+        "Create 1 community",
+        "Up to 100 members",
+        "Basic analytics",
+        "Standard support"
+      ],
+      chaosBonus: 500
+    },
+    {
+      id: "pro",
+      name: "Chaos Commander",
+      price: 79,
+      interval: "monthly", 
+      features: [
+        "Create 5 communities",
+        "Up to 1000 members",
+        "Advanced analytics",
+        "MLM tracking",
+        "Priority support",
+        "Custom branding"
+      ],
+      chaosBonus: 1500,
+      popular: true
+    },
+    {
+      id: "empire",
+      name: "Revolution Leader",
+      price: 199,
+      interval: "monthly",
+      features: [
+        "Unlimited communities",
+        "Unlimited members",
+        "Full analytics suite",
+        "Complete MLM system",
+        "White-label options",
+        "Dedicated support"
+      ],
+      chaosBonus: 5000
+    }
+  ],
+
+  // MLM Structure (8 Levels)
+  mlmStructure: {
+    levels: [
+      { level: 1, commission: 10, name: "Direct Recruit" },
+      { level: 2, commission: 8, name: "Second Line" },
+      { level: 3, commission: 6, name: "Third Line" },
+      { level: 4, commission: 4, name: "Fourth Line" },
+      { level: 5, commission: 3, name: "Fifth Line" },
+      { level: 6, commission: 2, name: "Sixth Line" },
+      { level: 7, commission: 1.5, name: "Seventh Line" },
+      { level: 8, commission: 1, name: "Eighth Line" }
+    ],
+    bonuses: {
+      rankAdvancement: [100, 250, 500, 1000, 2500, 5000, 10000, 25000],
+      monthlyVolume: [50, 100, 200, 400, 800, 1600, 3200, 6400]
+    }
+  }
+};
 
 // Mock Coach/Entrepreneur Profiles
 const mockCoaches = [
