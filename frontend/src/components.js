@@ -1136,53 +1136,464 @@ export const ApocalypseContentRow = ({ title, content, userPoints, onPlay, urgen
   );
 };
 
-// Live Stream Component
-export const LiveStreamGrid = ({ streams, userPoints, onJoinStream }) => {
+// User Profile Component
+export const UserProfile = ({ user, onClose }) => {
+  const userTypeInfo = userTypes[user.type];
+
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {streams.map((stream) => (
-        <motion.div
-          key={stream.id}
-          className="bg-gray-900 border border-red-600 rounded-lg overflow-hidden"
-          whileHover={{ scale: 1.03 }}
-        >
-          <div className="relative">
-            <img 
-              src={stream.thumbnail} 
-              alt={stream.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="absolute top-2 left-2 flex items-center space-x-1 bg-red-600 px-2 py-1 rounded-full">
-              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-              <span className="text-white text-xs font-bold">LIVE</span>
-            </div>
-            <div className="absolute top-2 right-2 bg-black bg-opacity-80 text-white px-2 py-1 rounded">
-              {stream.viewers} watching
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      className="bg-gray-900 border border-red-600 rounded-xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+    >
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center space-x-4">
+          <img 
+            src={user.profile.avatar} 
+            alt={user.profile.displayName}
+            className="w-20 h-20 rounded-full border-2 border-red-600"
+          />
+          <div>
+            <h2 className="text-3xl font-bold text-white">{user.profile.displayName}</h2>
+            <div className="flex items-center space-x-3 mt-2">
+              <span className={`${userTypeInfo.color} font-semibold`}>
+                {userTypeInfo.icon} {userTypeInfo.name}
+              </span>
+              <span className="text-gray-400">Level {user.level}</span>
+              {user.profile.verified && (
+                <span className="bg-green-600 text-white px-2 py-1 rounded-full text-xs">✓ VERIFIED</span>
+              )}
             </div>
           </div>
-          
-          <div className="p-4">
-            <h3 className="text-white font-bold text-lg mb-2">{stream.title}</h3>
-            <p className="text-gray-400 text-sm mb-3">{stream.description}</p>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-gray-300 text-sm">{stream.streamer}</span>
+        </div>
+        <button onClick={onClose} className="text-gray-400 hover:text-white">
+          <X className="w-8 h-8" />
+        </button>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* Left Column */}
+        <div className="space-y-6">
+          {/* Bio */}
+          <div className="bg-gray-800 p-6 rounded-lg">
+            <h3 className="text-white font-bold text-xl mb-4">About</h3>
+            <p className="text-gray-300">{user.profile.bio}</p>
+            <div className="mt-4 text-gray-400">
+              📍 {user.profile.location}
+            </div>
+          </div>
+
+          {/* Memecoin */}
+          <div className="bg-gradient-to-r from-yellow-900 to-orange-900 p-6 rounded-lg border border-yellow-600">
+            <h3 className="text-white font-bold text-xl mb-4 flex items-center space-x-2">
+              <span>💰</span>
+              <span>{user.memecoin.name} Memecoin</span>
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-yellow-400 font-bold text-2xl">{user.memecoin.symbol}</div>
+                <div className="text-gray-300 text-sm">Symbol</div>
               </div>
-              
-              <button
-                onClick={() => onJoinStream(stream)}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
-              >
-                Join Stream
-              </button>
+              <div>
+                <div className="text-yellow-400 font-bold text-2xl">{user.memecoin.value}</div>
+                <div className="text-gray-300 text-sm">CHAOS per token</div>
+              </div>
+              <div>
+                <div className="text-yellow-400 font-bold text-2xl">{user.memecoin.supply.toLocaleString()}</div>
+                <div className="text-gray-300 text-sm">Total Supply</div>
+              </div>
+              <div>
+                <div className="text-yellow-400 font-bold text-2xl">{user.memecoin.holders}</div>
+                <div className="text-gray-300 text-sm">Holders</div>
+              </div>
+            </div>
+            <button className="w-full mt-4 bg-yellow-600 hover:bg-yellow-700 text-black font-bold py-3 rounded-lg transition-colors">
+              Buy {user.memecoin.symbol} Tokens
+            </button>
+          </div>
+
+          {/* Skills */}
+          <div className="bg-gray-800 p-6 rounded-lg">
+            <h3 className="text-white font-bold text-xl mb-4">Specialties</h3>
+            <div className="flex flex-wrap gap-2">
+              {user.profile.skills.map((skill, index) => (
+                <span key={index} className="bg-red-600 text-white px-3 py-1 rounded-full text-sm">
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
-        </motion.div>
-      ))}
+        </div>
+
+        {/* Right Column */}
+        <div className="space-y-6">
+          {/* Intro Video */}
+          <div className="bg-gray-800 p-6 rounded-lg">
+            <h3 className="text-white font-bold text-xl mb-4">Introduction Video</h3>
+            <div className="aspect-video bg-black rounded-lg overflow-hidden">
+              <iframe
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${user.profile.introVideo}`}
+                title="User Introduction"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div className="bg-gray-800 p-6 rounded-lg">
+            <h3 className="text-white font-bold text-xl mb-4">Connect</h3>
+            <div className="space-y-3">
+              {Object.entries(user.profile.socialLinks).map(([platform, handle]) => (
+                <div key={platform} className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                    <Globe className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold capitalize">{platform}</div>
+                    <div className="text-gray-400 text-sm">{handle}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="bg-gray-800 p-6 rounded-lg">
+            <h3 className="text-white font-bold text-xl mb-4">Marketplace Stats</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-green-400 font-bold text-2xl">{user.profile.reputation}/5</div>
+                <div className="text-gray-300 text-sm">Reputation</div>
+              </div>
+              <div>
+                <div className="text-green-400 font-bold text-2xl">{user.profile.totalTrades}</div>
+                <div className="text-gray-300 text-sm">Total Trades</div>
+              </div>
+              <div>
+                <div className="text-green-400 font-bold text-2xl">{user.marketplace.activeListings}</div>
+                <div className="text-gray-300 text-sm">Active Listings</div>
+              </div>
+              <div>
+                <div className="text-green-400 font-bold text-2xl">{user.marketplace.revenue.toLocaleString()}</div>
+                <div className="text-gray-300 text-sm">CHAOS Earned</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Marketplace Component
+export const Marketplace = ({ userPoints, setUserPoints }) => {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [showItemDetail, setShowItemDetail] = useState(false);
+
+  const filteredItems = selectedCategory === 'all' 
+    ? mockMarketplaceItems 
+    : mockMarketplaceItems.filter(item => item.category === selectedCategory);
+
+  const handlePurchase = (item) => {
+    if (userPoints >= item.price) {
+      setUserPoints(prev => prev - item.price);
+      // Simulate purchase success
+      alert(`Successfully purchased ${item.title} for ${item.price} CHAOS points!`);
+      setShowItemDetail(false);
+    } else {
+      alert(`Insufficient CHAOS points. You need ${item.price - userPoints} more points.`);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-black pt-24 px-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-5xl font-bold text-white mb-4 flex items-center space-x-3">
+          <span>🏪</span>
+          <span>CHAOS MARKETPLACE</span>
+        </h1>
+        <p className="text-xl text-gray-400 mb-8">P2P trading for rebels • Bio seeds • Furniture • Tech gear • Memecoins</p>
+
+        {/* Categories */}
+        <div className="flex flex-wrap gap-4 mb-8">
+          <button
+            onClick={() => setSelectedCategory('all')}
+            className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+              selectedCategory === 'all'
+                ? 'bg-red-600 text-white'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+            }`}
+          >
+            All Items
+          </button>
+          {Object.entries(marketplaceCategories).map(([key, category]) => (
+            <button
+              key={key}
+              onClick={() => setSelectedCategory(key)}
+              className={`px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2 ${
+                selectedCategory === key
+                  ? 'bg-red-600 text-white'
+                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              <span>{category.icon}</span>
+              <span>{category.name}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Items Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredItems.map((item) => (
+            <motion.div
+              key={item.id}
+              className="bg-gray-900 border border-gray-700 rounded-lg overflow-hidden hover:border-red-600 transition-colors cursor-pointer"
+              whileHover={{ scale: 1.03 }}
+              onClick={() => {
+                setSelectedItem(item);
+                setShowItemDetail(true);
+              }}
+            >
+              <img 
+                src={item.images[0]} 
+                alt={item.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-white font-bold text-lg mb-2 line-clamp-2">{item.title}</h3>
+                <p className="text-gray-400 text-sm mb-3 line-clamp-2">{item.description}</p>
+                
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <Coins className="w-5 h-5 text-yellow-400" />
+                    <span className="text-white font-bold text-xl">{item.price}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                    <span className="text-gray-300 text-sm">{item.rating}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-400 text-sm">@{item.seller}</span>
+                  <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">
+                    {item.stock} left
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Item Detail Modal */}
+        <AnimatePresence>
+          {showItemDetail && selectedItem && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
+              onClick={() => setShowItemDetail(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-gray-900 border border-red-600 rounded-xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-3xl font-bold text-white">{selectedItem.title}</h2>
+                  <button
+                    onClick={() => setShowItemDetail(false)}
+                    className="text-gray-400 hover:text-white"
+                  >
+                    <X className="w-8 h-8" />
+                  </button>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <img 
+                      src={selectedItem.images[0]} 
+                      alt={selectedItem.title}
+                      className="w-full h-64 object-cover rounded-lg mb-4"
+                    />
+                    <div className="flex flex-wrap gap-2">
+                      {selectedItem.tags.map((tag, index) => (
+                        <span key={index} className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-sm">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-white font-bold text-xl mb-2">Description</h3>
+                      <p className="text-gray-300">{selectedItem.description}</p>
+                    </div>
+
+                    <div className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-2">
+                        <Coins className="w-6 h-6 text-yellow-400" />
+                        <span className="text-white font-bold text-3xl">{selectedItem.price}</span>
+                        <span className="text-gray-400">CHAOS</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Star className="w-5 h-5 text-yellow-400 fill-current" />
+                        <span className="text-white font-semibold">{selectedItem.rating}</span>
+                        <span className="text-gray-400">({selectedItem.reviews} reviews)</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-white font-semibold mb-2">Seller Info</h4>
+                      <div className="bg-gray-800 p-4 rounded-lg">
+                        <div className="flex items-center space-x-3 mb-2">
+                          <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center">
+                            <User className="w-5 h-5 text-white" />
+                          </div>
+                          <div>
+                            <div className="text-white font-semibold">@{selectedItem.seller}</div>
+                            <div className="text-gray-400 text-sm">{userTypes[selectedItem.sellerType]?.name}</div>
+                          </div>
+                        </div>
+                        <div className="text-gray-300 text-sm">
+                          📍 {selectedItem.location} • 🚚 {selectedItem.shipping}
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => handlePurchase(selectedItem)}
+                      disabled={userPoints < selectedItem.price}
+                      className={`w-full py-4 rounded-lg font-bold text-lg transition-colors ${
+                        userPoints >= selectedItem.price
+                          ? 'bg-red-600 hover:bg-red-700 text-white'
+                          : 'bg-gray-600 text-gray-300 cursor-not-allowed'
+                      }`}
+                    >
+                      {userPoints >= selectedItem.price 
+                        ? `Purchase for ${selectedItem.price} CHAOS` 
+                        : `Need ${selectedItem.price - userPoints} more CHAOS`
+                      }
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+// Community Profiles Grid
+export const CommunityProfiles = () => {
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showProfile, setShowProfile] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-black pt-24 px-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-5xl font-bold text-white mb-4 flex items-center space-x-3">
+          <span>👥</span>
+          <span>REBEL COMMUNITY</span>
+        </h1>
+        <p className="text-xl text-gray-400 mb-8">Connect with fellow rebels • Trade skills • Build networks</p>
+
+        {/* User Type Filter */}
+        <div className="flex flex-wrap gap-4 mb-8">
+          {Object.entries(userTypes).map(([key, type]) => (
+            <div key={key} className={`${type.bgColor} border border-gray-600 rounded-lg p-4 text-center`}>
+              <div className="text-2xl mb-2">{type.icon}</div>
+              <div className={`font-bold ${type.color}`}>{type.name}</div>
+              <div className="text-gray-400 text-sm mt-1">{type.description}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* User Profiles Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {mockUserProfiles.map((user) => {
+            const userTypeInfo = userTypes[user.type];
+            return (
+              <motion.div
+                key={user.id}
+                className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-red-600 transition-colors cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                onClick={() => {
+                  setSelectedUser(user);
+                  setShowProfile(true);
+                }}
+              >
+                <div className="flex items-center space-x-4 mb-4">
+                  <img 
+                    src={user.profile.avatar} 
+                    alt={user.profile.displayName}
+                    className="w-16 h-16 rounded-full border-2 border-red-600"
+                  />
+                  <div>
+                    <h3 className="text-white font-bold text-xl">{user.profile.displayName}</h3>
+                    <div className="flex items-center space-x-2">
+                      <span className={`${userTypeInfo.color} font-semibold text-sm`}>
+                        {userTypeInfo.icon} {userTypeInfo.name}
+                      </span>
+                      <span className="text-gray-400 text-sm">Lv.{user.level}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-gray-300 text-sm mb-4 line-clamp-2">{user.profile.bio}</p>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="text-center">
+                    <div className="text-yellow-400 font-bold">{user.chaosPoints.toLocaleString()}</div>
+                    <div className="text-gray-400 text-xs">CHAOS Points</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-green-400 font-bold">{user.profile.reputation}/5</div>
+                    <div className="text-gray-400 text-xs">Reputation</div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-yellow-900 to-orange-900 p-3 rounded-lg border border-yellow-600">
+                  <div className="text-center">
+                    <div className="text-yellow-400 font-bold">{user.memecoin.symbol}</div>
+                    <div className="text-gray-300 text-xs">{user.memecoin.value} CHAOS/token</div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* User Profile Modal */}
+        <AnimatePresence>
+          {showProfile && selectedUser && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
+              onClick={() => setShowProfile(false)}
+            >
+              <UserProfile 
+                user={selectedUser} 
+                onClose={() => setShowProfile(false)} 
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };
