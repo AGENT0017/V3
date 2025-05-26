@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the THRIVECHAOS FastAPI backend application to verify: 1. Basic API Endpoints, 2. Database Connection, 3. Status Check, 4. API Response Format, 5. Error Handling"
+user_problem_statement: "Fix all the errors in the THRIVECHAOS application - a apocalypse/survival-themed platform with React frontend, FastAPI backend, and MongoDB database"
 
 backend:
   - task: "FastAPI Root Endpoint"
