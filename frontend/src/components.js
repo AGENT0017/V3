@@ -46,7 +46,8 @@ import {
   Compass,
   Smartphone,
   Map,
-  Trophy
+  Trophy,
+  AlertTriangle
 } from 'lucide-react';
 
 // Enhanced User Classification System
