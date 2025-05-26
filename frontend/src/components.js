@@ -379,6 +379,44 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
+      {/* MILITARY CAMOUFLAGE BACKGROUND LAYER */}
+      <div className="fixed inset-0 opacity-30 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            radial-gradient(circle at 20% 80%, #1a4d1a 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, #2d4a2d 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, #0f2f0f 0%, transparent 50%),
+            radial-gradient(circle at 60% 80%, #1a331a 0%, transparent 50%),
+            radial-gradient(circle at 10% 30%, #2a3d2a 0%, transparent 50%),
+            radial-gradient(circle at 90% 70%, #1d3d1d 0%, transparent 50%)
+          `,
+          backgroundSize: '200px 200px, 300px 300px, 150px 150px, 250px 250px, 180px 180px, 220px 220px'
+        }}></div>
+        
+        {/* DIGITAL CAMO OVERLAY */}
+        <div className="absolute inset-0 opacity-40" style={{
+          backgroundImage: `
+            linear-gradient(45deg, #1a4d1a 25%, transparent 25%), 
+            linear-gradient(-45deg, #1a4d1a 25%, transparent 25%), 
+            linear-gradient(45deg, transparent 75%, #2d4a2d 75%), 
+            linear-gradient(-45deg, transparent 75%, #2d4a2d 75%)
+          `,
+          backgroundSize: '20px 20px',
+          backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+        }}></div>
+        
+        {/* URBAN CAMO PATTERN */}
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: `
+            radial-gradient(circle at 25% 25%, #333 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, #444 0%, transparent 50%),
+            radial-gradient(circle at 75% 25%, #222 0%, transparent 50%),
+            radial-gradient(circle at 25% 75%, #555 0%, transparent 50%)
+          `,
+          backgroundSize: '100px 100px'
+        }}></div>
+      </div>
+
       {/* FUTURISTIC MILITARY BACKGROUND SYSTEMS */}
       <div className="fixed inset-0 opacity-20 bg-gradient-to-b from-green-900 via-red-900 to-black pointer-events-none"></div>
       
@@ -399,44 +437,65 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         <div className="absolute right-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-blue-400 to-transparent animate-pulse"></div>
       </div>
 
+      {/* CAMOUFLAGE PATTERN OVERLAY */}
+      <div className="fixed inset-0 opacity-15 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            polygon(50% 0%, 0% 100%, 100% 100%)
+          `,
+          background: `
+            repeating-linear-gradient(
+              45deg,
+              #1a4d1a,
+              #1a4d1a 10px,
+              #2d4a2d 10px,
+              #2d4a2d 20px,
+              #0f2f0f 20px,
+              #0f2f0f 30px
+            )
+          `
+        }}></div>
+      </div>
+
       {/* MILITARY HUD CORNERS */}
       <div className="fixed inset-0 pointer-events-none z-10">
         {/* Top Left Corner */}
         <div className="absolute top-4 left-4">
-          <div className="w-12 h-12 border-l-2 border-t-2 border-green-400 animate-pulse"></div>
-          <div className="absolute -bottom-2 -right-2 text-xs text-green-400 font-mono">TL_01</div>
+          <div className="w-12 h-12 border-l-2 border-t-2 border-green-400 animate-pulse bg-black/40"></div>
+          <div className="absolute -bottom-2 -right-2 text-xs text-green-400 font-mono bg-black/60 px-1">TL_01</div>
         </div>
         
         {/* Top Right Corner */}
         <div className="absolute top-4 right-4">
-          <div className="w-12 h-12 border-r-2 border-t-2 border-yellow-400 animate-pulse"></div>
-          <div className="absolute -bottom-2 -left-2 text-xs text-yellow-400 font-mono">TR_02</div>
+          <div className="w-12 h-12 border-r-2 border-t-2 border-yellow-400 animate-pulse bg-black/40"></div>
+          <div className="absolute -bottom-2 -left-2 text-xs text-yellow-400 font-mono bg-black/60 px-1">TR_02</div>
         </div>
         
         {/* Bottom Left Corner */}
         <div className="absolute bottom-4 left-4">
-          <div className="w-12 h-12 border-l-2 border-b-2 border-red-400 animate-pulse"></div>
-          <div className="absolute -top-2 -right-2 text-xs text-red-400 font-mono">BL_03</div>
+          <div className="w-12 h-12 border-l-2 border-b-2 border-red-400 animate-pulse bg-black/40"></div>
+          <div className="absolute -top-2 -right-2 text-xs text-red-400 font-mono bg-black/60 px-1">BL_03</div>
         </div>
         
         {/* Bottom Right Corner */}
         <div className="absolute bottom-4 right-4">
-          <div className="w-12 h-12 border-r-2 border-b-2 border-blue-400 animate-pulse"></div>
-          <div className="absolute -top-2 -left-2 text-xs text-blue-400 font-mono">BR_04</div>
+          <div className="w-12 h-12 border-r-2 border-b-2 border-blue-400 animate-pulse bg-black/40"></div>
+          <div className="absolute -top-2 -left-2 text-xs text-blue-400 font-mono bg-black/60 px-1">BR_04</div>
         </div>
       </div>
 
       {/* MILITARY STATUS HUD */}
-      <div className="fixed top-20 left-4 z-20 bg-black/80 border border-green-400 rounded p-3 font-mono text-xs">
+      <div className="fixed top-20 left-4 z-20 bg-black/90 border border-green-400 rounded p-3 font-mono text-xs backdrop-blur-sm">
         <div className="text-green-400 mb-1">◉ TACTICAL STATUS</div>
         <div className="text-yellow-400">▶ HEROES: ACTIVE</div>
         <div className="text-red-400">▶ MATRIX: DEGRADING</div>
         <div className="text-blue-400">▶ LIBERATION: 33%</div>
+        <div className="text-green-400 text-xs mt-1 opacity-60">CAMO_MODE: ENGAGED</div>
       </div>
 
       {/* RADAR SWEEP EFFECT */}
       <div className="fixed top-20 right-4 z-20">
-        <div className="relative w-24 h-24 border border-green-400 rounded-full bg-black/80">
+        <div className="relative w-24 h-24 border border-green-400 rounded-full bg-black/90 backdrop-blur-sm">
           <div className="absolute inset-0 rounded-full border border-green-400/50"></div>
           <div className="absolute inset-2 rounded-full border border-green-400/30"></div>
           <div className="absolute inset-4 rounded-full border border-green-400/20"></div>
@@ -463,7 +522,7 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
 
       {/* MILITARY DATA STREAMS */}
       <div className="fixed bottom-20 left-4 right-4 z-10">
-        <div className="bg-black/60 border-t border-green-400 p-2">
+        <div className="bg-black/80 border-t border-green-400 p-2 backdrop-blur-sm">
           <div className="flex justify-between items-center font-mono text-xs">
             <div className="text-green-400">
               <span className="animate-pulse">▶</span> DATA_STREAM_01: HERO_RECRUITMENT_ACTIVE
