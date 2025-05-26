@@ -655,7 +655,7 @@ export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }
             whileHover={{ scale: 1.05 }}
           >
             <Coins className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
-            <span className="text-white font-semibold text-sm sm:text-base">{userPoints}</span>
+            <span className="text-white font-semibold text-sm sm:text-base">{user.points}</span>
             <span className="text-gray-300 text-xs sm:text-sm hidden sm:inline">CHAOS</span>
           </motion.div>
 
