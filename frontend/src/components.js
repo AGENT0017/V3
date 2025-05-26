@@ -397,38 +397,38 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
       </AnimatePresence>
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center">
+      <section className="relative min-h-screen flex items-center justify-center pt-32">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-red-900/20 to-black"></div>
         
-        {/* Crisis Countdown */}
-        <div className="absolute top-24 left-0 right-0 z-20">
+        {/* Crisis Countdown - Moved up */}
+        <div className="absolute top-28 left-0 right-0 z-20">
           <div className="text-center py-4">
-            <div className="text-red-400 text-xl font-bold animate-pulse">
+            <div className="text-red-400 text-lg font-bold animate-pulse">
               🔥 CRISIS ESCALATION: {crisisEscalationDays} DAYS 🔥
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-7xl mx-auto">
-          {/* Simple Beautiful THRIVECHAOS Logo - Visible */}
+        <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+          {/* Simple Small THRIVECHAOS Logo - Visible Below Header */}
           <motion.div
-            className={`mb-8 ${glitchActive ? 'animate-pulse' : ''}`}
+            className="mb-8"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="text-7xl md:text-9xl font-black mb-4 leading-none font-anton">
-              <span className="text-yellow-400 drop-shadow-lg">
+            <h1 className="text-5xl md:text-7xl font-black mb-4 leading-none font-anton">
+              <span className="text-white">
                 #THRIVE
               </span>
-              <span className="text-red-500 relative drop-shadow-lg">
+              <span className="text-red-500 relative ml-2">
                 CHAOS
                 {glitchActive && (
                   <span className="absolute inset-0 text-yellow-400 animate-ping">CHAOS</span>
                 )}
               </span>
             </h1>
-            <div className="text-2xl md:text-4xl font-mono text-yellow-400 mb-6">
+            <div className="text-xl md:text-2xl font-mono text-yellow-400 mb-6">
               From $20 to a revolution
             </div>
           </motion.div>
