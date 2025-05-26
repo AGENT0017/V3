@@ -597,7 +597,7 @@ export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }
         <div className="flex items-center space-x-4 sm:space-x-8">
           <motion.div 
             className="flex items-center space-x-2 cursor-pointer"
-            onClick={() => setCurrentView('home')}
+            onClick={() => onNavigate('home')}
             whileHover={{ scale: 1.05 }}
           >
             <Skull className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
