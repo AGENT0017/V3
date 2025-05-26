@@ -426,30 +426,113 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-7xl mx-auto">
-          {/* Enhanced Logo with Better Visibility */}
+          {/* CYBERPUNK REBEL LOGO - MAXIMUM VISIBILITY */}
           <motion.div
             className={`mb-8 ${glitchActive ? 'animate-pulse' : ''}`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="text-7xl md:text-9xl font-black mb-4 leading-none font-anton">
-              <span className="text-yellow-400 drop-shadow-[0_0_30px_rgba(255,215,0,1)] animate-pulse" style={{
-                textShadow: '0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700'
-              }}>
-                #THRIVE
+            <h1 className="text-7xl md:text-9xl font-black mb-4 leading-none font-anton tracking-wider">
+              {/* THRIVE - Military Green with Golden Glow */}
+              <span className="relative inline-block">
+                <span 
+                  className="text-green-400 font-black animate-pulse"
+                  style={{
+                    textShadow: `
+                      0 0 10px #00ff00,
+                      0 0 20px #00ff00,
+                      0 0 30px #00ff00,
+                      0 0 40px #00ff00,
+                      0 0 50px #FFD700,
+                      0 0 60px #FFD700,
+                      0 0 70px #FFD700,
+                      0 0 80px #FFD700,
+                      2px 2px 0px #000000,
+                      4px 4px 0px #000000
+                    `,
+                    WebkitTextStroke: '2px #000000'
+                  }}
+                >
+                  #THRIVE
+                </span>
+                {/* Cyberpunk Glow Layer */}
+                <span 
+                  className="absolute inset-0 text-yellow-400 opacity-70 animate-ping"
+                  style={{
+                    textShadow: '0 0 50px #FFD700, 0 0 100px #FFD700'
+                  }}
+                >
+                  #THRIVE
+                </span>
               </span>
-              <span className="text-red-500 drop-shadow-[0_0_30px_rgba(255,0,0,1)]" style={{
-                textShadow: '0 0 20px #FF0000, 0 0 40px #FF0000, 0 0 60px #FF0000'
-              }}>
-                CHAOS
+              
+              {/* CHAOS - Blood Red with Rebel Effects */}
+              <span className="relative inline-block ml-4">
+                <span 
+                  className="text-red-500 font-black"
+                  style={{
+                    textShadow: `
+                      0 0 10px #ff0000,
+                      0 0 20px #ff0000,
+                      0 0 30px #ff0000,
+                      0 0 40px #ff0000,
+                      0 0 50px #ff0000,
+                      0 0 60px #ff0000,
+                      0 0 70px #ff0000,
+                      0 0 80px #ff0000,
+                      2px 2px 0px #000000,
+                      4px 4px 0px #000000
+                    `,
+                    WebkitTextStroke: '2px #000000'
+                  }}
+                >
+                  CHAOS
+                </span>
+                {/* Glitch Effect for Rebels */}
                 {glitchActive && (
-                  <span className="absolute inset-0 text-yellow-400 animate-ping drop-shadow-[0_0_50px_rgba(255,215,0,1)]">CHAOS</span>
+                  <span 
+                    className="absolute inset-0 text-orange-400 animate-ping"
+                    style={{
+                      textShadow: '0 0 50px #ff4500, 0 0 100px #ff4500',
+                      transform: 'translate(2px, -2px)'
+                    }}
+                  >
+                    CHAOS
+                  </span>
                 )}
               </span>
             </h1>
-            <div className="text-2xl md:text-4xl font-mono text-yellow-400 mb-6 animate-pulse drop-shadow-lg">
-              From $20 to a revolution
+            
+            {/* Military/Cyberpunk Tagline */}
+            <div 
+              className="text-2xl md:text-4xl font-mono text-green-400 mb-6 animate-pulse font-bold"
+              style={{
+                textShadow: `
+                  0 0 10px #00ff00,
+                  0 0 20px #00ff00,
+                  0 0 30px #00ff00,
+                  2px 2px 0px #000000
+                `,
+                WebkitTextStroke: '1px #000000'
+              }}
+            >
+              &gt; MILITARY • HUMANITARIAN • CYBERPUNK REBELS &lt;
+            </div>
+            
+            {/* Revolution Subtitle */}
+            <div 
+              className="text-xl md:text-2xl font-mono text-yellow-400 mb-6 font-bold"
+              style={{
+                textShadow: `
+                  0 0 10px #FFD700,
+                  0 0 20px #FFD700,
+                  2px 2px 0px #000000
+                `,
+                WebkitTextStroke: '1px #000000'
+              }}
+            >
+              From $20 to a revolution • Resist • Survive • THRIVE
             </div>
           </motion.div>
 
