@@ -44,7 +44,8 @@ import {
   Book,
   Compass,
   Smartphone,
-  Map
+  Map,
+  Trophy
 } from 'lucide-react';
 
 // Enhanced User Classification System
