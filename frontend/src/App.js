@@ -458,8 +458,14 @@ const Home = () => {
         return { community: mockUserProfiles };
       case 'marketplace':
         return { marketplace: mockMarketplaceItems };
+      case 'business':
+        return { business: 'community-builder' };
+      case 'subscriptions':
+        return { subscriptions: 'subscription-manager' };
+      case 'mlm':
+        return { mlm: 'mlm-dashboard' };
       case 'intel':
-        return { intel: apocalypseContent.resistance }; // Using resistance as intel placeholder
+        return { intel: apocalypseContent.resistance };
       default:
         return {
           survival: apocalypseContent.survival,
@@ -557,7 +563,25 @@ const Home = () => {
         <CommunityProfiles />
       )}
 
-      {currentView !== 'home' && currentView !== 'streaming' && currentView !== 'marketplace' && currentView !== 'community' && (
+      {currentView === 'business' && (
+        <CommunityBuilder 
+          userPoints={userPoints}
+          setUserPoints={setUserPoints}
+        />
+      )}
+
+      {currentView === 'subscriptions' && (
+        <SubscriptionManager 
+          userPoints={userPoints}
+          setUserPoints={setUserPoints}
+        />
+      )}
+
+      {currentView === 'mlm' && (
+        <MLMDashboard />
+      )}
+
+      {currentView !== 'home' && currentView !== 'streaming' && currentView !== 'marketplace' && currentView !== 'community' && currentView !== 'business' && currentView !== 'subscriptions' && currentView !== 'mlm' && (
         <div className="pt-24 space-y-12">
           {Object.entries(content).map(([key, items]) => (
             <ApocalypseContentRow 
