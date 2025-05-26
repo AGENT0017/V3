@@ -3,7 +3,7 @@ import sys
 from datetime import datetime
 
 class SimpleAPITester:
-    def __init__(self, base_url="https://74e20651-2656-4b84-96c1-9a8c98f24520.preview.emergentagent.com"):
+    def __init__(self, base_url="https://049005b3-d7b9-4dc6-8bec-72aeb528701b.preview.emergentagent.com"):
         self.base_url = base_url
         self.tests_run = 0
         self.tests_passed = 0
