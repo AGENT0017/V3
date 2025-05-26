@@ -427,7 +427,7 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
             </div>
           </motion.div>
 
-          {/* Interactive Video Section */}
+          {/* STRATEGIC MILITARY HERO COMMAND CENTER */}
           <motion.div
             className="mb-12"
             initial={{ opacity: 0, y: 50 }}
@@ -435,7 +435,7 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
             transition={{ delay: 0.5, duration: 1 }}
           >
             <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 mb-6">
-              Your call to action
+              HEROES WANTED
             </h2>
             
             {/* Interactive Video Container */}
@@ -452,9 +452,9 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
                       <div className="w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg shadow-yellow-400/50 animate-pulse">
                         <Play className="w-12 h-12 text-black ml-1" />
                       </div>
-                      <h3 className="text-2xl font-bold text-yellow-400 mb-2">WATCH THE AWAKENING</h3>
-                      <p className="text-gray-300">Click to unlock your rebel journey</p>
-                      <div className="mt-4 text-yellow-400 font-bold animate-bounce">⚡ +25 A17 TOKENS FOR WATCHING ⚡</div>
+                      <h3 className="text-2xl font-bold text-yellow-400 mb-2">TACTICAL BRIEFING</h3>
+                      <p className="text-gray-300">Deploy Hero Protocols • Engage Anti-Matrix Operations</p>
+                      <div className="mt-4 text-yellow-400 font-bold animate-bounce">⚡ +25 A17 HERO TOKENS ⚡</div>
                     </div>
                   </motion.button>
                 ) : (
@@ -462,28 +462,28 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
                     src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1"
                     className="w-full h-full"
                     allowFullScreen
-                    title="THRIVECHAOS: The Awakening"
+                    title="THRIVECHAOS: HERO TACTICAL BRIEFING"
                     onLoad={() => setVideoLoaded(true)}
                   />
                 )}
               </div>
               
-              {/* Video Stats */}
+              {/* Hero Stats */}
               {isPlaying && (
                 <motion.div
                   className="mt-4 flex justify-center space-x-8 text-sm"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
-                  <span className="text-green-400">👁️ 847,392 rebels watched</span>
+                  <span className="text-green-400">👁️ 847,392 heroes activated</span>
                   <span className="text-yellow-400">⚡ +25 A17 earned</span>
-                  <span className="text-blue-400">🚀 Awakening in progress</span>
+                  <span className="text-blue-400">🚀 Hero protocols initiated</span>
                 </motion.div>
               )}
             </div>
 
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
-              Join the rebellion against collapse. When systems fail, we rise.
+              The matrix enslaves humanity. We build heroes who break free and liberate others.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
@@ -492,14 +492,14 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
                 whileHover={{ boxShadow: "0 0 40px rgba(255,0,0,0.6)" }}
                 whileTap={{ scale: 0.95 }}
               >
-                ⚔️ JOIN THE REBELLION ⚔️
+                ⚔️ ENLIST AS HERO ⚔️
               </motion.button>
               <motion.button 
                 className="border-3 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-16 py-6 rounded-lg text-2xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-yellow-400/30"
                 whileHover={{ boxShadow: "0 0 40px rgba(255,215,0,0.6)" }}
                 whileTap={{ scale: 0.95 }}
               >
-                🗺️ SEE BATTLE MAP 🗺️
+                🗺️ VIEW BATTLE MAP 🗺️
               </motion.button>
             </div>
           </motion.div>
