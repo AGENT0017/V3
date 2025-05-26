@@ -698,3 +698,304 @@ export const MLMDashboard = () => {
     </div>
   );
 };
+
+// Alternative Medicine & Mental Health Hub Component
+export const WellnessHub = ({ userPoints, setUserPoints }) => {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedPractitioner, setSelectedPractitioner] = useState(null);
+  const [showSessionModal, setShowSessionModal] = useState(false);
+
+  const wellnessPractitioners = [
+    {
+      id: "wellness_001",
+      name: "Dr. Maya Herbalist",
+      specialty: "Traditional Herbal Medicine",
+      avatar: "https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=200",
+      bio: "20+ years in plant medicine and natural healing. Specialized in crisis trauma recovery.",
+      skills: ["Herbal Medicine", "Crisis Recovery", "Immune Support"],
+      rating: 4.9,
+      sessions: 847,
+      pricePerSession: 45,
+      category: "herbalist",
+      verified: true
+    },
+    {
+      id: "wellness_002", 
+      name: "Marcus ColdTherapist",
+      specialty: "Ice Bath & Cold Therapy",
+      avatar: "https://images.unsplash.com/photo-1606512741416-fb5bbceaa4e2?w=200",
+      bio: "Expert in Wim Hof method and cold exposure therapy. Builds mental resilience for chaos.",
+      skills: ["Ice Bath Protocols", "Breathwork", "Mental Resilience"],
+      rating: 4.8,
+      sessions: 623,
+      pricePerSession: 35,
+      category: "cold-therapy",
+      verified: true
+    },
+    {
+      id: "wellness_003",
+      name: "Sarah MindHealer",
+      specialty: "Trauma & Mental Health",
+      avatar: "https://images.unsplash.com/photo-1642810814997-31c017df06a8?w=200",
+      bio: "Licensed therapist specializing in apocalypse anxiety and survival psychology.",
+      skills: ["EMDR", "Crisis Counseling", "Anxiety Management"],
+      rating: 5.0,
+      sessions: 1234,
+      pricePerSession: 60,
+      category: "mental-health",
+      verified: true
+    }
+  ];
+
+  const wellnessContent = [
+    {
+      id: "content_001",
+      title: "Emergency Breathing Techniques",
+      description: "Rapid stress relief methods for crisis situations",
+      type: "guide",
+      duration: "10 min",
+      cost: 15,
+      category: "breathwork",
+      thumbnail: "https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=300"
+    },
+    {
+      id: "content_002",
+      title: "Ice Bath Protocol for Beginners",
+      description: "Build mental toughness with progressive cold exposure",
+      type: "course",
+      duration: "45 min",
+      cost: 25,
+      category: "cold-therapy", 
+      thumbnail: "https://images.unsplash.com/photo-1606512741416-fb5bbceaa4e2?w=300"
+    },
+    {
+      id: "content_003",
+      title: "Herbal First Aid Kit",
+      description: "Essential herbs for medical emergencies when doctors aren't available",
+      type: "guide",
+      duration: "30 min",
+      cost: 20,
+      category: "herbalist",
+      thumbnail: "https://images.unsplash.com/photo-1642810814997-31c017df06a8?w=300"
+    }
+  ];
+
+  const categories = [
+    { id: 'all', name: 'All Wellness', icon: '🌿' },
+    { id: 'herbalist', name: 'Herbal Medicine', icon: '🌱' },
+    { id: 'cold-therapy', name: 'Cold Therapy', icon: '❄️' },
+    { id: 'mental-health', name: 'Mental Health', icon: '🧠' },
+    { id: 'breathwork', name: 'Breathwork', icon: '💨' },
+    { id: 'energy-healing', name: 'Energy Healing', icon: '✨' }
+  ];
+
+  const filteredPractitioners = selectedCategory === 'all' 
+    ? wellnessPractitioners 
+    : wellnessPractitioners.filter(p => p.category === selectedCategory);
+
+  const filteredContent = selectedCategory === 'all'
+    ? wellnessContent
+    : wellnessContent.filter(c => c.category === selectedCategory);
+
+  const handleBookSession = (practitioner) => {
+    if (userPoints >= practitioner.pricePerSession) {
+      setUserPoints(prev => prev - practitioner.pricePerSession);
+      alert(`Session booked with ${practitioner.name} for ${practitioner.pricePerSession} CHAOS points!`);
+      setShowSessionModal(false);
+    } else {
+      alert(`Insufficient CHAOS points. Need ${practitioner.pricePerSession - userPoints} more points.`);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-black pt-24 px-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-5xl font-bold text-white mb-4 flex items-center space-x-3">
+          <span>🌿</span>
+          <span>WELLNESS HUB</span>
+        </h1>
+        <p className="text-xl text-gray-400 mb-12">Alternative medicine & mental health for crisis resilience</p>
+
+        {/* Categories */}
+        <div className="flex flex-wrap gap-4 mb-12">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+              className={`px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2 ${
+                selectedCategory === category.id
+                  ? 'bg-green-600 text-white'
+                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              <span>{category.icon}</span>
+              <span>{category.name}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Practitioners Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-white mb-8">🩺 VERIFIED PRACTITIONERS</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {filteredPractitioners.map((practitioner) => (
+              <motion.div
+                key={practitioner.id}
+                className="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-green-600 transition-colors cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                onClick={() => {
+                  setSelectedPractitioner(practitioner);
+                  setShowSessionModal(true);
+                }}
+              >
+                <div className="flex items-center space-x-4 mb-4">
+                  <img 
+                    src={practitioner.avatar} 
+                    alt={practitioner.name}
+                    className="w-16 h-16 rounded-full border-2 border-green-600"
+                  />
+                  <div>
+                    <h3 className="text-white font-bold text-lg">{practitioner.name}</h3>
+                    <p className="text-green-400 font-semibold">{practitioner.specialty}</p>
+                    {practitioner.verified && (
+                      <span className="bg-green-600 text-white px-2 py-1 rounded-full text-xs">✓ VERIFIED</span>
+                    )}
+                  </div>
+                </div>
+
+                <p className="text-gray-300 text-sm mb-4">{practitioner.bio}</p>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="text-center">
+                    <div className="text-yellow-400 font-bold">{practitioner.rating}/5</div>
+                    <div className="text-gray-400 text-xs">Rating</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-blue-400 font-bold">{practitioner.sessions}</div>
+                    <div className="text-gray-400 text-xs">Sessions</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Coins className="w-5 h-5 text-yellow-400" />
+                    <span className="text-white font-bold">{practitioner.pricePerSession} CHAOS</span>
+                  </div>
+                  <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors">
+                    Book Session
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Wellness Content */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-white mb-8">📚 WELLNESS CONTENT</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {filteredContent.map((content) => (
+              <motion.div
+                key={content.id}
+                className="bg-gray-900 border border-gray-700 rounded-lg overflow-hidden hover:border-green-600 transition-colors cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+              >
+                <img 
+                  src={content.thumbnail} 
+                  alt={content.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-white font-bold text-lg mb-2">{content.title}</h3>
+                  <p className="text-gray-400 text-sm mb-4">{content.description}</p>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-gray-400 text-sm">{content.duration}</span>
+                    <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">
+                      {content.type.toUpperCase()}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <Coins className="w-5 h-5 text-yellow-400" />
+                      <span className="text-white font-bold">{content.cost} CHAOS</span>
+                    </div>
+                    <button 
+                      className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                        userPoints >= content.cost
+                          ? 'bg-green-600 hover:bg-green-700 text-white'
+                          : 'bg-gray-600 text-gray-300 cursor-not-allowed'
+                      }`}
+                      disabled={userPoints < content.cost}
+                    >
+                      {userPoints >= content.cost ? 'Access' : 'Locked'}
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Session Booking Modal */}
+        <AnimatePresence>
+          {showSessionModal && selectedPractitioner && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
+              onClick={() => setShowSessionModal(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-gray-900 border border-green-600 rounded-xl p-8 max-w-md w-full"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="text-center">
+                  <img 
+                    src={selectedPractitioner.avatar} 
+                    alt={selectedPractitioner.name}
+                    className="w-20 h-20 rounded-full border-2 border-green-600 mx-auto mb-4"
+                  />
+                  <h2 className="text-2xl font-bold text-white mb-2">{selectedPractitioner.name}</h2>
+                  <p className="text-green-400 mb-4">{selectedPractitioner.specialty}</p>
+                  <p className="text-gray-400 mb-6">{selectedPractitioner.bio}</p>
+                  
+                  <div className="bg-green-900 border border-green-600 p-4 rounded-lg mb-6">
+                    <div className="text-green-400 font-bold text-lg">
+                      Session Cost: {selectedPractitioner.pricePerSession} CHAOS Points
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <button
+                      onClick={() => setShowSessionModal(false)}
+                      className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={() => handleBookSession(selectedPractitioner)}
+                      disabled={userPoints < selectedPractitioner.pricePerSession}
+                      className={`flex-1 py-3 rounded-lg font-semibold transition-colors ${
+                        userPoints >= selectedPractitioner.pricePerSession
+                          ? 'bg-green-600 hover:bg-green-700 text-white'
+                          : 'bg-gray-600 text-gray-300 cursor-not-allowed'
+                      }`}
+                    >
+                      Book Session
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
