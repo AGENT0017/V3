@@ -21,6 +21,7 @@ import {
   Gamepad2,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   X,
   Check,
   Shield,
