@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import './App.css';
-import {
-  Header,
-  ApocalypseHero,
-  ApocalypseContentRow,
-  ApocalypseTasksModal,
-  VideoPlayer,
-  LiveStreamGrid,
-  Marketplace,
-  CommunityProfiles
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { 
+  ApocalypseHero, 
+  Header, 
+  InteractiveFilm, 
+  SurvivalAcademy,
+  Agent17Dashboard,
+  TinderOfDoers,
+  BloodDonationTracker,
+  MarketplaceGear,
+  EventBookingSystem,
+  LiveDataFeeds,
+  TokenDAO,
+  CommunityHub,
+  CrisisCommand
 } from './components';
-import {
-  CommunityBuilder,
-  SubscriptionManager,
-  MLMDashboard,
-  WellnessHub
+import { 
+  MLMDashboard, 
+  WellnessHub, 
+  UserProfile, 
+  SubscriptionTiers,
+  ContentCreationStudio,
+  Analytics
 } from './business-components';
 
 // Simplified mock data for App.js
