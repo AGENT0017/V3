@@ -594,87 +594,40 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         </motion.div>
       </section>
 
-      {/* MILITARY CYBERPUNK METRICS BAR - "IN CHAOS WE THRIVE" */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-green-600 via-red-600 to-yellow-600 py-6 border-y-2 border-green-400">
-        <div className="absolute inset-0 bg-black/40"></div>
+      {/* Simple Moving Metrics Bar - "IN CHAOS WE THRIVE" */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-red-600 to-yellow-600 py-4">
+        <div className="absolute inset-0 bg-black/20"></div>
         
-        {/* Scanner Line Effect */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-green-400 animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-red-400 animate-pulse"></div>
-        
-        {/* Military Cyberpunk Scrolling Text */}
+        {/* Clean Scrolling Text */}
         <div className="relative z-10">
           <motion.div
-            className="flex items-center whitespace-nowrap text-white font-bold text-xl font-mono tracking-wider"
+            className="flex items-center whitespace-nowrap text-white font-bold text-lg"
             animate={{ x: ['-100%', '100%'] }}
             transition={{ 
-              duration: 25, 
+              duration: 20, 
               repeat: Infinity, 
               ease: 'linear' 
             }}
-            style={{
-              textShadow: `
-                0 0 10px #00ff00,
-                0 0 20px #00ff00,
-                2px 2px 0px #000000
-              `,
-              WebkitTextStroke: '1px #000000'
-            }}
           >
-            <span className="mr-20">⚔️ &gt;&gt; IN CHAOS WE THRIVE &lt;&lt; ⚔️</span>
-            <span className="mr-20">🌍 [REBELS_ACTIVE: 12,847] STATUS: ONLINE</span>
-            <span className="mr-20">🗺️ [COUNTRIES_UNITED: 89] NETWORK: ACTIVE</span>
-            <span className="mr-20">⚡ [SYSTEM_STABILITY: 67%] WARNING: CRITICAL</span>
-            <span className="mr-20">🔥 [RESISTANCE_LEVEL: MAXIMUM] RISING</span>
-            <span className="mr-20">⚔️ &gt;&gt; IN CHAOS WE THRIVE &lt;&lt; ⚔️</span>
-            <span className="mr-20">💪 [SURVIVAL_NET: OPERATIONAL] GREEN</span>
-            <span className="mr-20">🎯 [AGENT17_STATUS: COORDINATING] ACTIVE</span>
-            <span className="mr-20">🚨 [CRISIS_MODE: STANDBY] READY</span>
-            <span className="mr-20">⚡ [A17_NETWORK: ONLINE] SECURE</span>
-            <span className="mr-20">🛡️ [HUMANITARIAN_OPS: ACTIVE] GLOBAL</span>
-            <span className="mr-20">💻 [CYBERPUNK_PROTOCOLS: ENGAGED] LIVE</span>
+            <span className="mr-16">⚔️ IN CHAOS WE THRIVE ⚔️</span>
+            <span className="mr-16">🌍 12,847 REBELS ACTIVE</span>
+            <span className="mr-16">🗺️ 89 COUNTRIES UNITED</span>
+            <span className="mr-16">⚡ SYSTEM STABILITY: 67%</span>
+            <span className="mr-16">🔥 RESISTANCE GROWING</span>
+            <span className="mr-16">⚔️ IN CHAOS WE THRIVE ⚔️</span>
+            <span className="mr-16">💪 SURVIVAL NETWORK ACTIVE</span>
+            <span className="mr-16">🎯 AGENT17 COORDINATING</span>
+            <span className="mr-16">🚨 CRISIS MODE READY</span>
+            <span className="mr-16">⚡ A17 NETWORK ONLINE</span>
           </motion.div>
         </div>
         
-        {/* Military Status Display Below */}
-        <div className="relative z-10 mt-4">
-          <div className="flex justify-center space-x-12 text-white text-base font-bold font-mono">
-            <span 
-              className="text-green-400"
-              style={{
-                textShadow: '0 0 10px #00ff00, 2px 2px 0px #000000',
-                WebkitTextStroke: '1px #000000'
-              }}
-            >
-              ⚔️ REBELS: 12,847 ACTIVE
-            </span>
-            <span 
-              className="text-yellow-400"
-              style={{
-                textShadow: '0 0 10px #FFD700, 2px 2px 0px #000000',
-                WebkitTextStroke: '1px #000000'
-              }}
-            >
-              🌍 ZONES: 89 COUNTRIES
-            </span>
-            <span 
-              className="text-red-400"
-              style={{
-                textShadow: '0 0 10px #ff0000, 2px 2px 0px #000000',
-                WebkitTextStroke: '1px #000000'
-              }}
-            >
-              ⚡ STABILITY: 67% CRITICAL
-            </span>
-          </div>
-        </div>
-        
-        {/* Cyberpunk Grid Lines */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="grid grid-cols-12 h-full">
-            {[...Array(12)].map((_, i) => (
-              <div key={i} className="border-r border-green-400"></div>
-            ))}
+        {/* Clean Metrics Display */}
+        <div className="relative z-10 mt-2">
+          <div className="flex justify-center space-x-8 text-white text-sm font-bold">
+            <span>⚔️ 12,847 REBELS ACTIVE</span>
+            <span>🌍 89 COUNTRIES</span>
+            <span>⚡ SYSTEM STABILITY: 67%</span>
           </div>
         </div>
       </section>
