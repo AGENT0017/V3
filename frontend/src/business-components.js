@@ -999,3 +999,202 @@ export const WellnessHub = ({ userPoints, setUserPoints }) => {
     </div>
   );
 };
+
+// User Profile Component
+export const UserProfile = ({ user, setUser, onNavigate }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState(user);
+
+  const handleSave = () => {
+    setUser(formData);
+    setIsEditing(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-black text-white p-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-gradient-to-r from-blue-900 to-purple-900 p-6 rounded-lg mb-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-2xl">
+                {user.name.charAt(0)}
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-white">{user.name}</h1>
+                <p className="text-gray-300">{user.level} • Agent {user.id}</p>
+                <div className="flex items-center space-x-4 mt-2">
+                  <span className="text-yellow-400">🪙 {user.agent17Tokens} A17 Tokens</span>
+                  <span className="text-green-400">🎯 {user.points} Points</span>
+                  <span className="text-blue-400">⭐ {user.trustScore}% Trust</span>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsEditing(!isEditing)}
+              className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-bold transition-colors"
+            >
+              {isEditing ? 'Cancel' : 'Edit Profile'}
+            </button>
+          </div>
+        </div>
+
+        {isEditing ? (
+          <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-white mb-6">Edit Profile</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-gray-400 mb-2">Name</label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  className="w-full p-3 bg-gray-800 border border-gray-600 rounded text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-400 mb-2">Blood Type</label>
+                <select
+                  value={formData.bloodType}
+                  onChange={(e) => setFormData({...formData, bloodType: e.target.value})}
+                  className="w-full p-3 bg-gray-800 border border-gray-600 rounded text-white"
+                >
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="AB+">AB+</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-gray-400 mb-2">Location</label>
+                <input
+                  type="text"
+                  value={formData.location}
+                  onChange={(e) => setFormData({...formData, location: e.target.value})}
+                  className="w-full p-3 bg-gray-800 border border-gray-600 rounded text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-400 mb-2">Vaccination Status</label>
+                <select
+                  value={formData.vaccinationStatus}
+                  onChange={(e) => setFormData({...formData, vaccinationStatus: e.target.value})}
+                  className="w-full p-3 bg-gray-800 border border-gray-600 rounded text-white"
+                >
+                  <option value="Current">Current</option>
+                  <option value="Expired">Expired</option>
+                  <option value="None">None</option>
+                </select>
+              </div>
+            </div>
+            <button
+              onClick={handleSave}
+              className="mt-6 bg-green-600 hover:bg-green-700 px-8 py-3 rounded-lg font-bold transition-colors"
+            >
+              Save Changes
+            </button>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Stats Panel */}
+            <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+              <h2 className="text-2xl font-bold text-white mb-6">Agent Statistics</h2>
+              <div className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Level</span>
+                  <span className="text-white font-bold">{user.level}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Trust Score</span>
+                  <span className="text-green-400 font-bold">{user.trustScore}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Missions Completed</span>
+                  <span className="text-white font-bold">{user.missionsCompleted}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Total Points</span>
+                  <span className="text-yellow-400 font-bold">{user.points.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Agent17 Tokens</span>
+                  <span className="text-yellow-400 font-bold">{user.agent17Tokens}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Skills & Info */}
+            <div className="space-y-6">
+              <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+                <h3 className="text-xl font-bold text-white mb-4">Skills & Expertise</h3>
+                <div className="flex flex-wrap gap-2">
+                  {user.skills.map((skill, index) => (
+                    <span key={index} className="px-3 py-1 bg-blue-900/50 text-blue-300 text-sm rounded-full border border-blue-600">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+                <h3 className="text-xl font-bold text-white mb-4">Profile Info</h3>
+                <div className="space-y-3">
+                  <div>
+                    <span className="text-gray-400">Blood Type:</span>
+                    <span className="text-white ml-2 font-bold">{user.bloodType}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400">Vaccination:</span>
+                    <span className="text-white ml-2 font-bold">{user.vaccinationStatus}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400">Location:</span>
+                    <span className="text-white ml-2 font-bold">{user.location}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Quick Actions */}
+        <div className="mt-12 grid md:grid-cols-4 gap-6">
+          <button
+            onClick={() => onNavigate('agent17')}
+            className="p-6 bg-blue-900/30 border border-blue-600 rounded-lg hover:bg-blue-900/50 transition-colors"
+          >
+            <h3 className="text-lg font-bold text-blue-400">Talk to Agent17</h3>
+            <p className="text-gray-400 text-sm">AI assistance and missions</p>
+          </button>
+          
+          <button
+            onClick={() => onNavigate('blood')}
+            className="p-6 bg-red-900/30 border border-red-600 rounded-lg hover:bg-red-900/50 transition-colors"
+          >
+            <h3 className="text-lg font-bold text-red-400">Blood Donations</h3>
+            <p className="text-gray-400 text-sm">Track your impact</p>
+          </button>
+          
+          <button
+            onClick={() => onNavigate('tinder')}
+            className="p-6 bg-purple-900/30 border border-purple-600 rounded-lg hover:bg-purple-900/50 transition-colors"
+          >
+            <h3 className="text-lg font-bold text-purple-400">Find Connections</h3>
+            <p className="text-gray-400 text-sm">Tinder of Doers</p>
+          </button>
+          
+          <button
+            onClick={() => onNavigate('academy')}
+            className="p-6 bg-green-900/30 border border-green-600 rounded-lg hover:bg-green-900/50 transition-colors"
+          >
+            <h3 className="text-lg font-bold text-green-400">Training</h3>
+            <p className="text-gray-400 text-sm">Survival Academy</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
