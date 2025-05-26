@@ -651,7 +651,6 @@ export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }
                 ? 'bg-red-800 border border-red-600' 
                 : 'bg-gray-900'
             }`}
-            onClick={() => setShowTasks(true)}
             whileHover={{ scale: 1.05 }}
           >
             <Coins className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
