@@ -345,25 +345,26 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showEmergencyMenu, setShowEmergencyMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
     <header className={`fixed top-0 w-full backdrop-blur-md z-50 border-b ${
       crisisMode 
-        ? 'bg-red-900 bg-opacity-90 border-red-700' 
+        ? 'bg-red-900 bg-opacity-95 border-red-700' 
         : 'bg-black bg-opacity-95 border-gray-800'
     }`}>
-      <div className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center space-x-8">
+      <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+        <div className="flex items-center space-x-4 sm:space-x-8">
           <motion.div 
             className="flex items-center space-x-2 cursor-pointer"
             onClick={() => setCurrentView('home')}
             whileHover={{ scale: 1.05 }}
           >
-            <Skull className="w-8 h-8 text-white" />
-            <div className="text-2xl font-bold text-white">#THRIVECHAOS</div>
+            <Skull className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+            <div className="text-lg sm:text-2xl font-bold text-white">#THRIVECHAOS</div>
             {crisisMode && (
               <motion.div 
-                className="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold"
+                className="bg-red-500 text-white px-1 sm:px-2 py-1 rounded text-xs font-bold hidden sm:block"
                 animate={{ opacity: [1, 0.5, 1] }}
                 transition={{ repeat: Infinity, duration: 1 }}
               >
@@ -372,7 +373,8 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
             )}
           </motion.div>
           
-          <nav className="hidden md:flex space-x-6">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex space-x-6">
             {[
               { name: 'Home', view: 'home', icon: Flame },
               { name: 'Survival', view: 'survival', icon: Shield },
@@ -401,9 +403,10 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
           </nav>
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
+          {/* Points Display */}
           <motion.div 
-            className={`flex items-center space-x-2 px-4 py-2 rounded-full cursor-pointer ${
+            className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1 sm:py-2 rounded-full cursor-pointer ${
               crisisMode 
                 ? 'bg-red-800 border border-red-600' 
                 : 'bg-gray-900'
@@ -411,50 +414,130 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
             onClick={() => setShowTasks(true)}
             whileHover={{ scale: 1.05 }}
           >
-            <Coins className="w-5 h-5 text-yellow-400" />
-            <span className="text-white font-semibold">{userPoints}</span>
-            <span className="text-gray-300 text-sm">CHAOS</span>
+            <Coins className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
+            <span className="text-white font-semibold text-sm sm:text-base">{userPoints}</span>
+            <span className="text-gray-300 text-xs sm:text-sm hidden sm:inline">CHAOS</span>
           </motion.div>
 
+          {/* Earn Points Button - Hidden on mobile, replaced with + icon */}
           <motion.button
-            className="bg-white text-black px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition-colors"
+            className="hidden sm:flex bg-white text-black px-3 sm:px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition-colors text-sm sm:text-base"
             onClick={() => setShowTasks(true)}
             whileHover={{ scale: 1.05 }}
           >
             Earn Chaos
           </motion.button>
 
+          {/* Mobile Earn Points (Plus icon) */}
           <motion.button
-            className="text-white hover:text-gray-300"
+            className="sm:hidden bg-white text-black p-2 rounded-full font-semibold hover:bg-gray-200 transition-colors"
+            onClick={() => setShowTasks(true)}
+            whileHover={{ scale: 1.05 }}
+          >
+            <Plus className="w-4 h-4" />
+          </motion.button>
+
+          {/* Search - Hidden on small mobile */}
+          <motion.button
+            className="hidden sm:block text-white hover:text-gray-300"
             onClick={() => setShowSearch(!showSearch)}
             whileHover={{ scale: 1.1 }}
           >
-            <Search className="w-6 h-6" />
+            <Search className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.button>
 
+          {/* Mobile Menu Button - Only visible on mobile */}
           <motion.button
-            className="text-white hover:text-gray-300"
+            className="lg:hidden text-white hover:text-gray-300 p-2"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
             whileHover={{ scale: 1.1 }}
           >
-            <User className="w-6 h-6" />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </motion.button>
+
+          {/* User Icon - Hidden on smallest mobile */}
+          <motion.button
+            className="hidden md:block text-white hover:text-gray-300"
+            whileHover={{ scale: 1.1 }}
+          >
+            <User className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.button>
         </div>
       </div>
 
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {showMobileMenu && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-black bg-opacity-95 border-t border-gray-700"
+          >
+            <div className="px-4 py-4 space-y-3">
+              {[
+                { name: 'Home', view: 'home', icon: Flame },
+                { name: 'Survival', view: 'survival', icon: Shield },
+                { name: 'Resistance', view: 'resistance', icon: Zap },
+                { name: 'Wellness', view: 'wellness', icon: Heart },
+                { name: 'Stream', view: 'streaming', icon: Radio },
+                { name: 'Community', view: 'community', icon: Users },
+                { name: 'Marketplace', view: 'marketplace', icon: Globe },
+                { name: 'Business', view: 'business', icon: Crown },
+                { name: 'Subscriptions', view: 'subscriptions', icon: CreditCard },
+                { name: 'MLM', view: 'mlm', icon: Trophy }
+              ].map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <motion.button
+                    key={item.name}
+                    className="w-full flex items-center space-x-3 text-white hover:text-gray-300 transition-colors py-3 px-4 hover:bg-gray-800 rounded-lg"
+                    onClick={() => {
+                      setCurrentView(item.view);
+                      setShowMobileMenu(false);
+                    }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <IconComponent className="w-5 h-5" />
+                    <span className="text-lg">{item.name}</span>
+                  </motion.button>
+                );
+              })}
+              
+              {/* Mobile Search */}
+              <motion.button
+                className="w-full flex items-center space-x-3 text-white hover:text-gray-300 transition-colors py-3 px-4 hover:bg-gray-800 rounded-lg"
+                onClick={() => {
+                  setShowSearch(!showSearch);
+                  setShowMobileMenu(false);
+                }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <Search className="w-5 h-5" />
+                <span className="text-lg">Search</span>
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Search Bar */}
       <AnimatePresence>
         {showSearch && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="px-6 pb-4"
+            className="px-4 sm:px-6 pb-4"
           >
             <input
               type="text"
               placeholder="Search survival skills, streams, resistance tactics..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-gray-900 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full bg-gray-900 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-sm sm:text-base"
               autoFocus
             />
           </motion.div>
