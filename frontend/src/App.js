@@ -450,7 +450,9 @@ const Home = () => {
       case 'streaming':
         return { streams: mockLiveStreams };
       case 'community':
-        return { community: apocalypseContent.survival }; // Using survival as community placeholder
+        return { community: mockUserProfiles };
+      case 'marketplace':
+        return { marketplace: mockMarketplaceItems };
       case 'intel':
         return { intel: apocalypseContent.resistance }; // Using resistance as intel placeholder
       default:
