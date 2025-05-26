@@ -39,7 +39,10 @@ import {
   Headphones,
   Video,
   Mic,
-  Globe
+  Globe,
+  Crown,
+  CreditCard,
+  Trophy
 } from 'lucide-react';
 
 // Enhanced User Classification System
