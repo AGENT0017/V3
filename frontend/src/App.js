@@ -4,10 +4,11 @@ import { AnimatePresence } from 'framer-motion';
 import './App.css';
 import {
   Header,
-  HeroSection,
-  ContentRow,
-  TasksModal,
-  VideoPlayer
+  ApocalypseHero,
+  ApocalypseContentRow,
+  ApocalypseTasksModal,
+  VideoPlayer,
+  LiveStreamGrid
 } from './components';
 
 // Mock data imports (these would normally come from APIs)
