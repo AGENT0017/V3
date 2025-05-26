@@ -379,8 +379,104 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
-      {/* Simple Background Effect */}
-      <div className="fixed inset-0 opacity-10 bg-gradient-to-b from-red-900 to-black pointer-events-none"></div>
+      {/* FUTURISTIC MILITARY BACKGROUND SYSTEMS */}
+      <div className="fixed inset-0 opacity-20 bg-gradient-to-b from-green-900 via-red-900 to-black pointer-events-none"></div>
+      
+      {/* MILITARY GRID OVERLAY */}
+      <div className="fixed inset-0 opacity-10 pointer-events-none">
+        <div className="grid grid-cols-24 grid-rows-24 h-full w-full">
+          {[...Array(576)].map((_, i) => (
+            <div key={i} className="border border-green-400/30"></div>
+          ))}
+        </div>
+      </div>
+
+      {/* TACTICAL SCANNING LINES */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-green-400 to-transparent animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-400 to-transparent animate-pulse"></div>
+        <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-yellow-400 to-transparent animate-pulse"></div>
+        <div className="absolute right-0 top-0 w-1 h-full bg-gradient-to-b from-transparent via-blue-400 to-transparent animate-pulse"></div>
+      </div>
+
+      {/* MILITARY HUD CORNERS */}
+      <div className="fixed inset-0 pointer-events-none z-10">
+        {/* Top Left Corner */}
+        <div className="absolute top-4 left-4">
+          <div className="w-12 h-12 border-l-2 border-t-2 border-green-400 animate-pulse"></div>
+          <div className="absolute -bottom-2 -right-2 text-xs text-green-400 font-mono">TL_01</div>
+        </div>
+        
+        {/* Top Right Corner */}
+        <div className="absolute top-4 right-4">
+          <div className="w-12 h-12 border-r-2 border-t-2 border-yellow-400 animate-pulse"></div>
+          <div className="absolute -bottom-2 -left-2 text-xs text-yellow-400 font-mono">TR_02</div>
+        </div>
+        
+        {/* Bottom Left Corner */}
+        <div className="absolute bottom-4 left-4">
+          <div className="w-12 h-12 border-l-2 border-b-2 border-red-400 animate-pulse"></div>
+          <div className="absolute -top-2 -right-2 text-xs text-red-400 font-mono">BL_03</div>
+        </div>
+        
+        {/* Bottom Right Corner */}
+        <div className="absolute bottom-4 right-4">
+          <div className="w-12 h-12 border-r-2 border-b-2 border-blue-400 animate-pulse"></div>
+          <div className="absolute -top-2 -left-2 text-xs text-blue-400 font-mono">BR_04</div>
+        </div>
+      </div>
+
+      {/* MILITARY STATUS HUD */}
+      <div className="fixed top-20 left-4 z-20 bg-black/80 border border-green-400 rounded p-3 font-mono text-xs">
+        <div className="text-green-400 mb-1">◉ TACTICAL STATUS</div>
+        <div className="text-yellow-400">▶ HEROES: ACTIVE</div>
+        <div className="text-red-400">▶ MATRIX: DEGRADING</div>
+        <div className="text-blue-400">▶ LIBERATION: 33%</div>
+      </div>
+
+      {/* RADAR SWEEP EFFECT */}
+      <div className="fixed top-20 right-4 z-20">
+        <div className="relative w-24 h-24 border border-green-400 rounded-full bg-black/80">
+          <div className="absolute inset-0 rounded-full border border-green-400/50"></div>
+          <div className="absolute inset-2 rounded-full border border-green-400/30"></div>
+          <div className="absolute inset-4 rounded-full border border-green-400/20"></div>
+          <div className="absolute top-1/2 left-1/2 w-8 h-0.5 bg-green-400 origin-left animate-spin"></div>
+          <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 text-xs text-green-400 font-mono">RADAR</div>
+        </div>
+      </div>
+
+      {/* FLOATING HOLOGRAPHIC ELEMENTS */}
+      <div className="fixed inset-0 pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 border border-cyan-400 rotate-45 animate-ping"
+            style={{
+              left: `${20 + Math.random() * 60}%`,
+              top: `${20 + Math.random() * 60}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${3 + Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* MILITARY DATA STREAMS */}
+      <div className="fixed bottom-20 left-4 right-4 z-10">
+        <div className="bg-black/60 border-t border-green-400 p-2">
+          <div className="flex justify-between items-center font-mono text-xs">
+            <div className="text-green-400">
+              <span className="animate-pulse">▶</span> DATA_STREAM_01: HERO_RECRUITMENT_ACTIVE
+            </div>
+            <div className="text-yellow-400">
+              <span className="animate-pulse">▶</span> MATRIX_BREACH_PROTOCOL: ENGAGED
+            </div>
+            <div className="text-red-400">
+              <span className="animate-pulse">▶</span> LIBERATION_OPS: OPERATIONAL
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Dopamine Reward Animation */}
       <AnimatePresence>
