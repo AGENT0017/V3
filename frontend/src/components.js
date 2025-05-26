@@ -492,34 +492,78 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         )}
       </AnimatePresence>
       
-      {/* Hero Section */}
+      {/* Hero Section - MILITARY COMMAND CENTER */}
       <section className="relative min-h-screen flex items-center justify-center pt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-red-900/20 to-black"></div>
+        
+        {/* HOLOGRAPHIC OVERLAY EFFECTS */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent animate-pulse"></div>
+          <div className="absolute top-1/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent"></div>
+          <div className="absolute top-2/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent"></div>
+          <div className="absolute top-3/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-400/50 to-transparent"></div>
+        </div>
+
+        {/* TACTICAL GRID BACKGROUND */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="grid grid-cols-12 grid-rows-12 h-full">
+            {[...Array(144)].map((_, i) => (
+              <div key={i} className="border border-green-400/20 relative">
+                {i % 20 === 0 && (
+                  <div className="absolute top-1 left-1 w-1 h-1 bg-cyan-400 animate-ping"></div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-          {/* STRATEGIC MILITARY ANTI-MATRIX LOGO */}
+          {/* MILITARY COMMAND LOGO WITH HUD EFFECTS */}
           <motion.div
-            className="mb-8"
+            className="mb-8 relative"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="text-5xl md:text-7xl font-black mb-4 leading-none font-anton">
-              <span className="text-white">
+            {/* TARGETING RETICLE AROUND LOGO */}
+            <div className="absolute -top-8 -left-8 -right-8 -bottom-8 border border-green-400/30 rounded-lg">
+              <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-green-400"></div>
+              <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-green-400"></div>
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-green-400"></div>
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-green-400"></div>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-black mb-4 leading-none font-anton relative">
+              <span className="text-white drop-shadow-lg">
                 #THRIVE
               </span>
-              <span className="text-red-500 relative ml-2">
+              <span className="text-red-500 relative ml-2 drop-shadow-lg">
                 CHAOS
                 {glitchActive && (
                   <span className="absolute inset-0 text-yellow-400 animate-ping">CHAOS</span>
                 )}
               </span>
+              
+              {/* HOLOGRAPHIC SCAN LINES */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
+              </div>
             </h1>
-            <div className="text-xl md:text-2xl font-mono text-yellow-400 mb-6 font-bold">
+            
+            <div className="text-xl md:text-2xl font-mono text-yellow-400 mb-6 font-bold relative">
               BREAK THE MATRIX • BUILD HEROES • RESIST THE SYSTEM
+              
+              {/* DATA STREAM EFFECT */}
+              <div className="absolute -left-4 top-1/2 w-2 h-2 bg-green-400 animate-ping"></div>
+              <div className="absolute -right-4 top-1/2 w-2 h-2 bg-red-400 animate-ping" style={{animationDelay: '0.5s'}}></div>
             </div>
-            <div className="text-lg md:text-xl font-mono text-green-400 mb-8">
+            
+            <div className="text-lg md:text-xl font-mono text-green-400 mb-8 relative">
               &gt; TACTICAL COMMAND FOR HUMAN LIBERATION &lt;
+              
+              {/* TYPING CURSOR EFFECT */}
+              <span className="animate-pulse text-white">|</span>
             </div>
           </motion.div>
 
