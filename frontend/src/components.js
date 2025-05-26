@@ -568,11 +568,24 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
   );
 };
 
-export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks, crisisMode }) => {
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showEmergencyMenu, setShowEmergencyMenu] = useState(false);
+export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+
+  const navigation = [
+    { id: 'hero', label: 'Home', icon: '🏠' },
+    { id: 'film', label: 'Interactive Film', icon: '🎬' },
+    { id: 'academy', label: 'Survival Academy', icon: '🎯' },
+    { id: 'agent17', label: 'Agent17', icon: '🤖' },
+    { id: 'tinder', label: 'Tinder of Doers', icon: '💝' },
+    { id: 'blood', label: 'Blood Donations', icon: '🩸' },
+    { id: 'marketplace', label: 'Marketplace', icon: '🛒' },
+    { id: 'events', label: 'Events', icon: '📅' },
+    { id: 'data', label: 'Live Data', icon: '📊' },
+    { id: 'token', label: 'Token & DAO', icon: '🪙' },
+    { id: 'community', label: 'Community', icon: '👥' },
+    { id: 'crisis', label: 'Crisis Command', icon: '🚨' }
+  ];
 
   return (
     <header className={`fixed top-0 w-full backdrop-blur-md z-50 border-b ${
