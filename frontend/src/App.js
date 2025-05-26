@@ -421,8 +421,6 @@ const mockLiveStreams = [
     category: "entertainment",
     isLive: true
   }
-];
-
 const Home = () => {
   const [userPoints, setUserPoints] = useState(200); // Increased starting points for apocalypse mode
   const [currentView, setCurrentView] = useState('home');
