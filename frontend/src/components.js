@@ -572,11 +572,11 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         </motion.div>
       </section>
 
-      {/* Simple Moving Metrics Bar - "IN CHAOS WE THRIVE" */}
+      {/* STRATEGIC MILITARY COMMAND BAR - "HEROES BREAK THE MATRIX" */}
       <section className="relative overflow-hidden bg-gradient-to-r from-red-600 to-yellow-600 py-4">
         <div className="absolute inset-0 bg-black/20"></div>
         
-        {/* Clean Scrolling Text */}
+        {/* HERO COMMAND SCROLLING TEXT */}
         <div className="relative z-10">
           <motion.div
             className="flex items-center whitespace-nowrap text-white font-bold text-lg"
@@ -587,25 +587,25 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
               ease: 'linear' 
             }}
           >
-            <span className="mr-16">⚔️ IN CHAOS WE THRIVE ⚔️</span>
-            <span className="mr-16">🌍 12,847 REBELS ACTIVE</span>
-            <span className="mr-16">🗺️ 89 COUNTRIES UNITED</span>
-            <span className="mr-16">⚡ SYSTEM STABILITY: 67%</span>
-            <span className="mr-16">🔥 RESISTANCE GROWING</span>
-            <span className="mr-16">⚔️ IN CHAOS WE THRIVE ⚔️</span>
-            <span className="mr-16">💪 SURVIVAL NETWORK ACTIVE</span>
-            <span className="mr-16">🎯 AGENT17 COORDINATING</span>
-            <span className="mr-16">🚨 CRISIS MODE READY</span>
-            <span className="mr-16">⚡ A17 NETWORK ONLINE</span>
+            <span className="mr-16">⚔️ HEROES BREAK THE MATRIX ⚔️</span>
+            <span className="mr-16">🛡️ 12,847 HEROES ACTIVE</span>
+            <span className="mr-16">🌍 89 LIBERATION ZONES</span>
+            <span className="mr-16">⚡ MATRIX INTEGRITY: 33% DEGRADED</span>
+            <span className="mr-16">🔥 ANTI-MATRIX OPERATIONS RISING</span>
+            <span className="mr-16">⚔️ HEROES BREAK THE MATRIX ⚔️</span>
+            <span className="mr-16">💪 HERO NETWORK OPERATIONAL</span>
+            <span className="mr-16">🎯 TACTICAL COMMAND ACTIVE</span>
+            <span className="mr-16">🚨 LIBERATION PROTOCOLS READY</span>
+            <span className="mr-16">⚡ A17 HERO NETWORK SECURE</span>
           </motion.div>
         </div>
         
-        {/* Clean Metrics Display */}
+        {/* MILITARY COMMAND STATUS */}
         <div className="relative z-10 mt-2">
           <div className="flex justify-center space-x-8 text-white text-sm font-bold">
-            <span>⚔️ 12,847 REBELS ACTIVE</span>
-            <span>🌍 89 COUNTRIES</span>
-            <span>⚡ SYSTEM STABILITY: 67%</span>
+            <span>⚔️ 12,847 HEROES ACTIVE</span>
+            <span>🌍 89 LIBERATION ZONES</span>
+            <span>⚡ MATRIX INTEGRITY: 33% DEGRADED</span>
           </div>
         </div>
       </section>
