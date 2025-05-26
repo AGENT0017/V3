@@ -8,7 +8,9 @@ import {
   ApocalypseContentRow,
   ApocalypseTasksModal,
   VideoPlayer,
-  LiveStreamGrid
+  LiveStreamGrid,
+  Marketplace,
+  CommunityProfiles
 } from './components';
 
 // Enhanced User Classification and Profile System
