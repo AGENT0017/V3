@@ -12,6 +12,11 @@ import {
   Marketplace,
   CommunityProfiles
 } from './components';
+import {
+  CommunityBuilder,
+  SubscriptionManager,
+  MLMDashboard
+} from './business-components';
 
 // Enhanced User Classification and Profile System
 const userTypes = {
