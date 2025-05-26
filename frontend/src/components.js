@@ -342,75 +342,223 @@ const apocalypseTasks = [
 ];
 
 // Header Component
-// Hero Component for Apocalypse Theme
+// Revolutionary Landing Page for THRIVECHAOS
 export const ApocalypseHero = ({ userPoints, crisisMode }) => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [glitchActive, setGlitchActive] = useState(false);
+  
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    const glitchTimer = setInterval(() => setGlitchActive(prev => !prev), 3000);
+    return () => {
+      clearInterval(timer);
+      clearInterval(glitchTimer);
+    };
+  }, []);
+
+  const crisisEscalationDays = Math.floor((new Date('2025-12-31') - currentTime) / (1000 * 60 * 60 * 24));
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-red-900 via-black to-black overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=1920')] bg-cover bg-center opacity-30"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
-      </div>
-
-      {/* Crisis Mode Alert */}
-      {crisisMode && (
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Glitch Background */}
+      <div className="fixed inset-0 opacity-5 bg-gradient-to-b from-red-900 to-black pointer-events-none"></div>
+      
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-red-900/20 to-black"></div>
+        
+        {/* Live Metrics Bar */}
         <div className="absolute top-24 left-0 right-0 z-20">
-          <div className="bg-red-600 text-white text-center py-4 animate-pulse">
-            <div className="text-2xl font-bold">🚨 CRISIS MODE ACTIVATED 🚨</div>
-            <div className="text-lg">ALL SURVIVAL CONTENT UNLOCKED</div>
-          </div>
-        </div>
-      )}
-
-      {/* Main Hero Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight">
-            THRIVE
-            <span className="text-red-500">CHAOS</span>
-          </h1>
-          
-          <h2 className="text-2xl md:text-4xl text-gray-300 mb-8 font-semibold">
-            When the world ends, we begin
-          </h2>
-          
-          <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
-            Master survival skills, build resistance networks, and prepare for the inevitable. 
-            Join thousands of rebels learning to thrive when society collapses.
-          </p>
-
-          {/* CHAOS Points Display */}
-          <div className="bg-black bg-opacity-60 border-2 border-red-600 rounded-lg p-6 mb-8 inline-block">
-            <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
-                <span className="text-2xl">🔥</span>
-              </div>
-              <div className="text-left">
-                <div className="text-gray-400 text-sm">YOUR CHAOS POINTS</div>
-                <div className="text-3xl font-bold text-yellow-400">{userPoints.toLocaleString()}</div>
-              </div>
+          <div className="bg-red-600/90 text-white text-center py-2">
+            <div className="flex justify-center space-x-8 text-sm font-bold">
+              <span>🔥 12,847 REBELS ACTIVE</span>
+              <span>📍 89 COUNTRIES</span>
+              <span>⚡ SYSTEM STABILITY: 67%</span>
             </div>
           </div>
+        </div>
 
-          {/* Call to Action */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-12 py-4 rounded-lg text-xl font-bold transition-colors">
-              START SURVIVAL TRAINING
+        {/* Crisis Countdown */}
+        <div className="absolute top-32 left-0 right-0 z-20">
+          <div className="text-center py-4">
+            <div className="text-red-400 text-xl font-bold animate-pulse">
+              CRISIS ESCALATION: {crisisEscalationDays} DAYS
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+          {/* Glitch Logo */}
+          <motion.div
+            className={`mb-8 ${glitchActive ? 'animate-pulse' : ''}`}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <h1 className="text-7xl md:text-9xl font-black text-white mb-4 leading-none font-anton">
+              THRIVE
+              <span className="text-red-500 relative">
+                CHAOS
+                {glitchActive && (
+                  <span className="absolute inset-0 text-yellow-400 animate-ping">CHAOS</span>
+                )}
+              </span>
+            </h1>
+            <div className="text-2xl md:text-4xl font-mono text-red-400 mb-6">
+              From $20 to a revolution
+            </div>
+          </motion.div>
+
+          {/* Main CTA */}
+          <motion.div
+            className="mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold text-yellow-400 mb-6">
+              Your call to action
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
+              Join the rebellion against collapse. When systems fail, we rise.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+              <button className="bg-red-600 hover:bg-red-700 text-white px-16 py-6 rounded-lg text-2xl font-bold transition-all transform hover:scale-105 shadow-2xl">
+                Join the Rebellion
+              </button>
+              <button className="border-3 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-16 py-6 rounded-lg text-2xl font-bold transition-all transform hover:scale-105">
+                See Battle Map
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Feature Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              {
+                icon: "🎯",
+                title: "AGENT17 Token",
+                desc: "Revolutionary crisis currency",
+                cta: "Get Tokens"
+              },
+              {
+                icon: "📱",
+                title: "NFC Agent Cards",
+                desc: "Physical rebellion network",
+                cta: "Pre-order Card"
+              },
+              {
+                icon: "🗺️",
+                title: "Crisis Command Map",
+                desc: "Real-time crisis coordination",
+                cta: "View Map"
+              },
+              {
+                icon: "💪",
+                title: "Mind & Body Arsenal",
+                desc: "Survival fitness protocol",
+                cta: "Start Training"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-black/60 border border-red-600/50 p-6 rounded-lg backdrop-blur-sm hover:border-yellow-400 transition-all"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 + index * 0.1, duration: 0.8 }}
+              >
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-bold text-yellow-400 mb-2">{feature.title}</h3>
+                <p className="text-gray-400 mb-4">{feature.desc}</p>
+                <button className="bg-red-600/80 hover:bg-red-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors">
+                  {feature.cta}
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <ChevronDown className="w-8 h-8 text-red-400" />
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="py-20 bg-gradient-to-b from-black to-red-900/20">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-5xl font-bold text-center text-white mb-12">
+            THRIVECHAOS: The Awakening
+          </h2>
+          <div className="relative aspect-video bg-black rounded-lg overflow-hidden border-2 border-red-600">
+            <iframe 
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+              title="THRIVECHAOS: The Awakening" 
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Crowdfund Storymaking Section */}
+      <section className="py-20 bg-gradient-to-b from-red-900/20 to-black">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-5xl font-bold text-white mb-8">
+            Crowdfund <span className="text-yellow-400">Storymaking</span>
+          </h2>
+          <p className="text-2xl text-gray-300 mb-12 max-w-4xl mx-auto">
+            Help create the resistance narrative. Fund real stories of survival, rebellion, and hope.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Survival Chronicles", funded: "87%", amount: "$43,500" },
+              { title: "Resistance Stories", funded: "92%", amount: "$76,200" },
+              { title: "Hope Archives", funded: "34%", amount: "$12,800" }
+            ].map((project, index) => (
+              <div key={index} className="bg-black/60 border border-yellow-400/50 p-6 rounded-lg">
+                <h3 className="text-2xl font-bold text-yellow-400 mb-4">{project.title}</h3>
+                <div className="text-3xl font-bold text-white mb-2">{project.amount}</div>
+                <div className="text-lg text-green-400 mb-4">Funded: {project.funded}</div>
+                <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded font-bold transition-colors">
+                  Fund This Story
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-gradient-to-t from-red-900 to-black">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-6xl font-bold text-white mb-8">
+            Ready to <span className="text-red-400">Survive?</span>
+          </h2>
+          <p className="text-2xl text-gray-300 mb-12">
+            The collapse is coming. Will you thrive or just survive?
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-20 py-8 rounded-lg text-3xl font-bold transition-all transform hover:scale-105 shadow-2xl">
+              Start Surviving (200 Free CHAOS Points)
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-black px-12 py-4 rounded-lg text-xl font-bold transition-colors">
-              JOIN RESISTANCE
+            <button className="border-3 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-20 py-8 rounded-lg text-3xl font-bold transition-all transform hover:scale-105">
+              View Crisis Dashboard
             </button>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </section>
 
-      {/* Floating Elements */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ChevronDown className="w-8 h-8 text-white opacity-60" />
+      {/* Footer Status */}
+      <div className="bg-red-900/90 text-white p-4 text-center">
+        <div className="flex justify-center space-x-8 text-lg font-bold">
+          <span>🚨 CRISIS LEVEL: MODERATE</span>
+          <span>⏰ {currentTime.toLocaleTimeString()}</span>
+          <span>🌍 GLOBAL STATUS: UNSTABLE</span>
+        </div>
       </div>
     </div>
   );
