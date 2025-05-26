@@ -1566,12 +1566,7 @@ export const CommunityProfiles = () => {
   );
 };
 
-// Import and re-export new comprehensive platform components
-export { InteractiveFilm } from './components/InteractiveFilm';
-export { SurvivalAcademy } from './components/SurvivalAcademy';
-export { Agent17Dashboard } from './components/Agent17Dashboard';
-export { TinderOfDoers } from './components/TinderOfDoers';
-export { BloodDonationTracker } from './components/BloodDonationTracker';
+// New comprehensive platform components are included above
 
 // Placeholder components for features coming soon
 export const MarketplaceGear = ({ user, onNavigate }) => (
