@@ -377,7 +377,9 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
               { name: 'Stream', view: 'streaming', icon: Radio },
               { name: 'Community', view: 'community', icon: Users },
               { name: 'Marketplace', view: 'marketplace', icon: Globe },
-              { name: 'Intel', view: 'intel', icon: Eye }
+              { name: 'Business', view: 'business', icon: Crown },
+              { name: 'Subscriptions', view: 'subscriptions', icon: CreditCard },
+              { name: 'MLM', view: 'mlm', icon: Trophy }
             ].map((item) => {
               const IconComponent = item.icon;
               return (
