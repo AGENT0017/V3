@@ -1597,3 +1597,173 @@ export const CommunityProfiles = () => {
     </div>
   );
 };
+
+// Live Stream Component
+export const LiveStreamGrid = ({ streams, userPoints, onJoinStream }) => {
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {streams.map((stream) => (
+        <motion.div
+          key={stream.id}
+          className="bg-gray-900 border border-red-600 rounded-lg overflow-hidden"
+          whileHover={{ scale: 1.03 }}
+        >
+          <div className="relative">
+            <img 
+              src={stream.thumbnail} 
+              alt={stream.title}
+              className="w-full h-48 object-cover"
+            />
+            <div className="absolute top-2 left-2 flex items-center space-x-1 bg-red-600 px-2 py-1 rounded-full">
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              <span className="text-white text-xs font-bold">LIVE</span>
+            </div>
+            <div className="absolute top-2 right-2 bg-black bg-opacity-80 text-white px-2 py-1 rounded">
+              {stream.viewers} watching
+            </div>
+          </div>
+          
+          <div className="p-4">
+            <h3 className="text-white font-bold text-lg mb-2">{stream.title}</h3>
+            <p className="text-gray-400 text-sm mb-3">{stream.description}</p>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-gray-300 text-sm">{stream.streamer}</span>
+              </div>
+              
+              <button
+                onClick={() => onJoinStream(stream)}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+              >
+                Join Stream
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+// Enhanced Video Player Component for Apocalypse Content
+export const VideoPlayer = ({ content, isOpen, onClose }) => {
+  if (!isOpen || !content) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black z-50 flex items-center justify-center"
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+      >
+        <X className="w-8 h-8" />
+      </button>
+
+      <div className="w-full h-full flex items-center justify-center">
+        {content.type === 'podcast' || content.category === 'entertainment' ? (
+          <div className="text-center p-8 max-w-4xl">
+            <img
+              src={content.cover || content.thumbnail || content.poster}
+              alt={content.title}
+              className="w-64 h-64 mx-auto rounded-lg mb-6"
+            />
+            <h2 className="text-4xl font-bold text-white mb-4">{content.title}</h2>
+            <p className="text-gray-400 mb-6 text-xl">{content.description}</p>
+            <div className="bg-red-900 border border-red-600 p-8 rounded-lg">
+              <div className="text-white mb-6 text-2xl">🎵 CHAOS AUDIO PLAYER</div>
+              <div className="text-gray-300 mb-4">Now Playing: {content.title}</div>
+              <div className="flex items-center space-x-4 justify-center">
+                <button className="bg-red-600 hover:bg-red-700 text-white p-4 rounded-full">
+                  <Play className="w-6 h-6" />
+                </button>
+                <button className="bg-gray-700 hover:bg-gray-600 text-white p-4 rounded-full">
+                  <Volume2 className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : content.type === 'text' ? (
+          <div className="max-w-4xl mx-auto p-8 text-white overflow-y-auto max-h-full">
+            <h1 className="text-5xl font-bold mb-6 text-red-400">{content.title}</h1>
+            <div className="text-gray-400 mb-8 text-lg">By {content.author} • {content.readTime}</div>
+            <div className="prose prose-invert max-w-none text-lg leading-relaxed">
+              <p className="mb-6">
+                This is critical survival content for the #THRIVECHAOS community. In times of crisis, 
+                knowledge becomes power, and power ensures survival.
+              </p>
+              <p className="mb-6">
+                The apocalypse isn't just about physical survival - it's about maintaining your humanity, 
+                building resilient communities, and creating systems that work when traditional ones fail.
+              </p>
+              <p className="mb-6">
+                This platform serves as your guide through the chaos, providing practical skills, 
+                community connections, and the entertainment needed to maintain morale during difficult times.
+              </p>
+              <h2 className="text-3xl font-bold text-red-400 mb-4">Key Survival Principles</h2>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Adapt quickly to changing circumstances</li>
+                <li>Build and maintain community connections</li>
+                <li>Develop multiple skill sets for self-sufficiency</li>
+                <li>Stay informed but avoid information overload</li>
+                <li>Maintain mental health through entertainment and social connection</li>
+              </ul>
+            </div>
+          </div>
+        ) : content.isLive || content.category ? (
+          <div className="text-center p-8 max-w-4xl">
+            <h2 className="text-4xl font-bold text-white mb-6 flex items-center justify-center space-x-3">
+              <Radio className="w-10 h-10 text-red-500" />
+              <span>{content.title}</span>
+              {content.isLive && (
+                <span className="bg-red-600 text-white px-3 py-1 rounded-full text-lg animate-pulse">
+                  LIVE
+                </span>
+              )}
+            </h2>
+            <p className="text-gray-400 mb-8 text-xl">{content.description}</p>
+            <div className="bg-gray-900 border border-red-600 p-8 rounded-lg">
+              <div className="text-white mb-6 text-2xl">📡 LIVE STREAM ACTIVE</div>
+              <div className="text-gray-300 mb-6">
+                Streamer: {content.streamer} | {content.viewers} watching
+              </div>
+              <div className="flex items-center justify-center space-x-4 mb-6">
+                <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+                <span className="text-white">Broadcasting Live</span>
+              </div>
+              <div className="bg-black p-6 rounded-lg mb-6">
+                <div className="text-green-400 font-mono text-sm">
+                  > CHAOS NETWORK ESTABLISHED<br/>
+                  > SECURE CONNECTION ACTIVE<br/>
+                  > STREAM QUALITY: HIGH<br/>
+                  > REBEL COUNT: {content.viewers}
+                </div>
+              </div>
+              <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold">
+                Join Voice Chat
+              </button>
+            </div>
+          </div>
+        ) : (
+          <iframe
+            width="80%"
+            height="80%"
+            src={`https://www.youtube.com/embed/${content.youtube_id}?autoplay=1`}
+            title={content.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="rounded-lg"
+          />
+        )}
+      </div>
+    </motion.div>
+  );
+};
