@@ -472,6 +472,7 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
                 <span 
                   className="text-red-500 font-black"
                   style={{
+                    color: '#ff0000',
                     textShadow: `
                       0 0 10px #ff0000,
                       0 0 20px #ff0000,
@@ -494,6 +495,7 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
                   <span 
                     className="absolute inset-0 text-orange-400 animate-ping"
                     style={{
+                      color: '#ff4500',
                       textShadow: '0 0 50px #ff4500, 0 0 100px #ff4500',
                       transform: 'translate(2px, -2px)'
                     }}
