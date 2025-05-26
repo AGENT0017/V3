@@ -397,20 +397,11 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
       </AnimatePresence>
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-32">
+      <section className="relative min-h-screen flex items-center justify-center pt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-red-900/20 to-black"></div>
-        
-        {/* Crisis Countdown - Moved up */}
-        <div className="absolute top-28 left-0 right-0 z-20">
-          <div className="text-center py-4">
-            <div className="text-red-400 text-lg font-bold animate-pulse">
-              🔥 CRISIS ESCALATION: {crisisEscalationDays} DAYS 🔥
-            </div>
-          </div>
-        </div>
 
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-          {/* Simple Small THRIVECHAOS Logo - Visible Below Header */}
+          {/* STRATEGIC MILITARY ANTI-MATRIX LOGO */}
           <motion.div
             className="mb-8"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -428,8 +419,11 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
                 )}
               </span>
             </h1>
-            <div className="text-xl md:text-2xl font-mono text-yellow-400 mb-6">
-              From $20 to a revolution
+            <div className="text-xl md:text-2xl font-mono text-yellow-400 mb-6 font-bold">
+              BREAK THE MATRIX • BUILD HEROES • RESIST THE SYSTEM
+            </div>
+            <div className="text-lg md:text-xl font-mono text-green-400 mb-8">
+              &gt; TACTICAL COMMAND FOR HUMAN LIBERATION &lt;
             </div>
           </motion.div>
 
