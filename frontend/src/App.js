@@ -19,7 +19,6 @@ import {
 } from './business-components';
 
 const Home = () => {
-  SURVIVALIST: {
     name: "Survivalist",
     icon: "🛡️",
     color: "text-green-400",
