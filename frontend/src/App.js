@@ -18,8 +18,7 @@ import {
   MLMDashboard
 } from './business-components';
 
-// Enhanced User Classification and Profile System
-const userTypes = {
+const Home = () => {
   SURVIVALIST: {
     name: "Survivalist",
     icon: "🛡️",
