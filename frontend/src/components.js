@@ -33,7 +33,9 @@ import {
   MapPin as MapPinIcon,
   Globe as GlobeIcon,
   Share2,
-  Wrench
+  Wrench,
+  Flame,
+  Coins
 } from 'lucide-react';
 
 // Enhanced User Classification System
