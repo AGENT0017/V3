@@ -547,107 +547,261 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
   );
 };
 
-// Apocalypse Hero Component
-export const ApocalypseHero = ({ userPoints, crisisMode }) => {
-  const [currentAlert, setCurrentAlert] = useState(0);
-  const alerts = [
-    "⚡ INFRASTRUCTURE FAILING - Learn essential survival skills NOW",
-    "🔥 LIVE: Community leaders sharing real-time crisis updates", 
-    "🛡️ NEW: Anonymous resistance tactics just uploaded",
-    "📡 EMERGENCY: Secure communication networks established"
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentAlert((prev) => (prev + 1) % alerts.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [alerts.length]);
+// Enhanced Landing Page Component
+export const LandingPage = ({ userPoints, setCurrentView }) => {
+  const [showVideo, setShowVideo] = useState(false);
 
   return (
-    <div className="relative h-screen overflow-hidden">
-      <motion.div
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ 
-            backgroundImage: `url(https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=1200)`,
-            filter: crisisMode ? 'hue-rotate(0deg) saturate(1.2)' : 'hue-rotate(20deg)'
-          }}
-        />
-        <div className={`absolute inset-0 ${
-          crisisMode 
-            ? 'bg-red-900 bg-opacity-60' 
-            : 'bg-black bg-opacity-50'
-        }`} />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-      </motion.div>
-
-      <div className={`absolute top-24 left-0 right-0 z-20 ${
-        crisisMode ? 'bg-red-600' : 'bg-orange-600'
-      } text-white py-2 px-6`}>
-        <motion.div
-          key={currentAlert}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
-          className="text-center font-semibold"
-        >
-          {alerts[currentAlert]}
-        </motion.div>
+    <div className="min-h-screen bg-black" style={{
+      backgroundImage: "url('https://www.transparenttextures.com/patterns/asfalt-light.png')",
+      backgroundRepeat: 'repeat'
+    }}>
+      {/* Glitch Logo */}
+      <div className="pt-24 pb-8">
+        <h1 className="font-black text-5xl md:text-7xl text-center text-yellow-400 tracking-wider uppercase"
+            style={{
+              fontFamily: 'Anton, sans-serif',
+              textShadow: `
+                1px 1px 0 #d8a600,
+                2px 2px 0 #a06c00,
+                3px 3px 0 #700,
+                2px 0 #ff0000,
+                -2px 0 #00ffff
+              `,
+              animation: 'glitch 1.5s infinite'
+            }}>
+          THRIVECHAOS
+        </h1>
       </div>
 
-      <div className="relative z-10 flex items-center h-full px-6 md:px-12">
-        <div className="max-w-4xl">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-6"
+      {/* Hero Section */}
+      <section className="px-4 py-16 max-w-6xl mx-auto"
+               style={{
+                 clipPath: 'polygon(0 5%, 100% 0%, 100% 95%, 0% 100%)',
+                 background: '#111',
+                 boxShadow: 'inset 0 0 40px #ff000040',
+                 marginBottom: '60px'
+               }}>
+        <p className="text-xl md:text-2xl max-w-4xl mx-auto mb-8 text-yellow-400 text-center font-black tracking-wide">
+          From $20 to a revolution — this is your call to action. <br />
+          The <strong>THRIVECHAOS</strong> movement ignites a rebellion for a new world order.
+        </p>
+        <div className="text-center space-x-4">
+          <motion.button
+            className="bg-yellow-400 text-black px-8 py-4 rounded font-black text-lg tracking-wider uppercase border-3 border-yellow-600 hover:bg-yellow-300 transition-all"
+            style={{
+              fontFamily: 'Anton, sans-serif',
+              boxShadow: '0 0 12px #ffd600cc',
+              textShadow: 'none'
+            }}
+            onClick={() => setCurrentView('home')}
+            whileHover={{ scale: 1.05 }}
           >
-            THRIVE IN THE
-            <br />
-            <span className="text-red-400">CHAOS</span>
-          </motion.h1>
+            Join the Rebellion
+          </motion.button>
+          <motion.button
+            className="bg-transparent text-red-500 px-8 py-4 rounded font-black text-lg tracking-wider uppercase border-3 border-red-500 hover:bg-red-500 hover:text-white transition-all"
+            style={{
+              fontFamily: 'Anton, sans-serif',
+              boxShadow: '0 0 10px #ff3b3f88'
+            }}
+            onClick={() => setCurrentView('survival')}
+            whileHover={{ scale: 1.05 }}
+          >
+            See the Battle Map
+          </motion.button>
+        </div>
+      </section>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl"
-          >
-            When systems collapse, rebels rise. Learn survival skills, connect with your tribe, 
-            and keep your sanity with apocalypse-ready entertainment.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="flex flex-wrap items-center gap-4"
-          >
+      {/* Interactive Film Section */}
+      <section className="px-4 py-16 max-w-6xl mx-auto"
+               style={{
+                 clipPath: 'polygon(0 0, 100% 5%, 100% 100%, 0% 95%)',
+                 background: '#220000',
+                 boxShadow: 'inset 0 0 40px #ff3b3f80',
+                 marginBottom: '60px'
+               }}>
+        <h2 className="text-3xl md:text-4xl font-bold text-red-500 text-center mb-6 tracking-wider uppercase"
+            style={{ textShadow: '1px 1px 3px #7a0000' }}>
+          🎬 The Film That Sparked the Uprising
+        </h2>
+        <p className="text-lg text-gray-300 text-center mb-8 max-w-3xl mx-auto">
+          Experience the cinematic pulse that fuses fiction with raw reality — a manifesto in motion.
+        </p>
+        
+        {!showVideo ? (
+          <div className="text-center">
             <motion.button
-              className="flex items-center space-x-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold text-lg transition-all"
+              className="bg-red-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-red-700 transition-all"
+              onClick={() => setShowVideo(true)}
               whileHover={{ scale: 1.05 }}
             >
-              <Shield className="w-6 h-6" />
-              <span>Start Surviving</span>
+              🎬 Watch the Manifesto
             </motion.button>
+          </div>
+        ) : (
+          <div className="max-w-4xl mx-auto">
+            <iframe
+              className="w-full h-64 md:h-96 rounded-xl border-4 border-red-500"
+              style={{
+                boxShadow: '0 0 15px #ff3b3faa, inset 0 0 40px #ff0000cc'
+              }}
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+              title="THRIVECHAOS: The Awakening"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
+      </section>
 
-            <motion.button
-              className="flex items-center space-x-2 px-8 py-4 bg-gray-700 bg-opacity-80 text-white rounded-lg font-semibold hover:bg-opacity-100 transition-all"
-              whileHover={{ scale: 1.05 }}
+      {/* NFC Cards Section */}
+      <section className="px-4 py-16 max-w-6xl mx-auto"
+               style={{
+                 clipPath: 'polygon(0 5%, 100% 0%, 100% 95%, 0% 100%)',
+                 background: '#111',
+                 boxShadow: 'inset 0 0 40px #ff000040',
+                 marginBottom: '60px'
+               }}>
+        <h2 className="text-3xl md:text-4xl font-bold text-red-500 text-center mb-6 tracking-wider uppercase"
+            style={{ textShadow: '1px 1px 3px #7a0000' }}>
+          📲 AGENT17 NFC Cards — Your Key to the Resistance
+        </h2>
+        <p className="text-lg text-gray-300 text-center mb-8 max-w-3xl mx-auto">
+          Your digital identity, weaponized for instant crisis response, exclusive access, and community networking.
+        </p>
+        <div className="text-center">
+          <motion.button
+            className="bg-yellow-400 text-black px-8 py-4 rounded font-black text-lg tracking-wider uppercase border-3 border-yellow-600 hover:bg-yellow-300 transition-all"
+            style={{
+              fontFamily: 'Anton, sans-serif',
+              boxShadow: '0 0 12px #ffd600cc'
+            }}
+            onClick={() => setCurrentView('community')}
+            whileHover={{ scale: 1.05 }}
+          >
+            Pre-order Your Agent17 Card
+          </motion.button>
+        </div>
+      </section>
+
+      {/* Token Section */}
+      <section className="px-4 py-16 max-w-6xl mx-auto"
+               style={{
+                 clipPath: 'polygon(0 0, 100% 5%, 100% 100%, 0% 95%)',
+                 background: '#220000',
+                 boxShadow: 'inset 0 0 40px #ff3b3f80',
+                 marginBottom: '60px'
+               }}>
+        <h2 className="text-3xl md:text-4xl font-bold text-red-500 text-center mb-6 tracking-wider uppercase"
+            style={{ textShadow: '1px 1px 3px #7a0000' }}>
+          🚀 AGENT17 Token — The Pulse of Power
+        </h2>
+        <p className="text-lg text-gray-300 text-center mb-8 max-w-3xl mx-auto">
+          Governance, rewards, and power in your hands. Control the future, claim your place in the chaos.
+        </p>
+        <div className="text-center">
+          <motion.button
+            className="bg-transparent text-red-500 px-8 py-4 rounded font-black text-lg tracking-wider uppercase border-3 border-red-500 hover:bg-red-500 hover:text-white transition-all"
+            style={{
+              fontFamily: 'Anton, sans-serif',
+              boxShadow: '0 0 10px #ff3b3f88'
+            }}
+            onClick={() => setCurrentView('subscriptions')}
+            whileHover={{ scale: 1.05 }}
+          >
+            Read the Manifesto
+          </motion.button>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="px-4 py-16 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              icon: "🌍",
+              title: "Crisis Command Map",
+              description: "Geo-synced collaboration platform linking volunteers, NGOs, military, and emergency teams worldwide.",
+              view: "survival"
+            },
+            {
+              icon: "📢",
+              title: "Walkie-Talkie + AI Transcription",
+              description: "Instant voice comms with AI-powered transcript logs for seamless, real-time strategy & coordination.",
+              view: "streaming"
+            },
+            {
+              icon: "🧠",
+              title: "Mind & Body Arsenal",
+              description: "Access alternative health, breathwork, cold therapy, and spiritual resilience programs.",
+              view: "wellness"
+            },
+            {
+              icon: "🎥",
+              title: "Crowdfund Storymaking",
+              description: "Join forces to create and fund documentaries, films, and live events with full DAO voting power.",
+              view: "business"
+            },
+            {
+              icon: "🚁",
+              title: "IOT & Drone Logistics",
+              description: "Automate deliveries and aid with smart drones synced through Web3 and blockchain logistics.",
+              view: "marketplace"
+            },
+            {
+              icon: "📡",
+              title: "Global Response Dashboard",
+              description: "Real-time crisis monitoring, resource allocation, and emergency response coordination worldwide.",
+              view: "mlm"
+            }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              className="bg-red-950 border-2 border-red-500 rounded-xl p-6 cursor-pointer transition-all"
+              style={{
+                boxShadow: '0 0 15px #ff3b3f99, inset 0 0 25px #aa000050'
+              }}
+              onClick={() => setCurrentView(feature.view)}
+              whileHover={{ 
+                scale: 1.03,
+                boxShadow: '0 0 25px #ff3b3fff, inset 0 0 40px #ff0000aa'
+              }}
             >
-              <Radio className="w-6 h-6" />
-              <span>Join Live Stream</span>
-            </motion.button>
-          </motion.div>
+              <h3 className="text-xl font-bold text-yellow-400 mb-3 tracking-wide uppercase">
+                {feature.icon} {feature.title}
+              </h3>
+              <p className="text-gray-300 leading-relaxed">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Live Stats Bar */}
+      <div className="bg-red-600 text-white py-3 text-center font-bold">
+        <div className="flex justify-center space-x-8 text-sm md:text-base">
+          <span>🔥 12,847 REBELS ACTIVE</span>
+          <span>📍 89 COUNTRIES</span>
+          <span>⚡ SYSTEM STABILITY: 67%</span>
         </div>
       </div>
+
+      {/* CSS for glitch animation */}
+      <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Mono:wght@700&display=swap');
+        
+        @keyframes glitch {
+          0% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; }
+          20% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; }
+          40% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; }
+          60% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; }
+          80% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; }
+          100% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; }
+        }
+      `}</style>
     </div>
   );
 };
