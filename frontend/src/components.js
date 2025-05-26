@@ -1400,8 +1400,8 @@ export const VideoPlayer = ({ content, isOpen, onClose }) => {
   );
 };
 
-// Marketplace Component
-export const Marketplace = ({ userPoints, setUserPoints }) => {
+// Legacy Marketplace Component (replaced by MarketplaceGear)
+export const LegacyMarketplace = ({ userPoints, setUserPoints }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedItem, setSelectedItem] = useState(null);
   const [showItemDetail, setShowItemDetail] = useState(false);
