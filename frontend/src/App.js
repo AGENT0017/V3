@@ -165,11 +165,12 @@ const mockLiveStreams = [
 ];
 
 const Home = () => {
-  const [userPoints, setUserPoints] = useState(125); // Starting points
+  const [userPoints, setUserPoints] = useState(200); // Increased starting points for apocalypse mode
   const [currentView, setCurrentView] = useState('home');
   const [showTasks, setShowTasks] = useState(false);
   const [selectedContent, setSelectedContent] = useState(null);
   const [showPlayer, setShowPlayer] = useState(false);
+  const [crisisMode, setCrisisMode] = useState(true); // Always in crisis mode
 
   const handlePlay = (content) => {
     if (userPoints >= content.cost) {
@@ -179,22 +180,29 @@ const Home = () => {
     }
   };
 
+  const handleJoinStream = (stream) => {
+    setSelectedContent(stream);
+    setShowPlayer(true);
+  };
+
   const getFilteredContent = () => {
     switch (currentView) {
       case 'survival':
         return { survival: apocalypseContent.survival };
       case 'resistance':
         return { resistance: apocalypseContent.resistance };
-      case 'entertainment':
-        return { entertainment: apocalypseContent.entertainment };
-      case 'streams':
+      case 'streaming':
         return { streams: mockLiveStreams };
+      case 'community':
+        return { community: apocalypseContent.survival }; // Using survival as community placeholder
+      case 'intel':
+        return { intel: apocalypseContent.resistance }; // Using resistance as intel placeholder
       default:
         return {
           survival: apocalypseContent.survival,
           resistance: apocalypseContent.resistance,
           entertainment: apocalypseContent.entertainment,
-          streams: mockLiveStreams
+          streams: mockLiveStreams.slice(0, 3)
         };
     }
   };
@@ -208,57 +216,83 @@ const Home = () => {
         setUserPoints={setUserPoints}
         setCurrentView={setCurrentView}
         setShowTasks={setShowTasks}
+        crisisMode={crisisMode}
       />
 
       {currentView === 'home' && (
         <>
-          <HeroSection userPoints={userPoints} />
+          <ApocalypseHero userPoints={userPoints} crisisMode={crisisMode} />
           <div className="pt-12 space-y-12">
             {content.survival && (
-              <ContentRow 
-                title="Critical Survival Skills" 
+              <ApocalypseContentRow 
+                title="🛡️ CRITICAL SURVIVAL SKILLS" 
                 content={content.survival} 
                 userPoints={userPoints}
                 onPlay={handlePlay}
+                urgent={true}
               />
             )}
             {content.resistance && (
-              <ContentRow 
-                title="Resistance Training" 
+              <ApocalypseContentRow 
+                title="⚡ RESISTANCE TRAINING" 
                 content={content.resistance} 
                 userPoints={userPoints}
                 onPlay={handlePlay}
+                urgent={false}
               />
             )}
             {content.entertainment && (
-              <ContentRow 
-                title="Entertainment & Morale" 
+              <ApocalypseContentRow 
+                title="🎭 CHAOS ENTERTAINMENT" 
                 content={content.entertainment} 
                 userPoints={userPoints}
                 onPlay={handlePlay}
+                urgent={false}
               />
             )}
             {content.streams && (
-              <ContentRow 
-                title="Live Streams" 
-                content={content.streams} 
-                userPoints={userPoints}
-                onPlay={handlePlay}
-              />
+              <div className="mb-12">
+                <h2 className="text-3xl font-bold text-white mb-6 px-6 flex items-center space-x-3">
+                  <span>📡 LIVE RESISTANCE STREAMS</span>
+                  <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                    LIVE NOW
+                  </span>
+                </h2>
+                <LiveStreamGrid 
+                  streams={content.streams} 
+                  userPoints={userPoints}
+                  onJoinStream={handleJoinStream}
+                />
+              </div>
             )}
           </div>
         </>
       )}
 
-      {currentView !== 'home' && (
+      {currentView === 'streaming' && (
+        <div className="pt-24">
+          <div className="text-center mb-12 px-6">
+            <h1 className="text-5xl font-bold text-white mb-4">📡 LIVE STREAMS</h1>
+            <p className="text-xl text-gray-400">Real-time intelligence, survival training, and community support</p>
+          </div>
+          <LiveStreamGrid 
+            streams={mockLiveStreams} 
+            userPoints={userPoints}
+            onJoinStream={handleJoinStream}
+          />
+        </div>
+      )}
+
+      {currentView !== 'home' && currentView !== 'streaming' && (
         <div className="pt-24 space-y-12">
           {Object.entries(content).map(([key, items]) => (
-            <ContentRow 
+            <ApocalypseContentRow 
               key={key}
-              title={key.charAt(0).toUpperCase() + key.slice(1)} 
+              title={`${key.charAt(0).toUpperCase() + key.slice(1)} Content`} 
               content={items} 
               userPoints={userPoints}
               onPlay={handlePlay}
+              urgent={key === 'survival'}
             />
           ))}
         </div>
@@ -266,7 +300,7 @@ const Home = () => {
 
       <AnimatePresence>
         {showTasks && (
-          <TasksModal
+          <ApocalypseTasksModal
             isOpen={showTasks}
             onClose={() => setShowTasks(false)}
             userPoints={userPoints}
@@ -285,13 +319,21 @@ const Home = () => {
         )}
       </AnimatePresence>
 
-      {/* Welcome Message */}
-      {userPoints === 125 && (
-        <div className="fixed bottom-6 right-6 bg-white text-black p-4 rounded-lg shadow-lg max-w-sm z-40">
-          <h3 className="font-bold mb-2">Welcome to #THRIVECHAOS!</h3>
-          <p className="text-sm">You have 125 starting points. Complete tasks to earn more and unlock premium content!</p>
+      {/* Apocalypse Welcome Message */}
+      {userPoints === 200 && (
+        <div className="fixed bottom-6 right-6 bg-red-900 border border-red-600 text-white p-4 rounded-lg shadow-lg max-w-sm z-40">
+          <h3 className="font-bold mb-2 flex items-center space-x-2">
+            <span>🔥</span>
+            <span>Welcome to the Chaos!</span>
+          </h3>
+          <p className="text-sm">You have 200 CHAOS points. Complete missions to earn more and access survival content!</p>
         </div>
       )}
+
+      {/* Crisis Status Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-red-900 bg-opacity-90 text-white p-2 text-center text-sm font-semibold">
+        🚨 CRISIS LEVEL: MODERATE | 12,847 REBELS ONLINE | SYSTEM STABILITY: 67%
+      </div>
     </div>
   );
 };
