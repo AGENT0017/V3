@@ -35,7 +35,8 @@ import {
   Share2,
   Wrench,
   Flame,
-  Coins
+  Coins,
+  Crown
 } from 'lucide-react';
 
 // Enhanced User Classification System
