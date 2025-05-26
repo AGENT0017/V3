@@ -632,7 +632,7 @@ export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }
                 <motion.button
                   key={item.name}
                   className="flex items-center space-x-1 text-white hover:text-gray-300 transition-colors"
-                  onClick={() => setCurrentView(item.view)}
+                  onClick={() => onNavigate(item.view)}
                   whileHover={{ scale: 1.05 }}
                 >
                   <IconComponent className="w-4 h-4" />
