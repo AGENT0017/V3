@@ -43,106 +43,77 @@ import {
 } from 'lucide-react';
 
 // Enhanced Business Ecosystem Data for ThriveChaos
-const businessFeatures = {
-  // Community Creation Tools
-  communityTemplates: [
-    {
-      id: "survival_academy",
-      name: "Survival Academy",
-      description: "Teach essential survival skills to rebels",
-      category: "Education",
-      price: 0, // Free template
-      features: ["Live streaming", "Course modules", "Certification system"],
-      theme: "survival",
-      color: "green"
-    },
-    {
-      id: "crypto_rebels",
-      name: "Crypto Rebels Hub",
-      description: "Build a community around cryptocurrency and financial freedom",
-      category: "Finance",
-      price: 50,
-      features: ["Trading signals", "Portfolio tracking", "Private channels"],
-      theme: "tech",
-      color: "blue"
-    },
-    {
-      id: "wellness_warriors",
-      name: "Wellness Warriors",
-      description: "Health and wellness coaching community",
-      category: "Health",
-      price: 30,
-      features: ["Fitness tracking", "Nutrition plans", "Group challenges"],
-      theme: "health",
-      color: "purple"
-    }
-  ],
-
-  // Subscription Plans
-  subscriptionTiers: [
-    {
-      id: "basic",
-      name: "Rebel Starter",
-      price: 29,
-      interval: "monthly",
-      features: [
-        "Create 1 community",
-        "Up to 100 members",
-        "Basic analytics",
-        "Standard support"
-      ],
-      chaosBonus: 500
-    },
-    {
-      id: "pro",
-      name: "Chaos Commander",
-      price: 79,
-      interval: "monthly", 
-      features: [
-        "Create 5 communities",
-        "Up to 1000 members",
-        "Advanced analytics",
-        "MLM tracking",
-        "Priority support",
-        "Custom branding"
-      ],
-      chaosBonus: 1500,
-      popular: true
-    },
-    {
-      id: "empire",
-      name: "Revolution Leader",
-      price: 199,
-      interval: "monthly",
-      features: [
-        "Unlimited communities",
-        "Unlimited members",
-        "Full analytics suite",
-        "Complete MLM system",
-        "White-label options",
-        "Dedicated support"
-      ],
-      chaosBonus: 5000
-    }
-  ],
-
-  // MLM Structure (8 Levels)
-  mlmStructure: {
-    levels: [
-      { level: 1, commission: 10, name: "Direct Recruit" },
-      { level: 2, commission: 8, name: "Second Line" },
-      { level: 3, commission: 6, name: "Third Line" },
-      { level: 4, commission: 4, name: "Fourth Line" },
-      { level: 5, commission: 3, name: "Fifth Line" },
-      { level: 6, commission: 2, name: "Sixth Line" },
-      { level: 7, commission: 1.5, name: "Seventh Line" },
-      { level: 8, commission: 1, name: "Eighth Line" }
-    ],
-    bonuses: {
-      rankAdvancement: [100, 250, 500, 1000, 2500, 5000, 10000, 25000],
-      monthlyVolume: [50, 100, 200, 400, 800, 1600, 3200, 6400]
-    }
+// Mock Coach/Entrepreneur Profiles
+const mockCoaches = [
+  {
+    id: "coach_001",
+    name: "Sarah Revolution",
+    title: "Survival Skills Master",
+    communities: ["Urban Survival Academy", "Off-Grid Living Pro"],
+    subscribers: 2847,
+    monthlyRevenue: 8940,
+    mlmLevel: 5,
+    downlineCount: 147,
+    totalCommissions: 3240,
+    avatar: "https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=200",
+    bio: "Former military survival instructor teaching urban and wilderness survival",
+    specialties: ["Urban survival", "Water procurement", "Shelter building"],
+    subscriptionPlan: "pro",
+    joinDate: "2023-08-15",
+    badge: "verified"
+  },
+  {
+    id: "coach_002", 
+    name: "Marcus CryptoSage",
+    title: "Financial Freedom Coach",
+    communities: ["Crypto Rebels Elite", "DeFi Masters", "Investment Sanctuary"],
+    subscribers: 5623,
+    monthlyRevenue: 18760,
+    mlmLevel: 7,
+    downlineCount: 312,
+    totalCommissions: 7890,
+    avatar: "https://images.unsplash.com/photo-1606512741416-fb5bbceaa4e2?w=200",
+    bio: "Helping rebels achieve financial independence through crypto and DeFi",
+    specialties: ["Cryptocurrency", "DeFi protocols", "Investment strategies"],
+    subscriptionPlan: "empire",
+    joinDate: "2023-06-10",
+    badge: "elite"
   }
+];
+
+// Mock Subscription Data
+const mockSubscriptions = [
+  {
+    id: "sub_001",
+    userId: "coach_001",
+    plan: "pro",
+    status: "active",
+    currentPeriodStart: "2024-01-01",
+    currentPeriodEnd: "2024-02-01",
+    amount: 79,
+    currency: "USD",
+    nextBilling: "2024-02-01"
+  }
+];
+
+// Mock MLM Network Data
+const mockMLMNetwork = {
+  userId: "coach_001",
+  totalDownline: 147,
+  activeDownline: 89,
+  levels: [
+    { level: 1, count: 12, commission: 89.40 },
+    { level: 2, count: 24, commission: 127.20 },
+    { level: 3, count: 31, commission: 98.60 },
+    { level: 4, count: 28, commission: 56.80 },
+    { level: 5, count: 22, commission: 34.50 },
+    { level: 6, count: 18, commission: 18.90 },
+    { level: 7, count: 8, commission: 6.75 },
+    { level: 8, count: 4, commission: 2.40 }
+  ],
+  monthlyCommissions: 435.55,
+  totalCommissions: 3240.00,
+  rank: "Chaos Commander"
 };
 // Mock Coach/Entrepreneur Profiles
 const mockCoaches = [
