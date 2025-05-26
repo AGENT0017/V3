@@ -181,24 +181,20 @@ const Home = () => {
 
   const getFilteredContent = () => {
     switch (currentView) {
-      case 'movies':
-        return { movies: mockMovies };
-      case 'tvshows':
-        return { shows: mockTVShows };
-      case 'podcasts':
-        return { podcasts: mockPodcasts };
-      case 'interactive':
-        return { interactive: mockInteractiveContent };
-      case 'text':
-        return { articles: mockTextContent };
+      case 'survival':
+        return { survival: apocalypseContent.survival };
+      case 'resistance':
+        return { resistance: apocalypseContent.resistance };
+      case 'entertainment':
+        return { entertainment: apocalypseContent.entertainment };
+      case 'streams':
+        return { streams: mockLiveStreams };
       default:
         return {
-          trending: [...mockMovies.slice(0, 2), ...mockTVShows.slice(0, 1)],
-          movies: mockMovies,
-          shows: mockTVShows,
-          podcasts: mockPodcasts,
-          interactive: mockInteractiveContent,
-          articles: mockTextContent
+          survival: apocalypseContent.survival,
+          resistance: apocalypseContent.resistance,
+          entertainment: apocalypseContent.entertainment,
+          streams: mockLiveStreams
         };
     }
   };
