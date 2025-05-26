@@ -341,6 +341,80 @@ const apocalypseTasks = [
 ];
 
 // Header Component
+// Hero Component for Apocalypse Theme
+export const ApocalypseHero = ({ userPoints, crisisMode }) => {
+  return (
+    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-red-900 via-black to-black overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1615709972711-574e9f76f37d?w=1920')] bg-cover bg-center opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
+      </div>
+
+      {/* Crisis Mode Alert */}
+      {crisisMode && (
+        <div className="absolute top-24 left-0 right-0 z-20">
+          <div className="bg-red-600 text-white text-center py-4 animate-pulse">
+            <div className="text-2xl font-bold">🚨 CRISIS MODE ACTIVATED 🚨</div>
+            <div className="text-lg">ALL SURVIVAL CONTENT UNLOCKED</div>
+          </div>
+        </div>
+      )}
+
+      {/* Main Hero Content */}
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight">
+            THRIVE
+            <span className="text-red-500">CHAOS</span>
+          </h1>
+          
+          <h2 className="text-2xl md:text-4xl text-gray-300 mb-8 font-semibold">
+            When the world ends, we begin
+          </h2>
+          
+          <p className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
+            Master survival skills, build resistance networks, and prepare for the inevitable. 
+            Join thousands of rebels learning to thrive when society collapses.
+          </p>
+
+          {/* CHAOS Points Display */}
+          <div className="bg-black bg-opacity-60 border-2 border-red-600 rounded-lg p-6 mb-8 inline-block">
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                <span className="text-2xl">🔥</span>
+              </div>
+              <div className="text-left">
+                <div className="text-gray-400 text-sm">YOUR CHAOS POINTS</div>
+                <div className="text-3xl font-bold text-yellow-400">{userPoints.toLocaleString()}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-12 py-4 rounded-lg text-xl font-bold transition-colors">
+              START SURVIVAL TRAINING
+            </button>
+            <button className="border-2 border-white text-white hover:bg-white hover:text-black px-12 py-4 rounded-lg text-xl font-bold transition-colors">
+              JOIN RESISTANCE
+            </button>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <ChevronDown className="w-8 h-8 text-white opacity-60" />
+      </div>
+    </div>
+  );
+};
+
 export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks, crisisMode }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
