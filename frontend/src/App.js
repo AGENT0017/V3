@@ -15,7 +15,8 @@ import {
 import {
   CommunityBuilder,
   SubscriptionManager,
-  MLMDashboard
+  MLMDashboard,
+  WellnessHub
 } from './business-components';
 
 // Simplified mock data for App.js
