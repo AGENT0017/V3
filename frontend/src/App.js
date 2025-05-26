@@ -541,7 +541,18 @@ const Home = () => {
         </div>
       )}
 
-      {currentView !== 'home' && currentView !== 'streaming' && (
+      {currentView === 'marketplace' && (
+        <Marketplace 
+          userPoints={userPoints}
+          setUserPoints={setUserPoints}
+        />
+      )}
+
+      {currentView === 'community' && (
+        <CommunityProfiles />
+      )}
+
+      {currentView !== 'home' && currentView !== 'streaming' && currentView !== 'marketplace' && currentView !== 'community' && (
         <div className="pt-24 space-y-12">
           {Object.entries(content).map(([key, items]) => (
             <ApocalypseContentRow 
