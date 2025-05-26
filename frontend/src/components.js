@@ -504,35 +504,35 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
             </div>
           </motion.div>
 
-          {/* Enhanced Feature Grid */}
+          {/* STRATEGIC MILITARY HERO ARSENAL */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               {
                 icon: "🎯",
-                title: "AGENT17 Token",
-                desc: "Revolutionary crisis currency",
-                cta: "Get A17 Tokens",
+                title: "HERO TOKEN A17",
+                desc: "Resistance currency for liberation ops",
+                cta: "Earn Hero Tokens",
                 reward: "+100 A17"
               },
               {
-                icon: "📱",
-                title: "NFC Agent Cards",
-                desc: "Physical rebellion network",
-                cta: "Pre-order Card",
+                icon: "🛡️",
+                title: "MATRIX BREAKER CARDS",
+                desc: "Physical ops network for heroes",
+                cta: "Deploy Matrix Breaker",
                 reward: "+250 A17"
               },
               {
                 icon: "🗺️",
-                title: "Crisis Command Map",
-                desc: "Real-time crisis coordination",
-                cta: "View Battle Map",
+                title: "TACTICAL COMMAND MAP",
+                desc: "Real-time hero coordination",
+                cta: "Access Command Center",
                 reward: "+75 A17"
               },
               {
                 icon: "💪",
-                title: "Mind & Body Arsenal",
-                desc: "Survival fitness protocol",
-                cta: "Start Training",
+                title: "HERO TRAINING ARSENAL",
+                desc: "Complete hero development program",
+                cta: "Begin Hero Training",
                 reward: "+150 A17"
               }
             ].map((feature, index) => (
