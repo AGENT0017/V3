@@ -497,6 +497,7 @@ export const Header = ({ userPoints, setUserPoints, setCurrentView, setShowTasks
               { name: 'Resistance', view: 'resistance', icon: Zap },
               { name: 'Stream', view: 'streaming', icon: Radio },
               { name: 'Community', view: 'community', icon: Users },
+              { name: 'Marketplace', view: 'marketplace', icon: Globe },
               { name: 'Intel', view: 'intel', icon: Eye }
             ].map((item) => {
               const IconComponent = item.icon;
