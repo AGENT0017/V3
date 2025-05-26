@@ -598,6 +598,44 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         </motion.div>
       </section>
 
+      {/* Moving Metrics Bar with "IN CHAOS WE THRIVE" */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-red-600 to-yellow-600 py-4">
+        <div className="absolute inset-0 bg-black/20"></div>
+        
+        {/* Scrolling Text Animation */}
+        <div className="relative z-10">
+          <motion.div
+            className="flex items-center whitespace-nowrap text-white font-bold text-lg"
+            animate={{ x: ['-100%', '100%'] }}
+            transition={{ 
+              duration: 20, 
+              repeat: Infinity, 
+              ease: 'linear' 
+            }}
+          >
+            <span className="mr-16">⚔️ IN CHAOS WE THRIVE ⚔️</span>
+            <span className="mr-16">🌍 12,847 REBELS ACTIVE</span>
+            <span className="mr-16">🗺️ 89 COUNTRIES UNITED</span>
+            <span className="mr-16">⚡ SYSTEM STABILITY: 67%</span>
+            <span className="mr-16">🔥 RESISTANCE GROWING</span>
+            <span className="mr-16">⚔️ IN CHAOS WE THRIVE ⚔️</span>
+            <span className="mr-16">💪 SURVIVAL NETWORK ACTIVE</span>
+            <span className="mr-16">🎯 AGENT17 COORDINATING</span>
+            <span className="mr-16">🚨 CRISIS MODE READY</span>
+            <span className="mr-16">⚡ A17 NETWORK ONLINE</span>
+          </motion.div>
+        </div>
+        
+        {/* Static Metrics Bar Below */}
+        <div className="relative z-10 mt-2">
+          <div className="flex justify-center space-x-8 text-white text-sm font-bold">
+            <span>⚔️ 12,847 REBELS ACTIVE</span>
+            <span>🌍 89 COUNTRIES</span>
+            <span>⚡ SYSTEM STABILITY: 67%</span>
+          </div>
+        </div>
+      </section>
+
       {/* Enhanced Video Section */}
       <section className="py-20 bg-gradient-to-b from-black to-red-900/20">
         <div className="max-w-6xl mx-auto px-6">
