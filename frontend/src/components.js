@@ -16,6 +16,7 @@ import {
   Zap,
   MapPin,
   Users,
+  User,
   Radio,
   Globe,
   Headphones,
