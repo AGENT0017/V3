@@ -323,10 +323,11 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "CHAOS Logo Blood Red Styling"
   stuck_tasks: []
   test_all: false
-  test_priority: "completed"
+  test_priority: "medium_priority"
 
 agent_communication:
     - agent: "testing"
