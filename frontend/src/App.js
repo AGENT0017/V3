@@ -11,11 +11,11 @@ import {
   CommunityHub,
   CrisisCommand
 } from './components';
-import InteractiveFilm from './components/InteractiveFilm';
-import SurvivalAcademy from './components/SurvivalAcademy';
-import Agent17Dashboard from './components/Agent17Dashboard';
-import TinderOfDoers from './components/TinderOfDoers';
-import BloodDonationTracker from './components/BloodDonationTracker';
+import { InteractiveFilm } from './components/InteractiveFilm';
+import { SurvivalAcademy } from './components/SurvivalAcademy';
+import { Agent17Dashboard } from './components/Agent17Dashboard';
+import { TinderOfDoers } from './components/TinderOfDoers';
+import { BloodDonationTracker } from './components/BloodDonationTracker';
 import { 
   MLMDashboard, 
   WellnessHub, 
