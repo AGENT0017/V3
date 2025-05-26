@@ -571,6 +571,7 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
 export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const navigation = [
     { id: 'hero', label: 'Home', icon: '🏠' },
