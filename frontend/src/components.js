@@ -416,19 +416,8 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
       <section className="relative min-h-screen flex items-center justify-center">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-red-900/20 to-black"></div>
         
-        {/* Live Metrics Bar */}
-        <div className="absolute top-24 left-0 right-0 z-20">
-          <div className="bg-gradient-to-r from-red-600/90 to-yellow-600/90 text-white text-center py-2">
-            <div className="flex justify-center space-x-8 text-sm font-bold">
-              <span>⚔️ 12,847 REBELS ACTIVE</span>
-              <span>🌍 89 COUNTRIES</span>
-              <span>⚡ SYSTEM STABILITY: 67%</span>
-            </div>
-          </div>
-        </div>
-
         {/* Crisis Countdown */}
-        <div className="absolute top-32 left-0 right-0 z-20">
+        <div className="absolute top-24 left-0 right-0 z-20">
           <div className="text-center py-4">
             <div className="text-red-400 text-xl font-bold animate-pulse">
               🔥 CRISIS ESCALATION: {crisisEscalationDays} DAYS 🔥
