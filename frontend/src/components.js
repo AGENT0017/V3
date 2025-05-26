@@ -669,7 +669,6 @@ export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }
           {/* Mobile Earn Points (Plus icon) */}
           <motion.button
             className="sm:hidden bg-white text-black p-2 rounded-full font-semibold hover:bg-gray-200 transition-colors"
-            onClick={() => setShowTasks(true)}
             whileHover={{ scale: 1.05 }}
           >
             <Plus className="w-4 h-4" />
