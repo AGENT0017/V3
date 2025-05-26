@@ -825,7 +825,7 @@ export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }
             className="hidden sm:flex bg-white text-black px-3 sm:px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition-colors text-sm sm:text-base"
             whileHover={{ scale: 1.05 }}
           >
-            Earn Chaos
+            Earn A17
           </motion.button>
 
           {/* Mobile Earn Points (Plus icon) */}
