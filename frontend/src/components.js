@@ -350,10 +350,18 @@ const apocalypseTasks = [
 export const ApocalypseHero = ({ userPoints, crisisMode }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [glitchActive, setGlitchActive] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showReward, setShowReward] = useState(false);
   
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     const glitchTimer = setInterval(() => setGlitchActive(prev => !prev), 3000);
+    
+    // Dopamine micro-dose - show reward animation on load
+    setTimeout(() => setShowReward(true), 2000);
+    setTimeout(() => setShowReward(false), 4000);
+    
     return () => {
       clearInterval(timer);
       clearInterval(glitchTimer);
@@ -362,10 +370,47 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
 
   const crisisEscalationDays = Math.floor((new Date('2025-12-31') - currentTime) / (1000 * 60 * 60 * 24));
 
+  const handleVideoPlay = () => {
+    setIsPlaying(true);
+    // Micro dopamine hit for engagement
+    setShowReward(true);
+    setTimeout(() => setShowReward(false), 1500);
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      {/* Glitch Background */}
-      <div className="fixed inset-0 opacity-5 bg-gradient-to-b from-red-900 to-black pointer-events-none"></div>
+    <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
+      {/* Animated Background Effects */}
+      <div className="fixed inset-0 opacity-10 bg-gradient-to-b from-yellow-600 via-red-900 to-black pointer-events-none animate-pulse"></div>
+      
+      {/* Floating Golden Particles */}
+      <div className="fixed inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-yellow-400 rounded-full animate-ping"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Dopamine Reward Animation */}
+      <AnimatePresence>
+        {showReward && (
+          <motion.div
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+          >
+            <div className="text-6xl text-yellow-400 animate-bounce">⚡ +50 A17 ⚡</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center">
@@ -373,10 +418,10 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         
         {/* Live Metrics Bar */}
         <div className="absolute top-24 left-0 right-0 z-20">
-          <div className="bg-red-600/90 text-white text-center py-2">
+          <div className="bg-gradient-to-r from-red-600/90 to-yellow-600/90 text-white text-center py-2">
             <div className="flex justify-center space-x-8 text-sm font-bold">
-              <span>🔥 12,847 REBELS ACTIVE</span>
-              <span>📍 89 COUNTRIES</span>
+              <span>⚔️ 12,847 REBELS ACTIVE</span>
+              <span>🌍 89 COUNTRIES</span>
               <span>⚡ SYSTEM STABILITY: 67%</span>
             </div>
           </div>
@@ -386,182 +431,297 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         <div className="absolute top-32 left-0 right-0 z-20">
           <div className="text-center py-4">
             <div className="text-red-400 text-xl font-bold animate-pulse">
-              CRISIS ESCALATION: {crisisEscalationDays} DAYS
+              🔥 CRISIS ESCALATION: {crisisEscalationDays} DAYS 🔥
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-          {/* Glitch Logo */}
+        <div className="relative z-10 text-center px-6 max-w-7xl mx-auto">
+          {/* Enhanced Glitch Logo with Golden Glow */}
           <motion.div
             className={`mb-8 ${glitchActive ? 'animate-pulse' : ''}`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
-            <h1 className="text-7xl md:text-9xl font-black text-white mb-4 leading-none font-anton">
-              THRIVE
-              <span className="text-red-500 relative">
+            <h1 className="text-7xl md:text-9xl font-black mb-4 leading-none font-anton">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-600 animate-pulse drop-shadow-[0_0_20px_rgba(255,215,0,0.8)]">
+                #THRIVE
+              </span>
+              <span className="text-red-500 relative drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">
                 CHAOS
                 {glitchActive && (
-                  <span className="absolute inset-0 text-yellow-400 animate-ping">CHAOS</span>
+                  <span className="absolute inset-0 text-yellow-400 animate-ping drop-shadow-[0_0_30px_rgba(255,215,0,1)]">CHAOS</span>
                 )}
               </span>
             </h1>
-            <div className="text-2xl md:text-4xl font-mono text-red-400 mb-6">
+            <div className="text-2xl md:text-4xl font-mono text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 mb-6 animate-pulse">
               From $20 to a revolution
             </div>
           </motion.div>
 
-          {/* Main CTA */}
+          {/* Interactive Video Section */}
           <motion.div
             className="mb-12"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-yellow-400 mb-6">
+            <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 mb-6">
               Your call to action
             </h2>
+            
+            {/* Interactive Video Container */}
+            <div className="relative max-w-4xl mx-auto mb-8">
+              <div className="aspect-video bg-gradient-to-br from-gray-900 to-black rounded-xl border-2 border-yellow-400 shadow-2xl shadow-yellow-400/50 overflow-hidden group">
+                {!isPlaying ? (
+                  <motion.button
+                    onClick={handleVideoPlay}
+                    className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-900/80 to-black/80 hover:from-red-800/90 hover:to-black/90 transition-all duration-300"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="text-center">
+                      <div className="w-24 h-24 bg-yellow-400 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg shadow-yellow-400/50 animate-pulse">
+                        <Play className="w-12 h-12 text-black ml-1" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-yellow-400 mb-2">WATCH THE AWAKENING</h3>
+                      <p className="text-gray-300">Click to unlock your rebel journey</p>
+                      <div className="mt-4 text-yellow-400 font-bold animate-bounce">⚡ +25 A17 TOKENS FOR WATCHING ⚡</div>
+                    </div>
+                  </motion.button>
+                ) : (
+                  <iframe
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1"
+                    className="w-full h-full"
+                    allowFullScreen
+                    title="THRIVECHAOS: The Awakening"
+                    onLoad={() => setVideoLoaded(true)}
+                  />
+                )}
+              </div>
+              
+              {/* Video Stats */}
+              {isPlaying && (
+                <motion.div
+                  className="mt-4 flex justify-center space-x-8 text-sm"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <span className="text-green-400">👁️ 847,392 rebels watched</span>
+                  <span className="text-yellow-400">⚡ +25 A17 earned</span>
+                  <span className="text-blue-400">🚀 Awakening in progress</span>
+                </motion.div>
+              )}
+            </div>
+
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
               Join the rebellion against collapse. When systems fail, we rise.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-              <button className="bg-red-600 hover:bg-red-700 text-white px-16 py-6 rounded-lg text-2xl font-bold transition-all transform hover:scale-105 shadow-2xl">
-                Join the Rebellion
-              </button>
-              <button className="border-3 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-16 py-6 rounded-lg text-2xl font-bold transition-all transform hover:scale-105">
-                See Battle Map
-              </button>
+              <motion.button 
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-16 py-6 rounded-lg text-2xl font-bold transition-all transform hover:scale-105 shadow-2xl shadow-red-600/50"
+                whileHover={{ boxShadow: "0 0 40px rgba(255,0,0,0.6)" }}
+                whileTap={{ scale: 0.95 }}
+              >
+                ⚔️ JOIN THE REBELLION ⚔️
+              </motion.button>
+              <motion.button 
+                className="border-3 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-16 py-6 rounded-lg text-2xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-yellow-400/30"
+                whileHover={{ boxShadow: "0 0 40px rgba(255,215,0,0.6)" }}
+                whileTap={{ scale: 0.95 }}
+              >
+                🗺️ SEE BATTLE MAP 🗺️
+              </motion.button>
             </div>
           </motion.div>
 
-          {/* Feature Grid */}
+          {/* Enhanced Feature Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               {
                 icon: "🎯",
                 title: "AGENT17 Token",
                 desc: "Revolutionary crisis currency",
-                cta: "Get Tokens"
+                cta: "Get A17 Tokens",
+                reward: "+100 A17"
               },
               {
                 icon: "📱",
                 title: "NFC Agent Cards",
                 desc: "Physical rebellion network",
-                cta: "Pre-order Card"
+                cta: "Pre-order Card",
+                reward: "+250 A17"
               },
               {
                 icon: "🗺️",
                 title: "Crisis Command Map",
                 desc: "Real-time crisis coordination",
-                cta: "View Map"
+                cta: "View Battle Map",
+                reward: "+75 A17"
               },
               {
                 icon: "💪",
                 title: "Mind & Body Arsenal",
                 desc: "Survival fitness protocol",
-                cta: "Start Training"
+                cta: "Start Training",
+                reward: "+150 A17"
               }
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-black/60 border border-red-600/50 p-6 rounded-lg backdrop-blur-sm hover:border-yellow-400 transition-all"
+                className="bg-black/80 border-2 border-yellow-600/50 p-6 rounded-lg backdrop-blur-sm hover:border-yellow-400 hover:shadow-xl hover:shadow-yellow-400/30 transition-all group"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1, duration: 0.8 }}
+                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,215,0,0.4)" }}
               >
                 <div className="text-4xl mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-bold text-yellow-400 mb-2">{feature.title}</h3>
                 <p className="text-gray-400 mb-4">{feature.desc}</p>
-                <button className="bg-red-600/80 hover:bg-red-600 text-white px-4 py-2 rounded text-sm font-bold transition-colors">
+                <div className="text-green-400 text-sm font-bold mb-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {feature.reward}
+                </div>
+                <motion.button 
+                  className="bg-gradient-to-r from-red-600/80 to-yellow-600/80 hover:from-red-600 hover:to-yellow-600 text-white px-4 py-2 rounded text-sm font-bold transition-all w-full"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   {feature.cta}
-                </button>
+                </motion.button>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-8 h-8 text-red-400" />
-        </div>
+        {/* Enhanced Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ChevronDown className="w-8 h-8 text-yellow-400 drop-shadow-[0_0_10px_rgba(255,215,0,0.8)]" />
+        </motion.div>
       </section>
 
-      {/* Video Section */}
+      {/* Enhanced Video Section */}
       <section className="py-20 bg-gradient-to-b from-black to-red-900/20">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-5xl font-bold text-center text-white mb-12">
-            THRIVECHAOS: The Awakening
-          </h2>
-          <div className="relative aspect-video bg-black rounded-lg overflow-hidden border-2 border-red-600">
+          <motion.h2 
+            className="text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            #THRIVECHAOS: The Awakening
+          </motion.h2>
+          <motion.div 
+            className="relative aspect-video bg-black rounded-lg overflow-hidden border-2 border-yellow-600 shadow-2xl shadow-yellow-600/50"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
             <iframe 
               className="w-full h-full"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" 
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=0&controls=1" 
               title="THRIVECHAOS: The Awakening" 
               allowFullScreen
             />
-          </div>
+            <div className="absolute top-4 right-4 bg-black/80 px-3 py-1 rounded-full text-yellow-400 font-bold">
+              ⚡ +50 A17 for watching
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Crowdfund Storymaking Section */}
+      {/* Enhanced Crowdfund Section */}
       <section className="py-20 bg-gradient-to-b from-red-900/20 to-black">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-5xl font-bold text-white mb-8">
-            Crowdfund <span className="text-yellow-400">Storymaking</span>
-          </h2>
+          <motion.h2 
+            className="text-5xl font-bold text-white mb-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Crowdfund <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">Storymaking</span>
+          </motion.h2>
           <p className="text-2xl text-gray-300 mb-12 max-w-4xl mx-auto">
             Help create the resistance narrative. Fund real stories of survival, rebellion, and hope.
           </p>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: "Survival Chronicles", funded: "87%", amount: "$43,500" },
-              { title: "Resistance Stories", funded: "92%", amount: "$76,200" },
-              { title: "Hope Archives", funded: "34%", amount: "$12,800" }
+              { title: "Survival Chronicles", funded: "87%", amount: "$43,500", reward: "+500 A17" },
+              { title: "Resistance Stories", funded: "92%", amount: "$76,200", reward: "+750 A17" },
+              { title: "Hope Archives", funded: "34%", amount: "$12,800", reward: "+300 A17" }
             ].map((project, index) => (
-              <div key={index} className="bg-black/60 border border-yellow-400/50 p-6 rounded-lg">
+              <motion.div 
+                key={index} 
+                className="bg-black/60 border border-yellow-400/50 p-6 rounded-lg hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/30 transition-all"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
                 <h3 className="text-2xl font-bold text-yellow-400 mb-4">{project.title}</h3>
                 <div className="text-3xl font-bold text-white mb-2">{project.amount}</div>
                 <div className="text-lg text-green-400 mb-4">Funded: {project.funded}</div>
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded font-bold transition-colors">
-                  Fund This Story
-                </button>
-              </div>
+                <div className="text-yellow-400 font-bold mb-4">{project.reward}</div>
+                <motion.button 
+                  className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-black px-6 py-3 rounded font-bold transition-all w-full"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  ⚔️ Fund This Story
+                </motion.button>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Enhanced Final CTA */}
       <section className="py-20 bg-gradient-to-t from-red-900 to-black">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-6xl font-bold text-white mb-8">
-            Ready to <span className="text-red-400">Survive?</span>
-          </h2>
+          <motion.h2 
+            className="text-6xl font-bold text-white mb-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-yellow-400">Survive?</span>
+          </motion.h2>
           <p className="text-2xl text-gray-300 mb-12">
             The collapse is coming. Will you thrive or just survive?
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-20 py-8 rounded-lg text-3xl font-bold transition-all transform hover:scale-105 shadow-2xl">
-              Start Surviving (200 Free CHAOS Points)
-            </button>
-            <button className="border-3 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-20 py-8 rounded-lg text-3xl font-bold transition-all transform hover:scale-105">
-              View Crisis Dashboard
-            </button>
+            <motion.button 
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-20 py-8 rounded-lg text-3xl font-bold transition-all transform hover:scale-105 shadow-2xl shadow-red-600/50"
+              whileHover={{ boxShadow: "0 0 50px rgba(255,0,0,0.8)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              ⚔️ Start Surviving (200 Free A17 Tokens)
+            </motion.button>
+            <motion.button 
+              className="border-3 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-20 py-8 rounded-lg text-3xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-yellow-400/50"
+              whileHover={{ boxShadow: "0 0 50px rgba(255,215,0,0.8)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              🗺️ View Crisis Dashboard
+            </motion.button>
           </div>
         </div>
       </section>
 
-      {/* Footer Status */}
-      <div className="bg-red-900/90 text-white p-4 text-center">
+      {/* Enhanced Footer Status */}
+      <div className="bg-gradient-to-r from-red-900/90 to-yellow-900/90 text-white p-4 text-center border-t border-yellow-400/50">
         <div className="flex justify-center space-x-8 text-lg font-bold">
           <span>🚨 CRISIS LEVEL: MODERATE</span>
           <span>⏰ {currentTime.toLocaleTimeString()}</span>
           <span>🌍 GLOBAL STATUS: UNSTABLE</span>
+          <span className="text-yellow-400">⚡ A17 NETWORK: ACTIVE</span>
         </div>
       </div>
     </div>
