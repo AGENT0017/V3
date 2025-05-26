@@ -474,83 +474,188 @@ export const ApocalypseHero = ({ userPoints, crisisMode }) => {
         ))}
       </div>
 
-      {/* PREMIUM STATUS DASHBOARD - CENTER LEFT */}
+      {/* MATRIX-STYLE ADAPTIVE STATUS DASHBOARD - DISAPPEARS OVER CONTENT */}
       <motion.div 
         className="fixed top-1/2 left-6 transform -translate-y-1/2 z-20"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
+        whileHover={{ scale: 1.05, x: -10 }}
+        style={{
+          background: 'rgba(0, 0, 0, 0.1)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)'
+        }}
       >
-        <div className="bg-black/40 backdrop-blur-xl border border-emerald-400/40 rounded-xl p-4 shadow-2xl">
-          <div className="bg-gradient-to-r from-emerald-400/20 to-blue-400/20 rounded-lg p-3 mb-3">
-            <div className="text-emerald-400 font-bold text-sm mb-2 flex items-center">
-              <div className="w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse"></div>
-              GLOBAL STATUS
+        <motion.div 
+          className="bg-black/60 backdrop-blur-2xl border border-emerald-400/60 rounded-2xl p-4 shadow-2xl transition-all duration-300"
+          animate={{
+            borderColor: ['rgba(34, 197, 94, 0.6)', 'rgba(34, 197, 94, 0.8)', 'rgba(34, 197, 94, 0.6)'],
+            boxShadow: [
+              '0 0 20px rgba(34, 197, 94, 0.3)',
+              '0 0 30px rgba(34, 197, 94, 0.5)',
+              '0 0 20px rgba(34, 197, 94, 0.3)'
+            ]
+          }}
+          transition={{ duration: 3, repeat: Infinity }}
+        >
+          <div className="bg-gradient-to-r from-emerald-400/30 to-blue-400/30 rounded-xl p-3 mb-3">
+            <div className="text-emerald-400 font-bold text-sm mb-2 flex items-center font-mono">
+              <motion.div 
+                className="w-2 h-2 bg-emerald-400 rounded-full mr-2"
+                animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+              MATRIX STATUS
             </div>
-            <div className="space-y-2 text-xs">
+            <div className="space-y-2 text-xs font-mono">
               <div className="flex justify-between items-center">
-                <span className="text-gray-300">Heroes Network</span>
+                <span className="text-gray-300">HEROES_NET:</span>
                 <div className="flex items-center">
-                  <div className="w-12 h-1 bg-emerald-400/30 rounded-full mr-2">
-                    <div className="w-10 h-1 bg-emerald-400 rounded-full"></div>
+                  <div className="w-12 h-1 bg-emerald-400/30 rounded-full mr-2 overflow-hidden">
+                    <motion.div 
+                      className="h-full bg-emerald-400 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: '83%' }}
+                      transition={{ duration: 2, delay: 1 }}
+                    />
                   </div>
                   <span className="text-emerald-400 font-bold">97%</span>
                 </div>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-300">Matrix Integrity</span>
+                <span className="text-gray-300">MATRIX_INTEG:</span>
                 <div className="flex items-center">
-                  <div className="w-12 h-1 bg-red-400/30 rounded-full mr-2">
-                    <div className="w-4 h-1 bg-red-400 rounded-full"></div>
+                  <div className="w-12 h-1 bg-red-400/30 rounded-full mr-2 overflow-hidden">
+                    <motion.div 
+                      className="h-full bg-red-400 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: '33%' }}
+                      transition={{ duration: 2, delay: 1.2 }}
+                    />
                   </div>
                   <span className="text-red-400 font-bold">33%</span>
                 </div>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-300">Liberation Ops</span>
+                <span className="text-gray-300">LIBERATION:</span>
                 <div className="flex items-center">
-                  <div className="w-12 h-1 bg-blue-400/30 rounded-full mr-2">
-                    <div className="w-8 h-1 bg-blue-400 rounded-full"></div>
+                  <div className="w-12 h-1 bg-blue-400/30 rounded-full mr-2 overflow-hidden">
+                    <motion.div 
+                      className="h-full bg-blue-400 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: '78%' }}
+                      transition={{ duration: 2, delay: 1.4 }}
+                    />
                   </div>
                   <span className="text-blue-400 font-bold">78%</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="text-xs text-gray-400 text-center">
-            <span className="text-emerald-400">●</span> ENTERPRISE GRADE
+          <div className="text-xs text-gray-400 text-center font-mono">
+            <motion.span 
+              className="text-emerald-400"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              ●
+            </motion.span> ENTERPRISE.MATRIX
           </div>
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* PREMIUM RADAR SYSTEM - CENTER RIGHT */}
+      {/* MATRIX-STYLE ADAPTIVE RADAR - DISAPPEARS OVER CONTENT */}
       <motion.div 
         className="fixed top-1/2 right-6 transform -translate-y-1/2 z-20"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.7 }}
+        whileHover={{ scale: 1.05, x: 10 }}
+        style={{
+          background: 'rgba(0, 0, 0, 0.1)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)'
+        }}
       >
-        <div className="bg-black/40 backdrop-blur-xl border border-blue-400/40 rounded-xl p-4 shadow-2xl">
+        <motion.div 
+          className="bg-black/60 backdrop-blur-2xl border border-blue-400/60 rounded-2xl p-4 shadow-2xl"
+          animate={{
+            borderColor: ['rgba(59, 130, 246, 0.6)', 'rgba(59, 130, 246, 0.8)', 'rgba(59, 130, 246, 0.6)'],
+            boxShadow: [
+              '0 0 20px rgba(59, 130, 246, 0.3)',
+              '0 0 30px rgba(59, 130, 246, 0.5)',
+              '0 0 20px rgba(59, 130, 246, 0.3)'
+            ]
+          }}
+          transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+        >
           <div className="relative w-24 h-24 mx-auto mb-3">
-            <div className="absolute inset-0 rounded-full border-2 border-blue-400/60 bg-gradient-to-br from-blue-400/20 to-purple-400/20"></div>
+            <motion.div 
+              className="absolute inset-0 rounded-full border-2 border-blue-400/60"
+              animate={{
+                background: [
+                  'radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%)',
+                  'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%)'
+                ]
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+            />
             <div className="absolute inset-2 rounded-full border border-blue-400/40"></div>
             <div className="absolute inset-4 rounded-full border border-blue-400/20"></div>
-            <div className="absolute inset-6 rounded-full bg-blue-400/30"></div>
             <motion.div 
-              className="absolute top-1/2 left-1/2 w-10 h-0.5 bg-gradient-to-r from-blue-400 to-transparent origin-left"
+              className="absolute inset-6 rounded-full bg-blue-400/30"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <motion.div 
+              className="absolute top-1/2 left-1/2 w-10 h-0.5 origin-left"
+              style={{
+                background: 'linear-gradient(90deg, rgba(59, 130, 246, 1) 0%, rgba(59, 130, 246, 0.5) 50%, transparent 100%)'
+              }}
               animate={{ rotate: 360 }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             />
-            {/* Radar Blips */}
-            <div className="absolute top-2 right-3 w-1 h-1 bg-emerald-400 rounded-full animate-ping"></div>
-            <div className="absolute bottom-4 left-4 w-1 h-1 bg-yellow-400 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
-            <div className="absolute top-6 left-2 w-1 h-1 bg-red-400 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+            {/* Matrix-Style Radar Blips */}
+            <motion.div 
+              className="absolute top-2 right-3 w-1 h-1 bg-emerald-400 rounded-full"
+              animate={{ 
+                scale: [1, 2, 1], 
+                opacity: [1, 0, 1],
+                boxShadow: ['0 0 5px rgba(34, 197, 94, 0.5)', '0 0 15px rgba(34, 197, 94, 1)', '0 0 5px rgba(34, 197, 94, 0.5)']
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <motion.div 
+              className="absolute bottom-4 left-4 w-1 h-1 bg-yellow-400 rounded-full"
+              animate={{ 
+                scale: [1, 2, 1], 
+                opacity: [1, 0, 1],
+                boxShadow: ['0 0 5px rgba(245, 158, 11, 0.5)', '0 0 15px rgba(245, 158, 11, 1)', '0 0 5px rgba(245, 158, 11, 0.5)']
+              }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
+            />
+            <motion.div 
+              className="absolute top-6 left-2 w-1 h-1 bg-red-400 rounded-full"
+              animate={{ 
+                scale: [1, 2, 1], 
+                opacity: [1, 0, 1],
+                boxShadow: ['0 0 5px rgba(239, 68, 68, 0.5)', '0 0 15px rgba(239, 68, 68, 1)', '0 0 5px rgba(239, 68, 68, 0.5)']
+              }}
+              transition={{ duration: 2, repeat: Infinity, delay: 1.4 }}
+            />
           </div>
-          <div className="text-xs text-center">
-            <div className="text-blue-400 font-bold mb-1">TACTICAL RADAR</div>
-            <div className="text-gray-400">12.8K AGENTS TRACKED</div>
+          <div className="text-xs text-center font-mono">
+            <div className="text-blue-400 font-bold mb-1">MATRIX.RADAR</div>
+            <motion.div 
+              className="text-gray-400"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              12.8K NODES_TRACKED
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
 
       {/* PREMIUM DATA STREAM - BOTTOM CENTER */}
