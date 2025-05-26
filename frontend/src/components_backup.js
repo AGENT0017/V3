@@ -1742,3 +1742,180 @@ export const CrisisCommand = ({ user, globalData, onNavigate }) => (
     </div>
   </div>
 );
+
+// New comprehensive platform components are included above
+
+// Placeholder components for features coming soon
+export const MarketplaceGear = ({ user, onNavigate }) => (
+  <div className="min-h-screen bg-black text-white p-6">
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-4xl font-bold text-yellow-400 mb-4">🛒 Marketplace & Gear</h1>
+      <p className="text-gray-300 mb-8">Rugged tech, survival clothes, and community partnerships</p>
+      <div className="grid md:grid-cols-3 gap-6">
+        <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-white mb-2">🔌 Rugged Tech</h3>
+          <p className="text-gray-400">Solar panels, emergency radios, satellite communicators</p>
+        </div>
+        <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-white mb-2">👕 THRIVECHAOS Apparel</h3>
+          <p className="text-gray-400">Tactical clothing, survival gear, branded merchandise</p>
+        </div>
+        <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-white mb-2">🤝 Brand Partnerships</h3>
+          <p className="text-gray-400">Curated survival products from trusted partners</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const EventBookingSystem = ({ user, onNavigate }) => (
+  <div className="min-h-screen bg-black text-white p-6">
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-4xl font-bold text-yellow-400 mb-4">📅 Event Booking System</h1>
+      <p className="text-gray-300 mb-8">Airbnb-like booking for venues, photographers, caterers</p>
+      <div className="grid md:grid-cols-3 gap-6">
+        <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-white mb-2">🏛️ Venues</h3>
+          <p className="text-gray-400">Community spaces, emergency shelters, meeting locations</p>
+        </div>
+        <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-white mb-2">📸 Photographers</h3>
+          <p className="text-gray-400">Document your events and community moments</p>
+        </div>
+        <div className="bg-gray-900 border border-gray-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-white mb-2">🍽️ Catering</h3>
+          <p className="text-gray-400">Local food providers for community gatherings</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const LiveDataFeeds = ({ globalData, onNavigate }) => (
+  <div className="min-h-screen bg-black text-white p-6">
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-4xl font-bold text-yellow-400 mb-4">📊 Live Data Feeds</h1>
+      <p className="text-gray-300 mb-8">Real-time collapsology updates and humanitarian intelligence</p>
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-red-900/30 border border-red-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-red-400 mb-2">🌍 Global Stability</h3>
+          <div className="text-3xl font-bold text-white">{globalData.systemStability}%</div>
+          <p className="text-gray-400">System stability index</p>
+        </div>
+        <div className="bg-blue-900/30 border border-blue-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-blue-400 mb-2">👥 Active Agents</h3>
+          <div className="text-3xl font-bold text-white">{globalData.rebelsActive.toLocaleString()}</div>
+          <p className="text-gray-400">Agents worldwide</p>
+        </div>
+        <div className="bg-orange-900/30 border border-orange-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-orange-400 mb-2">🚨 Active Crises</h3>
+          <div className="text-3xl font-bold text-white">{globalData.activeCrises}</div>
+          <p className="text-gray-400">Current emergencies</p>
+        </div>
+        <div className="bg-green-900/30 border border-green-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">🌐 Countries</h3>
+          <div className="text-3xl font-bold text-white">{globalData.countriesActive}</div>
+          <p className="text-gray-400">Network coverage</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const TokenDAO = ({ user, onNavigate }) => (
+  <div className="min-h-screen bg-black text-white p-6">
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-4xl font-bold text-yellow-400 mb-4">🪙 Token & DAO Integration</h1>
+      <p className="text-gray-300 mb-8">Governance, rewards, donations, and access management</p>
+      <div className="grid md:grid-cols-2 gap-8">
+        <div className="bg-yellow-900/30 border border-yellow-600 rounded-lg p-6">
+          <h3 className="text-2xl font-bold text-yellow-400 mb-4">Your Agent17 Tokens</h3>
+          <div className="text-4xl font-bold text-white mb-4">{user.agent17Tokens}</div>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-gray-400">From Donations</span>
+              <span className="text-white">150 A17</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-400">From Missions</span>
+              <span className="text-white">75 A17</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-400">From Community</span>
+              <span className="text-white">25 A17</span>
+            </div>
+          </div>
+        </div>
+        <div className="bg-purple-900/30 border border-purple-600 rounded-lg p-6">
+          <h3 className="text-2xl font-bold text-purple-400 mb-4">DAO Governance</h3>
+          <p className="text-gray-300 mb-4">Participate in platform decisions and proposals</p>
+          <div className="space-y-3">
+            <div className="bg-black/40 rounded p-3">
+              <div className="text-white font-bold">Proposal #001</div>
+              <div className="text-gray-400 text-sm">Emergency fund allocation</div>
+            </div>
+            <div className="bg-black/40 rounded p-3">
+              <div className="text-white font-bold">Proposal #002</div>
+              <div className="text-gray-400 text-sm">New crisis response protocols</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const CommunityHub = ({ user, onNavigate }) => (
+  <div className="min-h-screen bg-black text-white p-6">
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-4xl font-bold text-yellow-400 mb-4">👥 Community Hub</h1>
+      <p className="text-gray-300 mb-8">Advanced community building and collaboration tools</p>
+      <div className="grid md:grid-cols-3 gap-6">
+        <div className="bg-blue-900/30 border border-blue-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-blue-400 mb-2">🏘️ Local Cells</h3>
+          <p className="text-gray-400">Connect with agents in your area for local action</p>
+        </div>
+        <div className="bg-green-900/30 border border-green-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-green-400 mb-2">🤝 Skill Sharing</h3>
+          <p className="text-gray-400">Teach and learn essential survival skills</p>
+        </div>
+        <div className="bg-purple-900/30 border border-purple-600 rounded-lg p-6">
+          <h3 className="text-xl font-bold text-purple-400 mb-2">📋 Group Projects</h3>
+          <p className="text-gray-400">Collaborate on community resilience initiatives</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const CrisisCommand = ({ user, globalData, onNavigate }) => (
+  <div className="min-h-screen bg-black text-white p-6">
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-4xl font-bold text-yellow-400 mb-4">🚨 Crisis Command Center</h1>
+      <p className="text-gray-300 mb-8">Real-time crisis coordination and emergency response</p>
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-red-900/30 border border-red-600 rounded-lg p-6">
+          <h3 className="text-lg font-bold text-red-400 mb-2">🌪️ Active Emergencies</h3>
+          <div className="text-3xl font-bold text-white">{globalData.activeCrises}</div>
+          <p className="text-gray-400 text-sm">Requiring immediate response</p>
+        </div>
+        <div className="bg-orange-900/30 border border-orange-600 rounded-lg p-6">
+          <h3 className="text-lg font-bold text-orange-400 mb-2">👨‍🚒 Response Teams</h3>
+          <div className="text-3xl font-bold text-white">12</div>
+          <p className="text-gray-400 text-sm">Teams deployed globally</p>
+        </div>
+        <div className="bg-blue-900/30 border border-blue-600 rounded-lg p-6">
+          <h3 className="text-lg font-bold text-blue-400 mb-2">📡 Communication</h3>
+          <div className="text-3xl font-bold text-white">98%</div>
+          <p className="text-gray-400 text-sm">Network uptime</p>
+        </div>
+        <div className="bg-green-900/30 border border-green-600 rounded-lg p-6">
+          <h3 className="text-lg font-bold text-green-400 mb-2">🎯 Your Missions</h3>
+          <div className="text-3xl font-bold text-white">{user.missionsCompleted}</div>
+          <p className="text-gray-400 text-sm">Completed successfully</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
