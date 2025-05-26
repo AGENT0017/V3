@@ -661,7 +661,6 @@ export const Header = ({ user, globalData, currentView, onNavigate, crisisMode }
           {/* Earn Points Button - Hidden on mobile, replaced with + icon */}
           <motion.button
             className="hidden sm:flex bg-white text-black px-3 sm:px-4 py-2 rounded-full font-semibold hover:bg-gray-200 transition-colors text-sm sm:text-base"
-            onClick={() => setShowTasks(true)}
             whileHover={{ scale: 1.05 }}
           >
             Earn Chaos
