@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { AuthProvider, useAuth } from './hooks/useAuth';
+import { db, subscriptions } from './lib/supabase';
+import AuthModal from './components/AuthModal';
 import { 
   ApocalypseHero, 
   Header, 
@@ -25,23 +28,12 @@ import {
   Analytics
 } from './business-components';
 
-function App() {
-  const [user, setUser] = useState({
-    id: "agent_001",
-    name: "Rebel Leader",
-    points: 15847,
-    agent17Tokens: 250,
-    bloodType: "O+",
-    vaccinationStatus: "Current",
-    skills: ["Crisis Management", "Survival Training", "Community Building"],
-    location: "Global Network",
-    trustScore: 95,
-    missionsCompleted: 23,
-    level: "Elite Agent"
-  });
-
+function AppContent() {
+  const { userProfile, isAuthenticated, addTokens } = useAuth();
   const [currentView, setCurrentView] = useState('hero');
   const [crisisMode, setCrisisMode] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState('signin');
   const [globalData, setGlobalData] = useState({
     activeCrises: 47,
     rebelsActive: 12847,
@@ -49,6 +41,46 @@ function App() {
     systemStability: 67,
     lastUpdate: new Date()
   });
+
+  // Load crisis data from Supabase
+  useEffect(() => {
+    const loadCrisisData = async () => {
+      try {
+        const { data, error } = await db.getCrisisData();
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          const crisisMetrics = {};
+          data.forEach(metric => {
+            crisisMetrics[metric.metric_name] = metric.metric_value;
+          });
+
+          setGlobalData(prev => ({
+            ...prev,
+            activeCrises: crisisMetrics.active_crises || prev.activeCrises,
+            rebelsActive: crisisMetrics.rebels_active || prev.rebelsActive,
+            countriesActive: crisisMetrics.countries_active || prev.countriesActive,
+            systemStability: crisisMetrics.system_stability || prev.systemStability,
+            lastUpdate: new Date()
+          }));
+        }
+      } catch (error) {
+        console.error('Error loading crisis data:', error);
+      }
+    };
+
+    loadCrisisData();
+
+    // Subscribe to real-time crisis data updates
+    const subscription = subscriptions.subscribeToCrisisData((payload) => {
+      console.log('Crisis data updated:', payload);
+      loadCrisisData(); // Reload data when changes occur
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   // Real-time crisis monitoring
   useEffect(() => {
@@ -74,111 +106,202 @@ function App() {
     setCurrentView(view);
   };
 
-  const updateUserPoints = (points) => {
-    setUser(prev => ({
-      ...prev,
-      points: prev.points + points,
-      agent17Tokens: prev.agent17Tokens + Math.floor(points / 10)
-    }));
+  const handleAuthRequired = (mode = 'signin') => {
+    setAuthModalMode(mode);
+    setShowAuthModal(true);
+  };
+
+  const updateUserPoints = async (points, source = 'activity') => {
+    if (!isAuthenticated || !userProfile) {
+      handleAuthRequired('signup');
+      return;
+    }
+
+    try {
+      await addTokens(points, 'chaos_points', source, `Earned ${points} CHAOS points from ${source}`);
+      
+      // Also award Agent17 tokens (1 token per 10 points)
+      const agent17Tokens = Math.floor(points / 10);
+      if (agent17Tokens > 0) {
+        await addTokens(agent17Tokens, 'agent17_tokens', source, `Earned ${agent17Tokens} Agent17 tokens from ${source}`);
+      }
+    } catch (error) {
+      console.error('Error updating user points:', error);
+    }
   };
 
   const renderCurrentView = () => {
+    const commonProps = {
+      user: userProfile || {
+        id: "guest",
+        name: "Guest User",
+        points: 0,
+        agent17Tokens: 0,
+        bloodType: "Unknown",
+        vaccinationStatus: "Unknown",
+        skills: [],
+        location: "Unknown",
+        trustScore: 0,
+        missionsCompleted: 0,
+        level: "Guest"
+      },
+      globalData,
+      onNavigate: handleViewChange,
+      onAuthRequired: handleAuthRequired
+    };
+
     switch(currentView) {
       case 'hero':
-        return <ApocalypseHero userPoints={user.points} crisisMode={crisisMode} onNavigate={handleViewChange} />;
+        return <ApocalypseHero 
+          userPoints={userProfile?.chaos_points || 0} 
+          crisisMode={crisisMode} 
+          onNavigate={handleViewChange}
+          onAuthRequired={handleAuthRequired}
+          isAuthenticated={isAuthenticated}
+        />;
       
       case 'film':
-        return <InteractiveFilm user={user} onComplete={(points) => updateUserPoints(points)} onNavigate={handleViewChange} />;
+        return <InteractiveFilm 
+          {...commonProps}
+          onComplete={(points) => updateUserPoints(points, 'interactive_film')} 
+        />;
       
       case 'academy':
-        return <SurvivalAcademy user={user} onProgress={(points) => updateUserPoints(points)} onNavigate={handleViewChange} />;
+        return <SurvivalAcademy 
+          {...commonProps}
+          onProgress={(points) => updateUserPoints(points, 'survival_academy')} 
+        />;
       
       case 'agent17':
-        return <Agent17Dashboard user={user} globalData={globalData} onNavigate={handleViewChange} />;
+        return <Agent17Dashboard {...commonProps} />;
       
       case 'tinder':
-        return <TinderOfDoers user={user} onMatch={(points) => updateUserPoints(points)} onNavigate={handleViewChange} />;
+        return <TinderOfDoers 
+          {...commonProps}
+          onMatch={(points) => updateUserPoints(points, 'tinder_match')} 
+        />;
       
       case 'blood':
-        return <BloodDonationTracker user={user} onDonate={(tokens) => updateUserPoints(tokens * 10)} onNavigate={handleViewChange} />;
+        return <BloodDonationTracker 
+          {...commonProps}
+          onDonate={(tokens) => updateUserPoints(tokens * 10, 'blood_donation')} 
+        />;
       
       case 'marketplace':
-        return <MarketplaceGear user={user} onPurchase={() => {}} onNavigate={handleViewChange} />;
+        return <MarketplaceGear {...commonProps} />;
       
       case 'events':
-        return <EventBookingSystem user={user} onBook={() => {}} onNavigate={handleViewChange} />;
+        return <EventBookingSystem {...commonProps} />;
       
       case 'data':
-        return <LiveDataFeeds globalData={globalData} onNavigate={handleViewChange} />;
+        return <LiveDataFeeds {...commonProps} />;
       
       case 'token':
-        return <TokenDAO user={user} onVote={(tokens) => updateUserPoints(tokens)} onNavigate={handleViewChange} />;
+        return <TokenDAO 
+          {...commonProps}
+          onVote={(tokens) => updateUserPoints(tokens, 'dao_voting')} 
+        />;
       
       case 'community':
-        return <CommunityHub user={user} onConnect={(points) => updateUserPoints(points)} onNavigate={handleViewChange} />;
+        return <CommunityHub 
+          {...commonProps}
+          onConnect={(points) => updateUserPoints(points, 'community_activity')} 
+        />;
       
       case 'crisis':
-        return <CrisisCommand user={user} globalData={globalData} onMission={(points) => updateUserPoints(points)} onNavigate={handleViewChange} />;
+        return <CrisisCommand 
+          {...commonProps}
+          onMission={(points) => updateUserPoints(points, 'crisis_mission')} 
+        />;
       
       case 'wellness':
-        return <WellnessHub user={user} onComplete={(points) => updateUserPoints(points)} onNavigate={handleViewChange} />;
+        return <WellnessHub 
+          {...commonProps}
+          onComplete={(points) => updateUserPoints(points, 'wellness_activity')} 
+        />;
       
       case 'profile':
-        return <UserProfile user={user} setUser={setUser} onNavigate={handleViewChange} />;
+        return <UserProfile {...commonProps} />;
       
       default:
-        return <ApocalypseHero userPoints={user.points} crisisMode={crisisMode} onNavigate={handleViewChange} />;
+        return <ApocalypseHero 
+          userPoints={userProfile?.chaos_points || 0} 
+          crisisMode={crisisMode} 
+          onNavigate={handleViewChange}
+          onAuthRequired={handleAuthRequired}
+          isAuthenticated={isAuthenticated}
+        />;
     }
   };
 
   return (
-    <Router>
-      <div className="min-h-screen bg-black text-white">
-        {/* Global Crisis Alert */}
-        {crisisMode && (
-          <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-2 animate-pulse">
-            <div className="font-bold">🚨 GLOBAL CRISIS ACTIVATED - ALL AGENTS MOBILIZE 🚨</div>
-          </div>
-        )}
+    <div className="min-h-screen bg-black text-white">
+      {/* Global Crisis Alert */}
+      {crisisMode && (
+        <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-2 animate-pulse">
+          <div className="font-bold">🚨 GLOBAL CRISIS ACTIVATED - ALL AGENTS MOBILIZE 🚨</div>
+        </div>
+      )}
 
-        {/* Main Header */}
-        <Header 
-          user={user}
-          globalData={globalData}
-          currentView={currentView}
-          onNavigate={handleViewChange}
-          crisisMode={crisisMode}
-        />
+      {/* Main Header */}
+      <Header 
+        user={userProfile}
+        globalData={globalData}
+        currentView={currentView}
+        onNavigate={handleViewChange}
+        onAuthRequired={handleAuthRequired}
+        crisisMode={crisisMode}
+        isAuthenticated={isAuthenticated}
+      />
 
-        {/* Main Content */}
-        <main className="relative">
-          <Routes>
-            <Route path="/" element={renderCurrentView()} />
-            <Route path="/film" element={<InteractiveFilm user={user} onComplete={updateUserPoints} onNavigate={handleViewChange} />} />
-            <Route path="/academy" element={<SurvivalAcademy user={user} onProgress={updateUserPoints} onNavigate={handleViewChange} />} />
-            <Route path="/agent17" element={<Agent17Dashboard user={user} globalData={globalData} onNavigate={handleViewChange} />} />
-            <Route path="/tinder" element={<TinderOfDoers user={user} onMatch={updateUserPoints} onNavigate={handleViewChange} />} />
-            <Route path="/blood" element={<BloodDonationTracker user={user} onDonate={updateUserPoints} onNavigate={handleViewChange} />} />
-            <Route path="/marketplace" element={<MarketplaceGear user={user} onNavigate={handleViewChange} />} />
-            <Route path="/events" element={<EventBookingSystem user={user} onNavigate={handleViewChange} />} />
-            <Route path="/data" element={<LiveDataFeeds globalData={globalData} onNavigate={handleViewChange} />} />
-            <Route path="/token" element={<TokenDAO user={user} onVote={updateUserPoints} onNavigate={handleViewChange} />} />
-            <Route path="/community" element={<CommunityHub user={user} onConnect={updateUserPoints} onNavigate={handleViewChange} />} />
-            <Route path="/crisis" element={<CrisisCommand user={user} globalData={globalData} onMission={updateUserPoints} onNavigate={handleViewChange} />} />
-          </Routes>
-        </main>
+      {/* Main Content */}
+      <main className="relative">
+        <Routes>
+          <Route path="/" element={renderCurrentView()} />
+          <Route path="/film" element={<InteractiveFilm {...{user: userProfile, globalData, onNavigate: handleViewChange}} onComplete={updateUserPoints} />} />
+          <Route path="/academy" element={<SurvivalAcademy {...{user: userProfile, globalData, onNavigate: handleViewChange}} onProgress={updateUserPoints} />} />
+          <Route path="/agent17" element={<Agent17Dashboard user={userProfile} globalData={globalData} onNavigate={handleViewChange} />} />
+          <Route path="/tinder" element={<TinderOfDoers {...{user: userProfile, globalData, onNavigate: handleViewChange}} onMatch={updateUserPoints} />} />
+          <Route path="/blood" element={<BloodDonationTracker {...{user: userProfile, globalData, onNavigate: handleViewChange}} onDonate={updateUserPoints} />} />
+          <Route path="/marketplace" element={<MarketplaceGear user={userProfile} onNavigate={handleViewChange} />} />
+          <Route path="/events" element={<EventBookingSystem user={userProfile} onNavigate={handleViewChange} />} />
+          <Route path="/data" element={<LiveDataFeeds globalData={globalData} onNavigate={handleViewChange} />} />
+          <Route path="/token" element={<TokenDAO {...{user: userProfile, globalData, onNavigate: handleViewChange}} onVote={updateUserPoints} />} />
+          <Route path="/community" element={<CommunityHub {...{user: userProfile, globalData, onNavigate: handleViewChange}} onConnect={updateUserPoints} />} />
+          <Route path="/crisis" element={<CrisisCommand user={userProfile} globalData={globalData} onMission={updateUserPoints} onNavigate={handleViewChange} />} />
+        </Routes>
+      </main>
 
-        {/* Global Status Footer */}
-        <div className="fixed bottom-0 left-0 right-0 bg-black/90 border-t border-red-600/50 p-2 text-xs">
-          <div className="flex justify-between items-center max-w-screen-xl mx-auto">
-            <span>🔥 {globalData.rebelsActive.toLocaleString()} ACTIVE</span>
-            <span>📊 STABILITY: {globalData.systemStability}%</span>
-            <span>🌍 {globalData.countriesActive} COUNTRIES</span>
-            <span>⚡ {user.agent17Tokens} A17 TOKENS</span>
-          </div>
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        initialMode={authModalMode}
+      />
+
+      {/* Global Status Footer */}
+      <div className="fixed bottom-0 left-0 right-0 bg-black/90 border-t border-red-600/50 p-2 text-xs">
+        <div className="flex justify-between items-center max-w-screen-xl mx-auto">
+          <span>🔥 {globalData.rebelsActive.toLocaleString()} ACTIVE</span>
+          <span>📊 STABILITY: {globalData.systemStability}%</span>
+          <span>🌍 {globalData.countriesActive} COUNTRIES</span>
+          <span>⚡ {userProfile?.agent17_tokens || 0} A17 TOKENS</span>
+          {isAuthenticated && (
+            <span>🎯 {userProfile?.chaos_points || 0} CHAOS</span>
+          )}
         </div>
       </div>
-    </Router>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
   );
 }
 
